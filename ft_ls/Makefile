@@ -6,7 +6,7 @@
 #    By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/03 09:23:03 by brabo-hi          #+#    #+#              #
-#    Updated: 2018/02/11 19:27:27 by brabo-hi         ###   ########.fr        #
+#    Updated: 2018/03/24 18:28:56 by brabo-hi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ SRC=\
 	ft_utils.c\
 	main.c
 FLAGS=-Wextra -Wall -Werror -g
-LIBFT=./libft
-LIBFTPRINTF=./ft_printf
+LIBFT=../libft
+LIBFTPRINTF=../ft_printf
 LIBFT_NAME=libft.a
 
 all:$(NAME)
