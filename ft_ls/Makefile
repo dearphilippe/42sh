@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME=ft_ls
+NAME=libftls.a
 SRC=\
 	ft_get.c\
 	ft_helper.c\
@@ -21,28 +21,19 @@ SRC=\
 	ft_utils.c\
 	main.c
 FLAGS=-Wextra -Wall -Werror -g
-LIBFT=../libft
-LIBFTPRINTF=../ft_printf
-LIBFT_NAME=libft.a
 
-all:$(NAME)
+all: $(NAME)
 
 $(NAME):
-	@cd $(LIBFT) && make
-	@cd $(LIBFTPRINTF) && make
 	@gcc -c $(SRC) $(FLAGS)
-	@gcc $(SRC:.c=.o) -o $(NAME) libft/libft.a ft_printf/libftprintf.a
+	@ar -rc $(NAME) $(SRC:.c=.o)
+	@ranlib $(NAME)
 
 clean:
-	@cd $(LIBFT) && make clean
-	@cd $(LIBFTPRINTF) && make clean
 	@/bin/rm -f $(SRC:.c=.o)
 
 fclean: clean
-	@cd $(LIBFT) && make fclean
-	@cd $(LIBFTPRINTF) && make fclean
 	@/bin/rm -f $(NAME)
+	@/bin/rm -f .a
 
 re: fclean all
-	@cd $(LIBFT) && make re
-	@cd $(LIBFTPRINTF) && make re
