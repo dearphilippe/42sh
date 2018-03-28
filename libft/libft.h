@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 21:01:32 by brabo-hi          #+#    #+#             */
-/*   Updated: 2018/01/05 00:21:10 by brabo-hi         ###   ########.fr       */
+/*   Updated: 2018/03/26 16:19:11 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <errno.h>
+# include <stdio.h>
 
 typedef struct		s_list
 {
