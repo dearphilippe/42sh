@@ -1,4 +1,7 @@
 {
     "editor.renderWhitespace": "boundary",
-    "editor.insertSpaces": false
+    "editor.insertSpaces": false,
+    "files.associations": {
+        "shell.h": "c"
+    }
 }

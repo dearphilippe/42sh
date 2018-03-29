@@ -6,13 +6,11 @@
 #    By: passef <passef@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/25 17:50:25 by ztisnes           #+#    #+#              #
-#    Updated: 2018/03/27 16:49:45 by passef           ###   ########.fr        #
+#    Updated: 2018/03/28 15:03:59 by passef           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
-NAME =		libft/libft.a
-LIBPRINTF =	ft_printf/libft.a
+NAME =		ft_printf/libftprintf.a
 EXEC =		42sh
 
 SRC =		libft/ft_putstr_fd.c \

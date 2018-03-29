@@ -6,11 +6,16 @@
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 11:11:24 by passef            #+#    #+#             */
-/*   Updated: 2018/03/27 16:44:27 by passef           ###   ########.fr       */
+/*   Updated: 2018/03/28 19:37:38 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+
+void	init_e(t_env *e)
+{
+	
+}
 
 /*
 ** Initialize the prompt with basic loop
@@ -19,11 +24,11 @@
 
 char	*fts_read_line(void)
 {
-	int		position;
+	int		i;
 	char	*buff;
 	int		buff_size;
 
-	position = 0;
+	i = 0;
 	buff_size = 255;
 
 	if (!(buff = malloc(sizeof(buff) * buff_size)))
@@ -34,7 +39,10 @@ char	*fts_read_line(void)
 
 	while (42)
 	{
+		
 		read(1, &buff, buff_size);
+		// ft_putstr(&buff[i]);
+		i++;
 	}
 }
 
@@ -46,7 +54,7 @@ void	fts_loop(void)
 	state = 1;
 	while (state)
 	{
-		ft_putstr("➜  ~ ");
+		ft_putstr("42sh ~ ");
 		line = fts_read_line();
 		free(line);
 	}
