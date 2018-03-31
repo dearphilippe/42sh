@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:50:54 by asarandi          #+#    #+#             */
-/*   Updated: 2018/03/30 20:07:05 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/03/30 21:52:15 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,8 @@
 
 #include "ft_printf_header.h"
 #include "libft.h"
+#include <stdio.h>	//perror
+#include <term.h>
+
 
 #endif

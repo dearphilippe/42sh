@@ -6,17 +6,17 @@
 #    By: ztisnes <ztisnes@student.42.us.org>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/25 17:50:25 by ztisnes           #+#    #+#              #
-#    Updated: 2018/03/30 20:13:22 by asarandi         ###   ########.fr        #
+#    Updated: 2018/03/30 21:52:26 by asarandi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= 42sh
 SRC			= main.c
 OBJ			= $(SRC:%.c=%.o)
-CC			= cc
-FLAGS		= -Wextra -Wall -Werror -g
+CC			= gcc
+FLAGS		= -g -Wextra -Wall -Werror
 INC			= -I libft/ -I ft_printf/
-LIB			= -L libft/ -lft -L ft_printf/ -lftprintf
+LIB			= -L libft/ -lft -L ft_printf/ -lftprintf -ltermcap
 
 all:$(NAME)
 
@@ -33,7 +33,6 @@ rmbin:
 	rm -f $(NAME)
 
 again: rmobj rmbin all
-	rm -f $(OBJ)
 
 clean: rmobj
 	make clean -C libft/
