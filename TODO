@@ -1,0 +1,3 @@
+release:
+	edit Makefiles for 42sh, ft_printf, libft, --> change "-g" flags to "-O2"
+

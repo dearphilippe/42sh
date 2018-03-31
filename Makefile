@@ -6,50 +6,41 @@
 #    By: ztisnes <ztisnes@student.42.us.org>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/25 17:50:25 by ztisnes           #+#    #+#              #
-#    Updated: 2018/03/25 17:50:52 by ztisnes          ###   ########.fr        #
+#    Updated: 2018/03/30 20:13:22 by asarandi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME=exe
-SRC=*.c
-
-FLAGS=-Wextra -Wall -Werror -g
-
-LIBFT=./libft
-LIBFTFT_PRINTF=./ft_printf
-LIBFT_LS=./ft_ls
-
-LIBFT_NAME=libft
-LIBFTFT_PRINTF_NAME=libftprintf
-LIBFT_LS_NAME=libftls
-
+NAME		= 42sh
+SRC			= main.c
+OBJ			= $(SRC:%.c=%.o)
+CC			= cc
+FLAGS		= -Wextra -Wall -Werror -g
+INC			= -I libft/ -I ft_printf/
+LIB			= -L libft/ -lft -L ft_printf/ -lftprintf
 
 all:$(NAME)
 
 $(NAME):
-	@cd $(LIBFT) && make
-	@cd $(LIBFTFT_PRINTF) && make
-	@cd $(LIBFT_LS) && make
+	make -C libft/
+	make -C ft_printf/
+	$(CC) $(FLAGS) $(INC) -c $(SRC)
+	$(CC) $(FLAGS) $(LIB) $(OBJ) -o $(NAME)
 
-	@gcc -c $(SRC) $(FLAGS)
-	@gcc $(SRC:.c=.o) -o $(NAME)\
-		$(LIBFT)/$(LIBFT_NAME).a\
-		$(LIBFTFT_PRINTF)/$(LIBFTFT_PRINTF_NAME).a\
-		$(LIBFT_LS)/$(LIBFT_LS_NAME).a
+rmobj:
+	rm -f $(OBJ)
 
-clean:
-	@cd $(LIBFT) && make clean
-	@cd $(LIBFTFT_PRINTF) && make clean
-	@cd $(LIBFT_LS) && make clean
-	@/bin/rm -f $(SRC:.c=.o)
+rmbin:
+	rm -f $(NAME)
 
-fclean: clean
-	@cd $(LIBFT) && make fclean
-	@cd $(LIBFTFT_PRINTF) && make fclean
-	@cd $(LIBFT_LS) && make fclean
-	@/bin/rm -f $(NAME)
+again: rmobj rmbin all
+	rm -f $(OBJ)
+
+clean: rmobj
+	make clean -C libft/
+	make clean -C ft_printf/
+
+fclean: clean rmbin
+	make fclean -C libft/
+	make fclean -C ft_printf/
 
 re: fclean all
-	@cd $(LIBFT) && make re
-	@cd $(LIBFTFT_PRINTF) && make re
-	@cd $(LIBFT_LS) && make re
