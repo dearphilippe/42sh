@@ -6,7 +6,7 @@
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 21:01:32 by brabo-hi          #+#    #+#             */
-/*   Updated: 2018/03/26 16:19:11 by passef           ###   ########.fr       */
+/*   Updated: 2018/04/02 10:55:18 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,18 @@
 # define LIBFT_H
 # define SED(x) (TRIM(x) || x == '\t' || x == '\v' || x == '\r' || x == '\f')
 # define TRIM(x) (x == ' ' || x == '\n' || x == '\t')
+
 # include <string.h>
 # include <ctype.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <errno.h>
 # include <stdio.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+
+# define BUFF_SIZE 1
 
 typedef struct		s_list
 {
@@ -91,4 +97,9 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strtrim(char const *s);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
+int					get_next_line(const int fd, char **line);
+int					ft_contains_end_line(char *str);
+int					ft_copy_and_cut(char **str, char **line, int fd);
+int					ft_append(char **str, char *buff, int fd, int size);
+int					ft_copy_end_file(char **str, char **line, int fd);
 #endif

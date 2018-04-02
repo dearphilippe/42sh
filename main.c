@@ -6,7 +6,7 @@
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 11:11:24 by passef            #+#    #+#             */
-/*   Updated: 2018/03/28 19:37:38 by passef           ###   ########.fr       */
+/*   Updated: 2018/04/02 10:52:51 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*fts_read_line(void)
 	while (42)
 	{
 		
-		read(1, &buff, buff_size);
+		// read(1, &buff, buff_size);
 		// ft_putstr(&buff[i]);
 		i++;
 	}
