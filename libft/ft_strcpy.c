@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/28 01:57:54 by brabo-hi          #+#    #+#             */
-/*   Updated: 2017/10/28 02:19:43 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/20 16:48:57 by asarandi          #+#    #+#             */
+/*   Updated: 2017/09/20 16:55:16 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ char	*ft_strcpy(char *dst, const char *src)
 		dst[i] = src[i];
 		i++;
 	}
-	dst[i] = '\0';
+	dst[i] = 0;
 	return (dst);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:44:12 by brabo-hi          #+#    #+#             */
-/*   Updated: 2017/12/18 08:29:22 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/24 21:53:25 by asarandi          #+#    #+#             */
+/*   Updated: 2017/09/24 22:08:49 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	ft_putchar(char c)
 {
-	ft_putchar_fd(c, 1);
+	(void)(write(1, &c, sizeof(c)) + 1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:47:48 by brabo-hi          #+#    #+#             */
-/*   Updated: 2017/11/08 04:53:40 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/23 17:59:36 by asarandi          #+#    #+#             */
+/*   Updated: 2017/09/24 13:56:42 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*str;
+	char	*m;
 
-	if (!s1 || !s2)
-		return (NULL);
-	str = ft_strnew(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!str)
-		return (NULL);
-	ft_strcpy(str, s1);
-	return (ft_strcat(str, s2));
+	m = ft_memalloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (m == NULL)
+		return (m);
+	ft_strcpy(m, s1);
+	ft_strcat(m, s2);
+	return (m);
 }

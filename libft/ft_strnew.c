@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 14:49:38 by brabo-hi          #+#    #+#             */
-/*   Updated: 2017/12/18 08:29:36 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/23 16:07:37 by asarandi          #+#    #+#             */
+/*   Updated: 2017/09/24 13:56:10 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 char	*ft_strnew(size_t size)
 {
-	char	*str;
+	char			*p;
+	size_t			i;
 
-	str = ft_memalloc(size + 1);
-	if (str == NULL)
+	if ((p = (char *)malloc(size * sizeof(char) + 1)) == NULL)
 		return (NULL);
-	str[size] = '\0';
-	return (str);
+	i = 0;
+	while (i <= size)
+		p[i++] = 0;
+	return (char *)(p);
 }

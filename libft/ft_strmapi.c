@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:48:48 by brabo-hi          #+#    #+#             */
-/*   Updated: 2017/11/12 13:15:04 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/23 16:42:50 by asarandi          #+#    #+#             */
+/*   Updated: 2017/09/24 13:57:16 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,21 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int		i;
-	char	*str;
+	size_t	i;
+	size_t	k;
+	char	*s2;
+	char	c;
 
-	i = -1;
-	if (!s || !f)
-		return (NULL);
-	str = ft_strnew(ft_strlen(s));
-	if (!str)
-		return (NULL);
-	while (s[++i])
-		str[i] = f(i, s[i]);
-	return (str);
+	s2 = ft_strdup(s);
+	if (s2 == NULL)
+		return (s2);
+	i = ft_strlen(s2);
+	k = 0;
+	while (k < i)
+	{
+		c = f((unsigned int)k, s2[k]);
+		s2[k] = c;
+		k++;
+	}
+	return (s2);
 }

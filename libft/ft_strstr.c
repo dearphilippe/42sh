@@ -3,29 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:50:40 by brabo-hi          #+#    #+#             */
-/*   Updated: 2017/11/12 13:11:54 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/20 15:39:46 by asarandi          #+#    #+#             */
+/*   Updated: 2017/09/21 10:32:00 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strstr(const char *haystack, const char *needle)
+char	*ft_strstr(const char *big, const char *little)
 {
-	size_t	i;
+	int i;
+	int l;
+	int k;
 
 	i = 0;
-	if (!*needle)
-		return ((char *)(haystack));
-	while (*haystack)
+	if ((!little[i]) && (big))
+		return (char *)big;
+	if ((little) && (!big[i]))
+		return (NULL);
+	l = ft_strlen(big);
+	k = ft_strlen(little);
+	l -= k;
+	while (i <= l)
 	{
-		i = 0;
-		while (haystack[i] == needle[i])
-			if (!needle[++i])
-				return ((char *)haystack);
-		haystack++;
+		if ((ft_strncmp(little, &big[i], k)) == 0)
+			return (char *)&big[i];
+		i++;
 	}
 	return (NULL);
 }

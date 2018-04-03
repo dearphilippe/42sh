@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:15:00 by brabo-hi          #+#    #+#             */
-/*   Updated: 2017/11/12 14:06:55 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/25 11:51:58 by asarandi          #+#    #+#             */
+/*   Updated: 2017/09/25 15:29:07 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,28 @@
 
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list	*current;
-	t_list	*copy;
+	t_list	*start;
+	t_list	*new;
+	t_list	*prev;
 
-	current = f(lst);
-	copy = current;
-	if (current == NULL)
+	if ((start = malloc(sizeof(t_list))) == NULL)
 		return (NULL);
-	while (lst->next)
+	start = f(lst);
+	start->next = NULL;
+	lst = lst->next;
+	prev = start;
+	while (lst)
 	{
-		lst = lst->next;
-		copy->next = f(lst);
-		if (copy->next == NULL)
+		if ((new = malloc(sizeof(t_list))) == NULL)
 			return (NULL);
-		copy = copy->next;
+		new = f(lst);
+		if (start->next == NULL)
+			start->next = new;
+		if (prev->next == NULL)
+			prev->next = new;
+		prev = new;
+		new->next = NULL;
+		lst = lst->next;
 	}
-	return (current);
+	return (start);
 }

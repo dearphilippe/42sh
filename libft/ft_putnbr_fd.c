@@ -3,29 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/15 01:25:14 by brabo-hi          #+#    #+#             */
-/*   Updated: 2017/11/15 02:02:00 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/24 23:10:00 by asarandi          #+#    #+#             */
+/*   Updated: 2017/09/27 12:32:08 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+static int	ft_itoa_len2(long n)
 {
-	if (n == -2147483648)
-		ft_putstr_fd("-2147483648", fd);
-	else if (n < 0)
+	int		i;
+
+	if (n == 0)
+		return (1);
+	i = 0;
+	while (n)
 	{
-		ft_putchar_fd('-', fd);
-		ft_putnbr_fd(-n, fd);
+		n /= 10;
+		i++;
 	}
-	else if (n >= 10)
+	return (i);
+}
+
+static char	*ft_itoa2(long n, char *m)
+{
+	int		neg;
+	int		i;
+
+	neg = 0;
+	if (n < 0)
 	{
-		ft_putnbr_fd(n / 10, fd);
-		ft_putchar_fd(n % 10 + '0', fd);
+		n = -n;
+		neg = 1;
 	}
-	else
-		ft_putchar_fd(n + '0', fd);
+	i = ft_itoa_len2(n) + neg;
+	m[i--] = 0;
+	if (!n)
+		m[i] = '0';
+	while (n)
+	{
+		m[i--] = (n % 10) + '0';
+		n /= 10;
+	}
+	if (neg)
+		m[i] = '-';
+	return (m);
+}
+
+void		ft_putnbr_fd(int n, int fd)
+{
+	char	m[200];
+	int		i;
+
+	i = 0;
+	while (i < 200)
+		m[i++] = 0;
+	ft_itoa2(n, m);
+	ft_putstr_fd(m, fd);
 }

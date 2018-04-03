@@ -3,16 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:44:49 by brabo-hi          #+#    #+#             */
-/*   Updated: 2017/11/08 03:46:49 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/24 22:20:46 by asarandi          #+#    #+#             */
+/*   Updated: 2017/09/27 12:31:46 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr(int n)
+static int	ft_itoa_len2(long n)
 {
-	ft_putnbr_fd(n, 1);
+	int		i;
+
+	if (n == 0)
+		return (1);
+	i = 0;
+	while (n)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
+}
+
+static char	*ft_itoa2(long n, char *m)
+{
+	int		neg;
+	int		i;
+
+	neg = 0;
+	if (n < 0)
+	{
+		n = -n;
+		neg = 1;
+	}
+	i = ft_itoa_len2(n) + neg;
+	m[i--] = 0;
+	if (!n)
+		m[i] = '0';
+	while (n)
+	{
+		m[i--] = (n % 10) + '0';
+		n /= 10;
+	}
+	if (neg)
+		m[i] = '-';
+	return (m);
+}
+
+void		ft_putnbr(int n)
+{
+	char	m[200];
+	int		i;
+
+	i = 0;
+	while (i < 200)
+		m[i++] = 0;
+	ft_itoa2(n, m);
+	ft_putstr(m);
 }

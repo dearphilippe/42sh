@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:45:09 by brabo-hi          #+#    #+#             */
-/*   Updated: 2017/12/18 08:27:47 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/24 22:13:01 by asarandi          #+#    #+#             */
+/*   Updated: 2017/09/24 22:17:16 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	ft_putstr(char const *s)
 {
-	ft_putstr_fd(s, 1);
+	while (*s)
+		ft_putchar(*s++);
 }

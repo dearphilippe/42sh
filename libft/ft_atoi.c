@@ -3,32 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:40:48 by brabo-hi          #+#    #+#             */
-/*   Updated: 2017/12/18 23:33:06 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/20 15:37:35 by asarandi          #+#    #+#             */
+/*   Updated: 2018/02/11 06:13:38 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+int			ft_atoi(const char *s)
 {
-	int		number;
 	int		i;
-	int		signe;
+	int		n;
+	long	r;
 
-	number = 0;
 	i = 0;
-	signe = 0;
-	while (SED(str[i]))
+	n = 0;
+	while (ft_isspace(s[i]))
 		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		signe = str[i] == '-' ? 1 : 0;
+	if (s[i] == '+')
 		i++;
-	}
-	while (ft_isdigit(str[i]))
-		number = (number * 10) + str[i++] - '0';
-	return (signe ? -number : number);
+	else if (s[i] == '-')
+		n = ++i;
+	r = 0;
+	while (ft_isdigit(s[i]))
+		r = (r * 10) + s[i++] - '0';
+	if (n)
+		return ((int)-r);
+	else
+		return ((int)r);
 }

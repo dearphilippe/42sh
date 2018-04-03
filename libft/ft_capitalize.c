@@ -3,29 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_capitalize.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/17 11:55:32 by brabo-hi          #+#    #+#             */
-/*   Updated: 2017/11/17 11:58:47 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/27 13:54:17 by asarandi          #+#    #+#             */
+/*   Updated: 2017/09/28 13:03:28 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_capitalize(char *s)
+char	*ft_capitalize(char *str)
 {
-	char	*new;
-	int		i;
+	int	i;
 
-	if (!s)
-		return (NULL);
-	new = ft_strnew(ft_strlen(s));
-	new[0] = ft_toupper(s[0]);
 	i = 0;
-	while (*(s + ++i))
-		if (!ft_isalnum(s[i - 1]) && ft_isalnum(s[i]))
-			new[i] = ft_toupper(s[i]);
-		else
-			new[i] = s[i];
-	return (new);
+	while (str[i])
+	{
+		if (ft_isalpha(str[i]))
+		{
+			str[i] = ft_toupper(str[i]);
+			i++;
+			while (ft_isalpha(str[i]))
+			{
+				str[i] = ft_tolower(str[i]);
+				i++;
+			}
+		}
+		i++;
+	}
+	return (str);
 }

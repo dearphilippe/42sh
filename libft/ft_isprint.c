@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/08 04:54:59 by brabo-hi          #+#    #+#             */
-/*   Updated: 2017/11/08 04:57:14 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/20 15:42:25 by asarandi          #+#    #+#             */
+/*   Updated: 2017/09/20 15:42:27 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isprint(int c)
+int	ft_isprint(int c)
 {
-	return (c >= 32 && c <= 126);
+	if ((c >= 0x20) && (c <= 0x7e))
+		return (1);
+	else
+		return (0);
 }
