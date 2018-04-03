@@ -6,7 +6,7 @@
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 21:01:32 by brabo-hi          #+#    #+#             */
-/*   Updated: 2018/04/02 10:55:18 by passef           ###   ########.fr       */
+/*   Updated: 2018/04/02 19:58:48 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 
-# define BUFF_SIZE 1
+# define BUFF_SIZE	1
 
 typedef struct		s_list
 {
