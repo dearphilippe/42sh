@@ -39,7 +39,7 @@
 # include <time.h>
 # include <string.h>
 
-# include "ft_printf/ft_printf_header.h"
+# include "../ft_printf/ft_printf_header.h"
 
 typedef struct		s_op
 {
