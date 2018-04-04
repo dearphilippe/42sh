@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strtolower.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.or>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:44:20 by brabo-hi          #+#    #+#             */
-/*   Updated: 2018/01/22 00:33:16 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/28 15:16:29 by asarandi          #+#    #+#             */
+/*   Updated: 2017/09/28 15:18:03 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+char	*ft_strtolower(char *s)
 {
-	write(fd, &c, 1);
+	size_t	i;
+	size_t	k;
+
+	i = ft_strlen(s);
+	k = 0;
+	while (k < i)
+	{
+		if ((s[k] >= 'A') && (s[k] <= 'Z'))
+			s[k] = ft_tolower(s[k]);
+		k++;
+	}
+	return (s);
 }

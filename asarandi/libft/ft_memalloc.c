@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:44:20 by brabo-hi          #+#    #+#             */
-/*   Updated: 2018/01/22 00:33:16 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/23 15:40:16 by asarandi          #+#    #+#             */
+/*   Updated: 2017/09/24 21:46:38 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+void	*ft_memalloc(size_t size)
 {
-	write(fd, &c, 1);
+	unsigned char	*p;
+	size_t			i;
+
+	if ((p = malloc(size)) == NULL)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		p[i] = 0;
+		i++;
+	}
+	return (p);
 }

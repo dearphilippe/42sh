@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:44:20 by brabo-hi          #+#    #+#             */
-/*   Updated: 2018/01/22 00:33:16 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/23 16:07:37 by asarandi          #+#    #+#             */
+/*   Updated: 2017/09/24 13:56:10 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+char	*ft_strnew(size_t size)
 {
-	write(fd, &c, 1);
+	char			*p;
+	size_t			i;
+
+	if ((p = (char *)malloc(size * sizeof(char) + 1)) == NULL)
+		return (NULL);
+	i = 0;
+	while (i <= size)
+		p[i++] = 0;
+	return (char *)(p);
 }

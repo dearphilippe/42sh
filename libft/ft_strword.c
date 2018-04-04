@@ -1,18 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strword.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:44:20 by brabo-hi          #+#    #+#             */
-/*   Updated: 2018/01/22 00:33:16 by brabo-hi         ###   ########.fr       */
+/*   Created: 2018/03/13 23:16:40 by brabo-hi          #+#    #+#             */
+/*   Updated: 2018/03/24 22:57:39 by brabo-hi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+char	*ft_strword(char *str)
 {
-	write(fd, &c, 1);
+	char	*dest;
+	int		i;
+	int		len;
+
+	if (!str)
+		return (NULL);
+	dest = NULL;
+	i = 0;
+	len = 0;
+	while (str[len] && str[len] != ' ' && str[len] != '\t')
+		len++;
+	if (!(dest = ft_memalloc(sizeof(len + 1))))
+		return (NULL);
+	while (i < len)
+		dest[i++] = *str++;
+	dest[i] = '\0';
+	return (dest);
 }
+

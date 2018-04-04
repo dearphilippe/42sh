@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strtoupper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.or>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:44:20 by brabo-hi          #+#    #+#             */
-/*   Updated: 2018/01/22 00:33:16 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/28 15:13:17 by asarandi          #+#    #+#             */
+/*   Updated: 2017/09/28 15:18:48 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+char	*ft_strtoupper(char *s)
 {
-	write(fd, &c, 1);
+	size_t	i;
+	size_t	k;
+
+	i = ft_strlen(s);
+	k = 0;
+	while (k < i)
+	{
+		if ((s[k] >= 'a') && (s[k] <= 'z'))
+			s[k] = ft_toupper(s[k]);
+		k++;
+	}
+	return (s);
 }

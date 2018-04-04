@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:44:20 by brabo-hi          #+#    #+#             */
-/*   Updated: 2018/01/22 00:33:16 by brabo-hi         ###   ########.fr       */
+/*   Created: 2017/09/23 16:42:50 by asarandi          #+#    #+#             */
+/*   Updated: 2017/09/24 13:57:00 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+char	*ft_strmap(char const *s, char (*f)(char))
 {
-	write(fd, &c, 1);
+	size_t	i;
+	size_t	k;
+	char	*s2;
+	char	c;
+
+	s2 = ft_strdup(s);
+	if (s2 == NULL)
+		return (s2);
+	i = ft_strlen(s2);
+	k = 0;
+	while (k < i)
+	{
+		c = f(s2[k]);
+		s2[k] = c;
+		k++;
+	}
+	return (s2);
 }
