@@ -12,7 +12,6 @@ t_queue     *get_lexer(char *str)
         str++;
     while (str && *str && (word = ft_strword(str)))
     {
-        printf("word [%s] len [%zu]\n", word, ft_strlen(word));
         if (!(lex = queue_enqueue(lex, queue_new(word))))
             return (NULL);
         str = str + ft_strlen(word);
