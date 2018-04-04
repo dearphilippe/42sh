@@ -10,12 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/stat.h>
 #include <signal.h>
 #include <sys/types.h>
-#include <wait.h>
+#include <sys/wait.h>
 #include <backend.h>
 #include <error.h>
 
@@ -48,3 +49,4 @@ t_ast		*insert_right(t_btree *node, int *value)
 	node->right = create_node(value);
 	return (node->right);
 }
+*/

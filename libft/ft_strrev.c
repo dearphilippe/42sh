@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:44:20 by brabo-hi          #+#    #+#             */
-/*   Updated: 2018/01/22 00:33:16 by brabo-hi         ###   ########.fr       */
+/*   Created: 2018/01/11 03:54:09 by brabo-hi          #+#    #+#             */
+/*   Updated: 2018/01/13 01:42:01 by brabo-hi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+char	*ft_strrev(char *str)
 {
-	write(fd, &c, 1);
+	char	*p1;
+	char	*p2;
+	char	temp;
+
+	if (!str || !*str)
+		return (str);
+	p1 = str;
+	p2 = str + ft_strlen(str) - 1;
+	while (p2 > p1)
+	{
+		temp = *p2;
+		*p2 = *p1;
+		*p1 = temp;
+		++p1;
+		--p2;
+	}
+	return (str);
 }

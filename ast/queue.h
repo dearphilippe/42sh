@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   queue.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/07 15:44:20 by brabo-hi          #+#    #+#             */
-/*   Updated: 2018/01/22 00:33:16 by brabo-hi         ###   ########.fr       */
+/*   Created: 2018/03/13 23:16:01 by brabo-hi          #+#    #+#             */
+/*   Updated: 2018/03/22 18:55:35 by brabo-hi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef QUEUE_H
+# define QUEUE_H
 
-void	ft_putchar_fd(char c, int fd)
+# include "../header.h"
+
+typedef struct		s_queue
 {
-	write(fd, &c, 1);
-}
+	char			*name;
+	struct s_queue	*next;
+}					t_queue;
+
+t_queue				*queue_new(char *name);
+t_queue				*queue_enqueue(t_queue *head, t_queue *node);
+t_queue				*queue_dequeue(t_queue *head);
+t_queue				*queue_dequeue_front(t_queue *head);
+int					queue_len(t_queue *head);
+
+#endif

@@ -21,7 +21,7 @@ int		main(int argc, char **argv)
 	fat = fork();
 	if (fat > 0)
 	{
-		wait();
+		wait(NULL);
 		printf("fat");
 	}
 	if (fat == 0)
