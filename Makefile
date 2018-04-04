@@ -3,19 +3,24 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: passef <passef@student.42.fr>              +#+  +:+       +#+         #
+#    By: ztisnes <ztisnes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/25 17:50:25 by ztisnes           #+#    #+#              #
-#    Updated: 2018/03/28 15:03:59 by passef           ###   ########.fr        #
+#    Updated: 2018/04/02 20:52:32 by ztisnes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		ft_printf/libftprintf.a
 EXEC =		42sh
 
-SRC =		libft/ft_putstr_fd.c \
-			libft/ft_putchar_fd.c \
-			libft/ft_putstr.c \
+git:
+	@echo "Adding to Github/Vogsphere"
+	@git add .
+	@echo "What is your message of your commit?"
+	@read msg && git commit -m "$$msg"
+	@echo "Pushing..."
+	@git push
+	@echo $(OK_COLOR) "all good :)" $(RESET_COLOR)
 
 OBJ = $(SRC:.c=.o)
 CC = gcc
