@@ -30,11 +30,11 @@ typedef struct		s_ast
 	void			*data;
 	struct s_ast	*left;
 	struct s_ast	*right;
-}					t_ast;
+}                t_ast;
 
 t_ast		*create_node(int *value)
 {
-	t_btree *root;
+	t_ast *root;
 
 	root = malloc(sizeof(t_ast));
 	root->data = value;
