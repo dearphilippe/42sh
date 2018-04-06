@@ -1,10 +1,11 @@
 #include "lexer.h"
 
-t_queue     *get_lexer(char *str)
+t_queue     *parse_lexer(char *str)
 {
     t_queue *lex;
     char    *word;
     char    *term;
+    t_queue *node;
 
     lex = NULL;
     word = NULL;
@@ -13,12 +14,13 @@ t_queue     *get_lexer(char *str)
     {
         if (*str == '\'' || *str == '"')
          {
-             str += handle_quote(&word, str);
+             str += parse_quote(&word, str);
              continue ;
          }
         if (*str && (*str == '|' || *str == '&' || *str == ';') && (term = contain_term(str)))
         {
-            if (!(lex = queue_enqueue(lex, queue_new(word, CMD))))
+            node = queue_new(remove_start_space(word), CMD);
+            if (node && !(lex = queue_enqueue(lex, node)))
                 return (NULL);
             ft_strdel(&word);
             word = NULL;
@@ -33,7 +35,8 @@ t_queue     *get_lexer(char *str)
     }
     if (ft_strlen(word))
     {
-        if (!(lex = queue_enqueue(lex, queue_new(word, CMD))))
+        node = queue_new(remove_start_space(word), CMD);
+        if (node && !(lex = queue_enqueue(lex, node)))
             return (NULL);
         ft_strdel(&word);
         word = NULL;
@@ -41,7 +44,7 @@ t_queue     *get_lexer(char *str)
     return (validate_lexer(lex));
 }
 
-int     handle_quote(char **word, char *str)
+int     parse_quote(char **word, char *str)
 {
     int i;
 
@@ -67,4 +70,19 @@ int     handle_quote(char **word, char *str)
             *word = ft_str_append(*word, '"');
     }
     return (i);
+}
+
+t_queue     *parse_ast(t_queue *lex)
+{
+    t_queue *ast;
+    t_queue *cpy_lex;
+
+    cpy_lex = lex;
+    while (lex)
+    {
+
+        lex = lex->next;
+    }
+    ast = NULL;
+    return (NULL);
 }

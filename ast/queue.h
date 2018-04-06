@@ -19,7 +19,9 @@ typedef struct		s_queue
 {
 	char			*name;
     t_type          type;
+	struct s_queue	*parent;
 	struct s_queue	*next;
+	struct s_queue	*right;
 }					t_queue;
 
 t_queue				*queue_new(char *name, t_type type);

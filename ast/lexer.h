@@ -8,7 +8,8 @@
 # include "validate.h"
 # include "print.h"
 
-t_queue     *get_lexer(char *str);
-int     handle_quote(char **word, char *str);
+t_queue     *parse_lexer(char *str);
+int     parse_quote(char **word, char *str);
+t_queue     *parse_ast(t_queue *lex);
 
 #endif
