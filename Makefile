@@ -6,7 +6,7 @@
 #    By: ztisnes <ztisnes@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/25 17:50:25 by ztisnes           #+#    #+#              #
-#    Updated: 2018/04/02 20:52:32 by ztisnes          ###   ########.fr        #
+#    Updated: 2018/04/04 23:52:34 by ztisnes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,5 +65,4 @@ git:
 	@echo "What is your message of your commit?"
 	@read msg && git commit -m "$$msg"
 	@echo "Pushing..."
-	@git push
-	@echo $(OK_COLOR) "all good :)" $(RESET_COLOR)
+	@git push origin && echo $(OK_COLOR) "all good :)" || echo $(WARN_COLOR)
