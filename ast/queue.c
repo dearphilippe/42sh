@@ -25,6 +25,8 @@ t_queue			*queue_new(char *name, t_type type)
 	ft_strcpy(node->name, (const char*)name);
 	node->type = type;
 	node->next = NULL;
+	node->parent = NULL;
+	node->right = NULL;
 	return (node);
 }
 
