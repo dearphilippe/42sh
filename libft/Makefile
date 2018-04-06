@@ -46,6 +46,8 @@ ft_putnbr.c\
 ft_putnbr_fd.c\
 ft_putstr.c\
 ft_putstr_fd.c\
+ft_startwith.c\
+ft_str_append.c\
 ft_strcat.c\
 ft_strchr.c\
 ft_strclr.c\

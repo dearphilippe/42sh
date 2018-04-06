@@ -18,10 +18,11 @@
 typedef struct		s_queue
 {
 	char			*name;
+    t_type          type;
 	struct s_queue	*next;
 }					t_queue;
 
-t_queue				*queue_new(char *name);
+t_queue				*queue_new(char *name, t_type type);
 t_queue				*queue_enqueue(t_queue *head, t_queue *node);
 t_queue				*queue_dequeue(t_queue *head);
 t_queue				*queue_dequeue_front(t_queue *head);
