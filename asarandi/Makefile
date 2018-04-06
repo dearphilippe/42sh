@@ -1,10 +1,29 @@
 NAME		= minishell
-SRC			= main.c
+SRC			=	builtins.c \
+				builtins_env.c \
+				char_array.c \
+				child_argv.c \
+				exec.c \
+				file_op.c \
+				history.c \
+				history_keys.c \
+				input_a.c \
+				input_b.c \
+				kv_array.c \
+				main.c \
+				path_utils.c \
+				quotes.c \
+				special_keys_a.c \
+				special_keys_b.c \
+				string_utils.c \
+				tab_key.c \
+				termcaps.c
+
 OBJ			= $(SRC:%.c=%.o)
 CC			= gcc
 FLAGS		= -g -Wextra -Wall -Werror # -fsanitize=address
 INC			= -I libft/ -I libft/ft_printf/
-LIB			= -L libft/ -lft -L libft/ft_printf/ -lftprintf
+LIB			= -L libft/ -lft -L libft/ft_printf/ -lftprintf -ltermcap
 
 all:$(NAME)
 
