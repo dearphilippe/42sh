@@ -1,20 +1,19 @@
 #include "parse.h"
 
-// TODO handle start with non CMD characters
 t_ast *validate_lexer(t_ast *lex)
 {
-    t_ast *cpy;
+    t_ast   *cpy;
 
     cpy = lex;
-    while (lex && lex->type == SEP)
-        lex = lex->next;
-    if (lex && lex->type != CMD)
+    while (lex)
     {
-        print_lexer_start_error(lex->name);
-        free_ast(cpy);
-        return (NULL);
+        if (!ft_strlen(lex->name) || lex->type != CMD)
+            return (NULL);
+        if ((lex = lex->next) && lex->type == CMD)
+            return (NULL);
+        lex = lex ? lex->next : lex;
     }
-    return (lex);
+    return (cpy);
 }
 
 // TODO implement method

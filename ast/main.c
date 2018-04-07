@@ -6,7 +6,7 @@ int     main(int argc, char **argv)
     t_ast **ast;
 
     //lex = parse_lexer("echo 'hello \" world' ; ls -la rep | grep \"repertoire 1\" && sed -a -b fichier2");
-    lex = parse_lexer("echo 'hello \" world' ; ls -la rep ; grep \"repertoire 1\" && sed -a -b fichier2");
+    lex = parse_lexer("echo 'hello \" world' ; ls -la rep ;grep \"repertoire 1\" && sed -a -b fichier2 ; ");
 
     if (!lex)
     {
