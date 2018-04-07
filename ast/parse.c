@@ -1,5 +1,7 @@
 #include "parse.h"
-
+/*
+ * Don't send space at the end of the string
+ */
 t_ast     *parse_lexer(char *str)
 {
     t_ast *lex;
@@ -123,5 +125,5 @@ t_ast     *parse_tree(t_ast *lex)
         lex = lex->next;
     }
     free_ast(cpy);
-    return (ast);
+    return (validate_ast(ast));
 }

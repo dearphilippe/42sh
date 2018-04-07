@@ -33,19 +33,12 @@ void	print_trees(t_ast **ast)
     }
 }
 
-void	print_lexer_start_error(char *name)
-{
-    ft_putstr("parse error near '");
-    ft_putstr(name);
-    ft_putstr("\n");
-}
-
 void	print_error_lexer(void)
 {
-
+    ft_putstr("Parse error lexer [CMD invalid]\n");
 }
 
 void	print_error_ast(void)
 {
-
+    ft_putstr("Parse error ast\n");
 }
