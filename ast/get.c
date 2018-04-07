@@ -1,4 +1,4 @@
-#include "get.h"
+#include "parse.h"
 
 t_type      get_type(char *str)
 {
@@ -16,7 +16,7 @@ t_type      get_type(char *str)
     return (CMD);
 }
 
-int         get_nbr_cmd(t_queue *lex)
+int         get_nbr_instructions(t_ast *lex)
 {
     int i;
 

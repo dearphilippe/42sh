@@ -1,11 +1,11 @@
-#include "lexer.h"
+#include "parse.h"
 
-t_queue     *parse_lexer(char *str)
+t_ast     *parse_lexer(char *str)
 {
-    t_queue *lex;
+    t_ast *lex;
     char    *word;
     char    *term;
-    t_queue *node;
+    t_ast *node;
 
     lex = NULL;
     word = NULL;
@@ -19,12 +19,12 @@ t_queue     *parse_lexer(char *str)
          }
         if (*str && (*str == '|' || *str == '&' || *str == ';') && (term = contain_term(str)))
         {
-            node = queue_new(remove_start_space(word), CMD);
-            if (node && !(lex = queue_enqueue(lex, node)))
+            node = ast_new(remove_start_space(word), CMD);
+            if (node && !(lex = ast_enast(lex, node)))
                 return (NULL);
             ft_strdel(&word);
             word = NULL;
-            if (!(lex = queue_enqueue(lex, queue_new(term, get_type(term)))))
+            if (!(lex = ast_enast(lex, ast_new(term, get_type(term)))))
                 return (NULL);
             str += ft_strlen(term);
             ft_strdel(&term);
@@ -35,8 +35,8 @@ t_queue     *parse_lexer(char *str)
     }
     if (ft_strlen(word))
     {
-        node = queue_new(remove_start_space(word), CMD);
-        if (node && !(lex = queue_enqueue(lex, node)))
+        node = ast_new(remove_start_space(word), CMD);
+        if (node && !(lex = ast_enast(lex, node)))
             return (NULL);
         ft_strdel(&word);
         word = NULL;
@@ -72,7 +72,7 @@ int     parse_quote(char **word, char *str)
     return (i);
 }
 
-t_queue     **parse_ast(t_queue **ast, t_queue *lex)
+t_ast     **parse_ast(t_ast **ast, t_ast *lex)
 {
     int i;
 
@@ -82,7 +82,7 @@ t_queue     **parse_ast(t_queue **ast, t_queue *lex)
     {
         if (lex->type == SEP)
             ast[++i] = NULL;
-        else if (!(ast[i] = queue_enqueue(ast[i], queue_new(lex->name, lex->type))))
+        else if (!(ast[i] = ast_enast(ast[i], ast_new(lex->name, lex->type))))
             return (NULL);
         lex = lex->next;
     }
@@ -97,23 +97,23 @@ t_queue     **parse_ast(t_queue **ast, t_queue *lex)
     return (ast);
 }
 
-t_queue     *parse_tree(t_queue *lex)
+t_ast     *parse_tree(t_ast *lex)
 {
-    t_queue *ast;
-    t_queue *op;
-    t_queue *right;
-    t_queue *cpy;
+    t_ast *ast;
+    t_ast *op;
+    t_ast *right;
+    t_ast *cpy;
 
-    if (!lex || lex->type != CMD || !(ast = queue_new(lex->name, lex->type)))
+    if (!lex || lex->type != CMD || !(ast = ast_new(lex->name, lex->type)))
         return (NULL);
     cpy = lex;
     lex = lex->next;
     while (lex)
     {
-        if (lex->type == CMD || !(op = queue_new(lex->name, lex->type)))
+        if (lex->type == CMD || !(op = ast_new(lex->name, lex->type)))
             return (NULL);
         lex = lex->next;
-        if (!lex || lex->type != CMD || !(right = queue_new(lex->name, lex->type)))
+        if (!lex || lex->type != CMD || !(right = ast_new(lex->name, lex->type)))
             return (NULL);
         op->next = ast;
         op->right = right;
@@ -122,6 +122,6 @@ t_queue     *parse_tree(t_queue *lex)
         ast = op;
         lex = lex->next;
     }
-    free_queue(cpy);
+    free_ast(cpy);
     return (ast);
 }

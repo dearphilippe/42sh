@@ -1,57 +1,67 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ast.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ztisnes <ztisnes@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/30 14:51:27 by ztisnes           #+#    #+#             */
-/*   Updated: 2018/04/04 01:01:23 by ztisnes          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "parse.h"
 
-/*
-#include <unistd.h>
-#include <stdio.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <signal.h>
-
-*/
-/*
-**
-** TODO:execve function to run the command after parsing it
-**		-> Make execve be running in the leaves of the AST
-**
-*//*
-
-
-typedef struct		s_ast
+t_ast			*ast_new(char *name, t_type type)
 {
-	void			*data;
-	struct s_ast	*left;
-	struct s_ast	*right;
-}                t_ast;
+	t_ast	*node;
 
-t_ast		*create_node(int *value)
-{
-	t_ast *root;
-
-	root = (t_ast *)ft_memmalloc(sizeof(t_ast));
-	root->data = value;
-	root->left = NULL;
-	root->right = NULL;
-	return (root);
+	if (!name)
+		return (NULL);
+	if (!(node = (t_ast *)ft_memalloc(sizeof(t_ast))))
+		return (NULL);
+	if (!(node->name = (char *)ft_memalloc(ft_strlen(name) + 1)))
+		return (NULL);
+	ft_strcpy(node->name, (const char*)name);
+	node->type = type;
+	node->next = NULL;
+	node->parent = NULL;
+	node->right = NULL;
+	return (node);
 }
 
-t_ast		*insert_left(t_ast *node, int *value)
+t_ast			*ast_enast(t_ast *head, t_ast *node)
 {
-	node->left = create_node(value);
-	return (node->left);
+	t_ast *cursor;
+
+	if (!node)
+		return (head);
+	if (!head)
+		return (node);
+	cursor = head;
+	while (cursor->next)
+		cursor = cursor->next;
+	cursor->next = node;
+	return (head);
 }
 
-t_ast		*insert_right(t_ast *node, int *value)
+t_ast			*ast_deast(t_ast *head)
 {
-	node->right = create_node(value);
-	return (node->right);
-}*/
+	t_ast	*cpy;
+
+	if (!head)
+		return (NULL);
+	if (!head->next)
+	{
+		ft_strdel(&head->name);
+		ft_memdel((void **)&head);
+		return (NULL);
+	}
+	cpy = head;
+	while (head->next->next)
+		head = head->next;
+	ft_strdel(&head->next->name);
+	ft_memdel((void **)head->next);
+	return (cpy);
+}
+
+int				ast_len(t_ast *head)
+{
+	int		i;
+
+	i = 0;
+	while (head)
+	{
+		head = head->next;
+		i++;
+	}
+	return (i);
+}

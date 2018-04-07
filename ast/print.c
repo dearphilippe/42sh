@@ -1,6 +1,6 @@
-#include "print.h"
+#include "parse.h"
 
-void	print_queue(t_queue *node)
+void	print_ast(t_ast *node)
 {
     while (node)
     {
@@ -22,12 +22,12 @@ void	print_queue(t_queue *node)
     }
 }
 
-void	print_ast(t_queue **ast)
+void	print_trees(t_ast **ast)
 {
     while (ast && *ast)
     {
         printf("#\n");
-        print_queue(*ast);
+        print_ast(*ast);
         printf("*****\n");
         ast++;
     }
