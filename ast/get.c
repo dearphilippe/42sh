@@ -15,3 +15,19 @@ t_type      get_type(char *str)
     }
     return (CMD);
 }
+
+int         get_nbr_cmd(t_queue *lex)
+{
+    int i;
+
+    if (!lex)
+        return (0);
+    i = 1;
+    while (lex)
+    {
+        if (lex->type == SEP)
+            i++;
+        lex = lex->next;
+    }
+    return (i);
+}

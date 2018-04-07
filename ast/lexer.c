@@ -72,56 +72,56 @@ int     parse_quote(char **word, char *str)
     return (i);
 }
 
-t_queue     *parse_ast(t_queue *lex)
+t_queue     **parse_ast(t_queue **ast, t_queue *lex)
 {
-    t_queue *ast;
-    t_queue *parent;
-    t_queue *right;
-    t_queue *current;
+    int i;
 
-    ast = NULL;
-    int i = 0;
-  //  print_queue(lex);
- //   printf("**************\n\n");
+    i = 0;
+    ast[i] = NULL;
     while (lex)
     {
-     //   printf("\t\t\t[%s]\n", lex->name);
-        current = queue_new(lex->name, lex->type);
-        lex = lex->next;
-        parent = lex ? queue_new(lex->name, lex->type) : queue_new("ROOT", ROOT);
-        if ((!current || current->type != CMD) || !parent || (parent->type == CMD))
+        if (lex->type == SEP)
+            ast[++i] = NULL;
+        else if (!(ast[i] = queue_enqueue(ast[i], queue_new(lex->name, lex->type))))
             return (NULL);
-        lex = lex ? lex->next : lex;
-
-        current->parent = parent;
-        current->next = ast;
-      //  printf("CUR +++++++++[\n");
- //       print_queue(current);
-    //    printf("CUR +++++++++]\n");
-
-        parent->next = current;
-   //     printf("PAR +++++++++[\n");
-     //   print_queue(parent);
-  //      printf("PAR +++++++++]\n");
-        if (parent->type == OP_AND || parent->type == OP_OR)
-        {
-            if (!lex || lex->type != CMD)
-            {
-                printf("NULL 2 \n");
-                return (NULL);
-            }
-            right = queue_new(lex->name, lex->type);
-            right->parent = parent;
-            parent->right = right;
-            lex = lex->next;
-        }
-        ast = parent;
-    //    printf("AST +++++++++[\n");
-     //   print_queue(ast);
-    //    printf("AST +++++++++]\n");
-
+        lex = lex->next;
     }
-    printf("\nlen %d\n",queue_len(parent));
-    print_queue(parent);
-    return (validate_ast(ast));
+    ast[++i] = 0;
+    i = 0;
+    while (ast[i])
+    {
+        if (!(ast[i] = parse_tree(ast[i])))
+            return (NULL);
+        i++;
+    }
+    return (ast);
+}
+
+t_queue     *parse_tree(t_queue *lex)
+{
+    t_queue *ast;
+    t_queue *op;
+    t_queue *right;
+    t_queue *cpy;
+
+    if (!lex || lex->type != CMD || !(ast = queue_new(lex->name, lex->type)))
+        return (NULL);
+    cpy = lex;
+    lex = lex->next;
+    while (lex)
+    {
+        if (lex->type == CMD || !(op = queue_new(lex->name, lex->type)))
+            return (NULL);
+        lex = lex->next;
+        if (!lex || lex->type != CMD || !(right = queue_new(lex->name, lex->type)))
+            return (NULL);
+        op->next = ast;
+        op->right = right;
+        right->parent = op;
+        ast->parent = op;
+        ast = op;
+        lex = lex->next;
+    }
+    free_queue(cpy);
+    return (ast);
 }
