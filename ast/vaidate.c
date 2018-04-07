@@ -16,3 +16,9 @@ t_queue *validate_lexer(t_queue *lex)
     }
     return (lex);
 }
+
+// TODO implement method
+t_queue     *validate_ast(t_queue *ast)
+{
+    return (ast);
+}
