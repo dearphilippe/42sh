@@ -7,5 +7,6 @@
 # include "print.h"
 
 t_queue *validate_lexer(t_queue *lex);
+t_queue     *validate_ast(t_queue *ast);
 
 #endif

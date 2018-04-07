@@ -75,14 +75,53 @@ int     parse_quote(char **word, char *str)
 t_queue     *parse_ast(t_queue *lex)
 {
     t_queue *ast;
-    t_queue *cpy_lex;
+    t_queue *parent;
+    t_queue *right;
+    t_queue *current;
 
-    cpy_lex = lex;
+    ast = NULL;
+    int i = 0;
+  //  print_queue(lex);
+ //   printf("**************\n\n");
     while (lex)
     {
-
+     //   printf("\t\t\t[%s]\n", lex->name);
+        current = queue_new(lex->name, lex->type);
         lex = lex->next;
+        parent = lex ? queue_new(lex->name, lex->type) : queue_new("ROOT", ROOT);
+        if ((!current || current->type != CMD) || !parent || (parent->type == CMD))
+            return (NULL);
+        lex = lex ? lex->next : lex;
+
+        current->parent = parent;
+        current->next = ast;
+      //  printf("CUR +++++++++[\n");
+ //       print_queue(current);
+    //    printf("CUR +++++++++]\n");
+
+        parent->next = current;
+   //     printf("PAR +++++++++[\n");
+     //   print_queue(parent);
+  //      printf("PAR +++++++++]\n");
+        if (parent->type == OP_AND || parent->type == OP_OR)
+        {
+            if (!lex || lex->type != CMD)
+            {
+                printf("NULL 2 \n");
+                return (NULL);
+            }
+            right = queue_new(lex->name, lex->type);
+            right->parent = parent;
+            parent->right = right;
+            lex = lex->next;
+        }
+        ast = parent;
+    //    printf("AST +++++++++[\n");
+     //   print_queue(ast);
+    //    printf("AST +++++++++]\n");
+
     }
-    ast = NULL;
-    return (NULL);
+    printf("\nlen %d\n",queue_len(parent));
+    print_queue(parent);
+    return (validate_ast(ast));
 }

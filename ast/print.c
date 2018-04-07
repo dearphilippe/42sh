@@ -19,3 +19,13 @@ void	print_lexer_start_error(char *name)
     ft_putstr(name);
     ft_putstr("\n");
 }
+
+void	print_error_lexer(void)
+{
+
+}
+
+void	print_error_ast(void)
+{
+
+}

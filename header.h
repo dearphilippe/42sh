@@ -30,7 +30,8 @@ typedef enum    e_type
                 RED_PIPE,
                 OP_AND,
                 OP_OR,
-                SEP
+                SEP,
+                ROOT
 }               t_type;
 
 // TODO to delete
