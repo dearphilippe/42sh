@@ -1,4 +1,4 @@
-#include "helper.h"
+#include "parse.h"
 
 char    *contain_term(char *str)
 {
