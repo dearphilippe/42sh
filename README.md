@@ -8,9 +8,9 @@
 	- Builtin alias
 	- Builtin unalias
 - Parser 
-	- Lexer
-	- type AST
-	- Parser
+	- Lexer ✅
+	- type AST ✅
+	- Parser ✅
 
 - Execution
 	- Operators (">" ">>" "<" "|" "||" "&&" ";")
