@@ -42,3 +42,24 @@ void	print_error_ast(void)
 {
 	ft_putstr("Parse error ast\n");
 }
+
+void	print_trees(t_ast **ast)
+{
+    while (ast && *ast)
+    {
+        printf("#\n");
+        print_ast(*ast);
+        printf("*****\n");
+        ast++;
+    }
+}
+
+void	print_error_lexer(void)
+{
+    ft_putstr("Parse error lexer [CMD invalid]\n");
+}
+
+void	print_error_ast(void)
+{
+    ft_putstr("Parse error ast\n");
+}

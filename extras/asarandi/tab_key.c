@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   tab_key.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/28 01:57:54 by brabo-hi          #+#    #+#             */
-/*   Updated: 2017/10/28 02:19:43 by brabo-hi         ###   ########.fr       */
+/*   Created: 2018/04/06 05:25:17 by asarandi          #+#    #+#             */
+/*   Updated: 2018/04/06 07:09:29 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dst, const char *src)
-{
-	int	i;
+#include "minishell.h"
 
-	i = 0;
-	while (src[i])
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
+void	key_tab_function(t_shell *sh)
+{
+	sh->buf_i += 0;
+	return ;
 }

@@ -49,9 +49,9 @@ t_ast		*parse_lexer(char *str)
 	return (validate_lexer(lex));
 }
 
-int			parse_quote(char **word, char *str)
+int	  	parse_quote(char **word, char *str)
 {
-	int		i;
+	int	  i;
 
 	i = 1;
 	if (*str == '\'' && str++)
@@ -77,9 +77,9 @@ int			parse_quote(char **word, char *str)
 	return (i);
 }
 
-t_ast		**parse_ast(t_ast **ast, t_ast *lex)
+t_ast	  **parse_ast(t_ast **ast, t_ast *lex)
 {
-	int		i;
+	int	  i;
 
 	i = 0;
 	ast[i] = NULL;
@@ -102,7 +102,7 @@ t_ast		**parse_ast(t_ast **ast, t_ast *lex)
 	return (ast);
 }
 
-t_ast		*parse_tree(t_ast *lex)
+t_ast	  *parse_tree(t_ast *lex)
 {
 	t_ast	*ast;
 	t_ast	*op;
