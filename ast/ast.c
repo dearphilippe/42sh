@@ -2,7 +2,7 @@
 
 t_ast			*ast_new(char *name, t_type type)
 {
-	t_ast	*node;
+	t_ast		*node;
 
 	if (!name)
 		return (NULL);
@@ -20,7 +20,7 @@ t_ast			*ast_new(char *name, t_type type)
 
 t_ast			*ast_enast(t_ast *head, t_ast *node)
 {
-	t_ast *cursor;
+	t_ast		*cursor;
 
 	if (!node)
 		return (head);
@@ -35,7 +35,7 @@ t_ast			*ast_enast(t_ast *head, t_ast *node)
 
 t_ast			*ast_deast(t_ast *head)
 {
-	t_ast	*cpy;
+	t_ast		*cpy;
 
 	if (!head)
 		return (NULL);
@@ -55,7 +55,7 @@ t_ast			*ast_deast(t_ast *head)
 
 int				ast_len(t_ast *head)
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	while (head)
