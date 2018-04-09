@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:59:41 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/06 06:00:11 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/08 16:07:13 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,18 @@ int	is_alphanumeric_string(char *str)
 		i++;
 	}
 	return (1);
+}
+
+int	string_has_whitespace(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isspace(str[i]))
+			return (1);
+		i++;
+	}
+	return (0);
 }

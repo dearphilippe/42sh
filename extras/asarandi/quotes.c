@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:13:13 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/06 05:13:52 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/08 15:22:45 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	handle_strong_quote(t_av *av, int *i, int *k)
 	while (in[*i] != STRONG_QUOTE)
 		out[(*k)++] = in[(*i)++];
 	(*i)++;
-	return (1);
+	return (2);
 }
 
 int	handle_dollar_sign(t_av *av, t_shell *sh, int *i, int *k)
@@ -77,5 +77,5 @@ int	handle_weak_quote(t_av *av, t_shell *sh, int *i, int *k)
 			out[(*k)++] = in[(*i)++];
 	}
 	(*i)++;
-	return (1);
+	return (2);
 }
