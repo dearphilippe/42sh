@@ -19,7 +19,7 @@ ERR_COLOR="\033[0;31m There was an error during your process. \033[0m"
 NAME=exe
 SRC=*.c
 
-FLAGS=-Wextra -Wall -Werror -g
+FLAGS=-Wextra -Wall -Werror -g # -fsanitize=address "Only necessary to avoid bugs instantly once the compiled program complains
 
 LIBFT=./libft
 LIBFTFT_PRINTF=./ft_printf
