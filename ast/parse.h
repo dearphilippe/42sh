@@ -15,9 +15,7 @@
 
 # define IS_TERM(x) (IS_OP(x) || IS_SEP(x) || IS_RED_PIPE(x))
 
-# include "../libft/libft.h"
-# include "../ft_printf/ft_printf_header.h"
-# include "../ft_ls/ft_ls.h"
+# include "../include/libft/libft.h"
 
 // TODO to delete
 # include <stdio.h>
