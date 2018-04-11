@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:13:13 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/08 15:22:45 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 10:55:50 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,13 @@ int	handle_dollar_sign(t_av *av, t_shell *sh, int *i, int *k)
 	av->key[z] = 0;
 	av->val = kv_array_get_key_value(sh->envp, av->key);
 	if (av->val == NULL)
-	{
 		ft_printf(STDERR_FILENO, UNDEFINED_VARIABLE, av->key);
-		cleanup_av_buffers(av);
-		return (0);
+	else
+	{
+		z = 0;
+		while (av->val[z])
+			av->out[(*k)++] = av->val[z++];
 	}
-	z = 0;
-	while (av->val[z])
-		av->out[(*k)++] = av->val[z++];
 	(*i) += ft_strlen(av->key);
 	return (1);
 }

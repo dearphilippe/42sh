@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 06:00:59 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/08 03:52:29 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 11:56:44 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ void	execute_external_cmd(t_shell *sh)
 	{
 		if ((path = find_command_path(sh, sh->child_argv[0])) == NULL)
 		{
-			return ((void)ft_printf(STDERR_FILENO,
-						E_NOTFOUND, sh->child_argv[0]));
+//			return ((void)ft_printf(STDERR_FILENO,
+//						E_NOTFOUND, sh->child_argv[0]));
+			return (perror(SHELL_NAME));
 		}
 		fullpath = dir_slash_exec(path, sh->child_argv[0]);
 		tcsetattr(STDIN_FILENO, TCSANOW, &sh->t_original);

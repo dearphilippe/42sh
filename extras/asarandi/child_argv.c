@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:57:11 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/10 22:35:22 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 11:34:57 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ void	add_string_to_child_argv(t_shell *sh, char *str, int *k)
 	return ;
 }
 
+int		is_end_of_argument(char c)
+{
+	if (ft_isspace(c))
+		return (1);
+	if (c == 0)
+		return (1);
+	if (c == COMMAND_SEPARATOR)
+		return (1);
+	return (0);
+}
+
 int		mini_parse(t_shell *sh, t_av *av, int *i, int *k)
 {
 	int	r;
@@ -52,12 +63,10 @@ int		mini_parse(t_shell *sh, t_av *av, int *i, int *k)
 	else if ((av->in[*i] == BACKSLASH) && ((*i)++))
 		av->out[(*k)++] = av->in[(*i)++];
 	else if (av->in[*i] == COMMAND_SEPARATOR)
-		r = 3;
+		return (3);
 	else
 		av->out[(*k)++] = av->in[(*i)++];
-	if (r == 0)
-		return (0);
-	if ((ft_isspace(av->in[*i])) || (av->in[*i] == 0) || r > 1)
+	if ((r > 0) && (is_end_of_argument(av->in[*i])))
 		add_string_to_child_argv(sh, av->out, k);
 	return (r);
 }

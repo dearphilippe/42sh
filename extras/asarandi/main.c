@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/10 22:40:04 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 12:00:42 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int		main(int argc, char **argv, char **envp)
 		raw_read(sh);
 		if (sh->buffer == NULL)
 			break ;
+		
 ///////////////////////////////////
 		if ((lex = parse_lexer(sh->buffer)) == NULL)
 		{
@@ -138,7 +139,6 @@ int		main(int argc, char **argv, char **envp)
 	    free_ast(lex);
 	    free_trees(ast);
 ///////////////////////////////////
-
 	
 		execute(sh);
 		clear_input_buffers(sh);

@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 15:46:44 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/08 15:48:08 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 11:59:06 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	builtin_cd_save_cwd(t_shell *sh, char *variable)
 		free(cwd);
 	}
 	else
-		ft_printf(STDERR_FILENO, "%s\n", E_CWDFAIL);
+		perror(SHELL_NAME);
+//		ft_printf(STDERR_FILENO, "%s\n", E_CWDFAIL);
 	return ;
 }
 
@@ -69,7 +70,8 @@ void	builtin_cd(t_shell *sh)
 		r = chdir(path);
 		free(path);
 		if (r == -1)
-			(void)ft_printf(STDERR_FILENO, E_CHDIRFAIL);
+			perror(SHELL_NAME);
+//			(void)ft_printf(STDERR_FILENO, E_CHDIRFAIL);
 		else
 			builtin_cd_save_cwd(sh, "PWD");
 	}
