@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:47:31 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/08 03:34:02 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/10 22:58:55 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,15 @@ void	clear_input_buffers(t_shell *sh)
 {
 	if (sh->partial_input != NULL)
 		free(sh->partial_input);
+	sh->partial_input = NULL;
 	if (sh->history != NULL)
 		destroy_char_array(sh->history);
 	sh->history = NULL;
-	destroy_char_array(sh->child_argv);
+	if (sh->child_argv != NULL)
+		destroy_char_array(sh->child_argv);
 	sh->child_argv = NULL;
-	free(sh->buffer);
+	if (sh->buffer != NULL)
+		free(sh->buffer);
 	sh->buffer = NULL;
 	return ;
 }
