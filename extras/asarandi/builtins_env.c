@@ -6,13 +6,13 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 07:11:01 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/06 07:12:59 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 12:39:44 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	builtin_setenv_kv(t_shell *sh, int arg_count)
+int	builtin_setenv_kv(t_shell *sh, int arg_count)
 {
 	char	*key;
 	char	*value;
@@ -24,15 +24,19 @@ void	builtin_setenv_kv(t_shell *sh, int arg_count)
 	if (is_alphanumeric_string(key) == 1)
 	{
 		if (ft_isalpha(key[0]))
+		{
 			kv_array_set_key_value(&sh->envp, key, value);
+			return (0);	//success
+		}
 		else
 			ft_printf(STDERR_FILENO, "setenv: %s\n", E_LETTER);
 	}
 	else
 		ft_printf(STDERR_FILENO, "setenv: %s\n", E_ALNUM);
+	return (1); //failure
 }
 
-void	builtin_setenv(t_shell *sh)
+int		builtin_setenv(t_shell *sh)
 {
 	int		count;
 
@@ -45,10 +49,10 @@ void	builtin_setenv(t_shell *sh)
 		return (builtin_setenv_kv(sh, 3));
 	else if (count > 3)
 		ft_printf(STDERR_FILENO, "setenv: %s\n", E_TOOMANY);
-	return ;
+	return (0);	//success
 }
 
-void	builtin_unsetenv(t_shell *sh)
+int		builtin_unsetenv(t_shell *sh)
 {
 	char	*key;
 	int		i;
@@ -63,11 +67,14 @@ void	builtin_unsetenv(t_shell *sh)
 		i++;
 	}
 	if (i == 1)
+	{
 		ft_printf(STDERR_FILENO, "unsetenv: %s\n", E_TOOFEW);
-	return ;
+		return (1);	//failure
+	}
+	return (0);	//success
 }
 
-void	builtin_env(t_shell *sh)
+int		builtin_env(t_shell *sh)
 {
 	int	i;
 
@@ -77,5 +84,5 @@ void	builtin_env(t_shell *sh)
 		ft_printf(STDOUT_FILENO, "%s\n", sh->envp[i]);
 		i++;
 	}
-	return ;
+	return (0);	//success
 }

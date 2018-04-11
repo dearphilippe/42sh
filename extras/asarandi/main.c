@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 12:00:42 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 12:45:55 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	execute(t_shell *sh)
 {
 	int			r;
 	int			i;
-	static void	(*builtin_functions[]) (t_shell *) = {&builtin_echo,
+	static int	(*builtin_functions[]) (t_shell *) = {&builtin_echo,
 		&builtin_cd, &builtin_setenv, &builtin_unsetenv, &builtin_env,
 		&builtin_exit, &builtin_help};
 
@@ -88,7 +88,7 @@ void	execute(t_shell *sh)
 		if (sh->child_argv[0] != NULL)
 		{
 			if ((r = builtin_cmd_index(sh->child_argv[0])) != -1)
-				(void)builtin_functions[r](sh);
+				sh->exit_code = builtin_functions[r](sh);
 			else
 				(void)execute_external_cmd(sh);
 		}

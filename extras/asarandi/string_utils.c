@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:59:41 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/08 16:07:13 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 12:07:46 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,20 @@ int	is_alphanumeric_string(char *str)
 	while (str[i])
 	{
 		if (!ft_isalnum2(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	is_numeric_string(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
 			return (0);
 		i++;
 	}

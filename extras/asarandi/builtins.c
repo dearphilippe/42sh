@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:06:58 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/08 15:47:49 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 12:44:30 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		builtin_cmd_index(char *cmd)
 	return (-1);
 }
 
-void	builtin_echo(t_shell *sh)
+int		builtin_echo(t_shell *sh)
 {
 	int	dash_n;
 	int	i;
@@ -48,6 +48,7 @@ void	builtin_echo(t_shell *sh)
 	}
 	if (dash_n == 0)
 		ft_printf(STDOUT_FILENO, "\n");
+	return (0);
 }
 
 char	*builtin_cd_get_kv(t_shell *sh, char *variable)
@@ -61,21 +62,25 @@ char	*builtin_cd_get_kv(t_shell *sh, char *variable)
 	return (result);
 }
 
-void	builtin_exit(t_shell *sh)
+int	builtin_exit(t_shell *sh)
 {
-	int	exit_code;
-
-	exit_code = EXIT_SUCCESS;
-	if (sh->child_argv[1] != NULL)
-		exit_code = ft_atoi(sh->child_argv[1]);
+	if ((sh->child_argv[1] != NULL) && (is_numeric_string(sh->child_argv[1])))
+		sh->exit_code = ft_atoi(sh->child_argv[1]);
 	ft_printf(STDERR_FILENO, "exit\n");
 	clean_up(sh);
-	exit(exit_code);
-	return ;
+	exit(sh->exit_code);
+	return (sh->exit_code);
 }
 
-void	builtin_help(t_shell *sh)
+int	builtin_help(t_shell *sh)
 {
-	sh->bufsize += 0;
-	return ;
+	sh->argc += 0;
+	ft_printf(STDOUT_FILENO, "this is a help message for %s\n", SHELL_NAME);
+	ft_printf(STDOUT_FILENO, "\t\tcd\t\tthis is a help message\n");
+	ft_printf(STDOUT_FILENO, "\t\techo\t\tthis is a help message\n");
+	ft_printf(STDOUT_FILENO, "\t\texit\t\tthis is a help message\n");
+	ft_printf(STDOUT_FILENO, "\t\tenv\t\tthis is a help message\n");
+	ft_printf(STDOUT_FILENO, "\t\tsetenv\t\tthis is a help message\n");
+	ft_printf(STDOUT_FILENO, "\t\tunsetenv\t\tthis is a help message\n");
+	return (0);
 }

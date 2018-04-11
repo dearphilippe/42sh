@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 16:20:50 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/08 16:47:49 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 12:43:09 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_shell	t_shell;
 typedef struct s_av		t_av;
 typedef struct s_exec	t_exec;
 
+int		is_numeric_string(char *str);
 char	**add_element_to_char_array(char **array, char *string);
 char	**create_char_array_copy(char **src, int extra);
 char	**history_array(t_shell *sh);
@@ -57,15 +58,15 @@ t_av	*init_av_buffers(t_shell *sh);
 void	add_string_to_child_argv(t_shell *sh, char *str, int *k);
 void	add_to_list_of_executables(t_shell *sh, char *cmd);
 void	build_list_of_executables(t_shell *sh, char **folders);
-void	builtin_cd(t_shell *sh);
-void	builtin_cd_save_cwd(t_shell *sh, char *variable);
-void	builtin_echo(t_shell *sh);
-void	builtin_env(t_shell *sh);
-void	builtin_exit(t_shell *sh);
-void	builtin_help(t_shell *sh);
-void	builtin_setenv(t_shell *sh);
-void	builtin_setenv_kv(t_shell *sh, int arg_count);
-void	builtin_unsetenv(t_shell *sh);
+int		builtin_cd(t_shell *sh);
+int		builtin_cd_save_cwd(t_shell *sh, char *variable);
+int		builtin_echo(t_shell *sh);
+int		builtin_env(t_shell *sh);
+int		builtin_exit(t_shell *sh);
+int		builtin_help(t_shell *sh);
+int		builtin_setenv(t_shell *sh);
+int		builtin_setenv_kv(t_shell *sh, int arg_count);
+int		builtin_unsetenv(t_shell *sh);
 void	check_special_keys(t_shell *sh);
 void	clean_up(t_shell *sh);
 void	cleanup_av_buffers(t_av *av);

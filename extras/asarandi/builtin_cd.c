@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 15:46:44 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 11:59:06 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 12:38:54 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*builtin_cd_get_path(t_shell *sh)
 	return (path);
 }
 
-void	builtin_cd_save_cwd(t_shell *sh, char *variable)
+int		builtin_cd_save_cwd(t_shell *sh, char *variable)
 {
 	char	*cwd;
 
@@ -49,20 +49,24 @@ void	builtin_cd_save_cwd(t_shell *sh, char *variable)
 	{
 		kv_array_set_key_value(&sh->envp, variable, cwd);
 		free(cwd);
+		return (0);	//success
 	}
 	else
 		perror(SHELL_NAME);
 //		ft_printf(STDERR_FILENO, "%s\n", E_CWDFAIL);
-	return ;
+	return (1);	//failure
 }
 
-void	builtin_cd(t_shell *sh)
+int		builtin_cd(t_shell *sh)
 {
 	char	*path;
 	int		r;
 
 	if (count_char_array(sh->child_argv) > 2)
-		return ((void)ft_printf(STDERR_FILENO, E_TOOMANY2, "cd"));
+	{
+		(void)ft_printf(STDERR_FILENO, E_TOOMANY2, "cd");
+		return (1);	//failure
+	}
 	path = builtin_cd_get_path(sh);
 	if (path != NULL)
 	{
@@ -70,10 +74,12 @@ void	builtin_cd(t_shell *sh)
 		r = chdir(path);
 		free(path);
 		if (r == -1)
+		{
 			perror(SHELL_NAME);
-//			(void)ft_printf(STDERR_FILENO, E_CHDIRFAIL);
+			return (1);	//failure
+		}
 		else
-			builtin_cd_save_cwd(sh, "PWD");
+			return (builtin_cd_save_cwd(sh, "PWD"));	//success, maybe
 	}
-	return ;
+	return (1);	//failure
 }
