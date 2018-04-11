@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:50:54 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/08 16:46:11 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/10 22:06:57 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "functions.h"
+# include "parse.h"
 # include "libft.h"
 # include "libftprintf.h"
 # include <unistd.h>

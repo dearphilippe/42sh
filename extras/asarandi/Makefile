@@ -1,5 +1,13 @@
 NAME		= minishell
-SRC			=	autocomplete.c \
+SRC			=	ast.c \
+				ast_free.c \
+				ast_get.c \
+				ast_helper.c \
+				ast_main.c \
+				ast_parse.c \
+				ast_print.c \
+				ast_validate.c \
+				autocomplete.c \
 				builtin_cd.c \
 				builtins.c \
 				builtins_env.c \

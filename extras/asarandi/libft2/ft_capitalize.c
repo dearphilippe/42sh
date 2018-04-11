@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_capitalize.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: brabo-hi <brabo-hi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/20 15:40:21 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/10 22:18:46 by asarandi         ###   ########.fr       */
+/*   Created: 2017/11/17 11:55:32 by brabo-hi          #+#    #+#             */
+/*   Updated: 2017/11/17 11:58:47 by brabo-hi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_capitalize(char *s)
 {
-	int i;
+	char	*new;
+	int		i;
 
+	if (!s)
+		return (NULL);
+	new = ft_strnew(ft_strlen(s));
+	new[0] = ft_toupper(s[0]);
 	i = 0;
-	while ((s) && (s[i]))
-		i++;
-	return (i);
+	while (*(s + ++i))
+		if (!ft_isalnum(s[i - 1]) && ft_isalnum(s[i]))
+			new[i] = ft_toupper(s[i]);
+		else
+			new[i] = s[i];
+	return (new);
 }

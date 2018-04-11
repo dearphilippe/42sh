@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 17:51:15 by asarandi          #+#    #+#             */
-/*   Updated: 2018/03/31 04:21:36 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/10 21:55:43 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef	struct		s_gnl
 	struct s_gnl	*next;
 }					t_gnl;
 
+char				*ft_str_append(char *str, char c);
+int					ft_strcmp_withspace(const char *s1, const char *s2);
 int					get_next_line(const int fd, char **line);
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));

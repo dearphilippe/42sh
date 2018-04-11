@@ -6,13 +6,15 @@
 #    By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/20 17:41:00 by asarandi          #+#    #+#              #
-#    Updated: 2018/03/31 04:21:54 by asarandi         ###   ########.fr        #
+#    Updated: 2018/04/10 21:56:26 by asarandi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= libft.a
 CFLAGS		= -g -Wall -Werror -Wextra -I.
-FILES		=	ft_atoi.c \
+FILES		=	ft_str_append.c \
+				ft_strcmp_withspace.c \
+				ft_atoi.c \
 				ft_base64encode.c \
 				ft_bzero.c \
 				ft_capitalize.c \

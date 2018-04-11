@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/08 16:32:42 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/10 22:40:04 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void	execute(t_shell *sh)
 int		main(int argc, char **argv, char **envp)
 {
 	t_shell		*sh;
+    t_ast		*lex;
+    t_ast		**ast;
 
 	sh = init_shell(argc, argv, envp);
 	while (1)
@@ -111,6 +113,33 @@ int		main(int argc, char **argv, char **envp)
 		raw_read(sh);
 		if (sh->buffer == NULL)
 			break ;
+///////////////////////////////////
+		if ((lex = parse_lexer(sh->buffer)) == NULL)
+		{
+			ft_printf(STDERR_FILENO, "lexical error!!\n");
+			clear_input_buffers(sh);
+			continue ;
+		}
+	    if (!(ast = (t_ast **)ft_memalloc(sizeof(t_ast *) * get_nbr_instructions(lex) + 1)))
+	    {
+	        ft_printf(STDERR_FILENO, "ast memory error!!\n");
+			clear_input_buffers(sh);
+			continue ;
+	    }
+
+	    if (!(ast = parse_ast(ast, lex)))
+		{
+	        ft_printf(STDERR_FILENO, "ast syntax error!!\n");
+			clear_input_buffers(sh);
+			continue ;
+		}
+//        print_error_ast();
+	    print_trees(ast);
+	    free_ast(lex);
+	    free_trees(ast);
+///////////////////////////////////
+
+	
 		execute(sh);
 		clear_input_buffers(sh);
 	}

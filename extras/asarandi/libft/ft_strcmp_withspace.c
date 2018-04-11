@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp_withspace.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: brabo-hi <brabo-hi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/20 15:40:21 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/10 22:18:46 by asarandi         ###   ########.fr       */
+/*   Created: 2017/10/06 04:30:11 by brabo-hi          #+#    #+#             */
+/*   Updated: 2018/04/10 21:54:47 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int		ft_strcmp_withspace(const char *s1, const char *s2)
 {
-	int i;
-
-	i = 0;
-	while ((s) && (s[i]))
-		i++;
-	return (i);
+	while (s1 && *s1 && *s1 == ' ')
+		s1++;
+	while (s2 && *s2 && *s2 == ' ')
+		s2++;
+	return (ft_strcmp(s1, s2));
 }
