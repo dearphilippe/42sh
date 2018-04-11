@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:06:58 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 12:44:30 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 15:49:47 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,19 @@ char	*builtin_cd_get_kv(t_shell *sh, char *variable)
 
 int	builtin_exit(t_shell *sh)
 {
-	if ((sh->child_argv[1] != NULL) && (is_numeric_string(sh->child_argv[1])))
-		sh->exit_code = ft_atoi(sh->child_argv[1]);
+	int	exit_code;
+
+	if ((sh->child_argv[1] != NULL) && 
+			((is_numeric_string(sh->child_argv[1])) ||
+			 ((sh->child_argv[1][0] == '-') &&
+			  (is_numeric_string(&sh->child_argv[1][1])))))
+		exit_code = ft_atoi(sh->child_argv[1]);
+	else
+		exit_code = sh->exit_code;
 	ft_printf(STDERR_FILENO, "exit\n");
 	clean_up(sh);
-	exit(sh->exit_code);
-	return (sh->exit_code);
+	exit(exit_code);
+	return (exit_code);
 }
 
 int	builtin_help(t_shell *sh)

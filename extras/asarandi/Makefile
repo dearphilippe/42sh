@@ -1,5 +1,5 @@
 NAME		= minishell
-SRC			=	ast.c \
+SRCFILES	=	ast.c \
 				ast_free.c \
 				ast_get.c \
 				ast_helper.c \
@@ -32,26 +32,32 @@ SRC			=	ast.c \
 				tab_key.c \
 				tab_utils.c \
 				termcaps.c
-
-OBJ			= $(SRC:%.c=%.o)
+OBJFILES	= $(SRCFILES:%.c=%.o)
+SRC			= $(addprefix src/,$(SRCFILES))
+OBJ			= $(addprefix obj/,$(OBJFILES))
 CC			= gcc
-FLAGS		= -g -Wextra -Wall -Werror # -fsanitize=address
-INC			= -I libft/ -I libft/ft_printf/
+FLAGS		= -g -Wextra -Wall -Werror
+INC			= -I libft/ -I libft/ft_printf/ -I inc/
 LIB			= -L libft/ -lft -L libft/ft_printf/ -lftprintf -ltermcap
 
 all:$(NAME)
 
-$(NAME):
+$(NAME): $(OBJ)
 	make -C libft/
 	make -C libft/ft_printf/
-	$(CC) $(FLAGS) $(INC) -c $(SRC)
-	$(CC) $(FLAGS) $(OBJ) $(LIB) -o $(NAME)
+	$(CC) $(FLAGS) -o $@ $^ $(LIB)
+
+objdir:
+	mkdir -p obj/
+
+obj/%.o: src/%.c | objdir
+	$(CC) $(FLAGS) -c $< -o $@ $(INC)
 
 rmobj:
-	rm -f $(OBJ)
+	rm -rf obj/
 
 rmbin:
-	rm -f $(NAME)
+	rm -rf $(NAME)
 
 again: rmobj rmbin all
 
