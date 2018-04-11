@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 12:45:55 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 13:02:29 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	execute(t_shell *sh)
 			if ((r = builtin_cmd_index(sh->child_argv[0])) != -1)
 				sh->exit_code = builtin_functions[r](sh);
 			else
-				(void)execute_external_cmd(sh);
+				sh->exit_code = execute_external_cmd(sh);
 		}
 		if (sh->buffer[i] == ';')
 		{

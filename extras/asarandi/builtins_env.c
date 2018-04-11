@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 07:11:01 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 12:39:44 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 12:52:50 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ int		builtin_setenv(t_shell *sh)
 	else if (count == 3)
 		return (builtin_setenv_kv(sh, 3));
 	else if (count > 3)
+	{
 		ft_printf(STDERR_FILENO, "setenv: %s\n", E_TOOMANY);
+		return (1);	//failure
+	}
 	return (0);	//success
 }
 
