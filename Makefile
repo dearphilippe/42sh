@@ -37,9 +37,6 @@ CURSORUP = \033[1A
 all: $(NAME)
 $(NAME): $(OBJ)
 	@echo "$(ERASE)$(PURPLE)[42sh] :$(NORM) $(GREEN)Creating Library$(NORM) $(CURSORUP)";
-	@ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
-	@$(CC) $(FLAGS) main.c $(NAME) -o $(EXEC)
 	@echo "$(ERASE)$(PURPLE)[42sh] :$(NORM) $(GREEN)42sh Compiled!$(NORM)";
 %.o: %.c
 	@$(CC) $(FLAGS) -c $< -o $@
