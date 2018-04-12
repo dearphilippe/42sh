@@ -1,68 +1,72 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ztisnes <ztisnes@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/03/25 17:50:25 by ztisnes           #+#    #+#              #
-#    Updated: 2018/04/04 23:52:34 by ztisnes          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-#Color coders
-RESET_COLOR="\033[0m"
-OK_COLOR="\033[0;32m"
-WARN_COLOR="\033[0;33m Warning. Check that everything is alright. \033[0m"
-ERR_COLOR="\033[0;31m There was an error during your process. \033[0m"
-
-NAME=exe
-SRC=*.c
-
-FLAGS=-Wextra -Wall -Werror -g # -fsanitize=address "Only necessary to avoid bugs instantly once the compiled program complains
-
-LIBFT=./libft
-LIBFTFT_PRINTF=./ft_printf
-LIBFT_LS=./ft_ls
-
-LIBFT_NAME=libft
-LIBFTFT_PRINTF_NAME=libftprintf
-LIBFT_LS_NAME=libftls
+NAME		= minishell
+SRCFILES	=	ast.c \
+				ast_free.c \
+				ast_get.c \
+				ast_helper.c \
+				ast_main.c \
+				ast_parse.c \
+				ast_print.c \
+				ast_validate.c \
+				autocomplete.c \
+				builtin_cd.c \
+				builtins.c \
+				builtins_env.c \
+				char_array.c \
+				child_argv.c \
+				error.c \
+				exec.c \
+				file_op.c \
+				history.c \
+				history_keys.c \
+				input_a.c \
+				input_b.c \
+				kv_array.c \
+				main.c \
+				norme.c \
+				path_utils.c \
+				quotes.c \
+				special_keys_a.c \
+				special_keys_b.c \
+				string_utils.c \
+				tab_columns.c \
+				tab_key.c \
+				tab_utils.c \
+				termcaps.c
+OBJFILES	= $(SRCFILES:%.c=%.o)
+SRC			= $(addprefix src/,$(SRCFILES))
+OBJ			= $(addprefix obj/,$(OBJFILES))
+CC			= gcc
+FLAGS		= -g -Wextra -Wall -Werror
+INC			= -I libft/ -I libft/ft_printf/ -I inc/
+LIB			= -L libft/ -lft -L libft/ft_printf/ -lftprintf -ltermcap
 
 all:$(NAME)
 
-$(NAME):
-	@cd $(LIBFT) && make
-	@cd $(LIBFTFT_PRINTF) && make
-	@cd $(LIBFT_LS) && make
+$(NAME): $(OBJ)
+	make -C libft/
+	make -C libft/ft_printf/
+	$(CC) $(FLAGS) -o $@ $^ $(LIB)
 
-	@gcc -c $(SRC) $(FLAGS)
-	@gcc $(SRC:.c=.o) -o $(NAME)\
-		$(LIBFT)/$(LIBFT_NAME).a\
-		$(LIBFTFT_PRINTF)/$(LIBFTFT_PRINTF_NAME).a\
-		$(LIBFT_LS)/$(LIBFT_LS_NAME).a
+objdir:
+	mkdir -p obj/
 
-clean:
-	@cd $(LIBFT) && make clean
-	@cd $(LIBFTFT_PRINTF) && make clean
-	@cd $(LIBFT_LS) && make clean
-	@/bin/rm -f $(SRC:.c=.o)
+obj/%.o: src/%.c | objdir
+	$(CC) $(FLAGS) -c $< -o $@ $(INC)
 
-fclean: clean
-	@cd $(LIBFT) && make fclean
-	@cd $(LIBFTFT_PRINTF) && make fclean
-	@cd $(LIBFT_LS) && make fclean
-	@/bin/rm -f $(NAME)
+rmobj:
+	rm -rf obj/
+
+rmbin:
+	rm -rf $(NAME)
+
+again: rmobj rmbin all
+
+clean: rmobj
+	make clean -C libft/
+	make clean -C libft/ft_printf/
+
+fclean: clean rmbin
+	make fclean -C libft/
+	make fclean -C libft/ft_printf/
 
 re: fclean all
-	@cd $(LIBFT) && make re
-	@cd $(LIBFTFT_PRINTF) && make re
-	@cd $(LIBFT_LS) && make re
-
-git:
-	@echo "Adding to Github/Vogsphere"
-	@git add .
-	@echo "What is your message of your commit?"
-	@read msg && git commit -m "$$msg"
-	@echo "Pushing..."
-	@git push origin && echo $(OK_COLOR) "all good :)" || echo $(WARN_COLOR)
