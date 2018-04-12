@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 18:43:43 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 19:41:04 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,11 @@ int			process_execute(t_shell *sh, t_process *p)
 	return (EXIT_FAILURE);
 }
 
-void	execute(t_shell *sh)
+void	execute(t_shell *sh, char *cmd)
 {
 	t_process	*p;
 
-	p = process_prepare(sh, sh->buffer);
+	p = process_prepare(sh, cmd);
 	if (p != NULL)
 	{
 		p->exit_code = process_execute(sh, p);
@@ -147,34 +147,84 @@ int		main(int argc, char **argv, char **envp)
 		raw_read(sh);
 		if (sh->buffer == NULL)
 			break ;
-		
+		if (ft_strlen(sh->buffer) != 0)
+		{
+				
 ///////////////////////////////////
-		if ((lex = parse_lexer(sh->buffer)) == NULL)
-		{
-			ft_printf(STDERR_FILENO, "lexical error!!\n");
-			clear_input_buffers(sh);
-			continue ;
-		}
-	    if (!(ast = (t_ast **)ft_memalloc(sizeof(t_ast *) * get_nbr_instructions(lex) + 1)))
-	    {
-	        ft_printf(STDERR_FILENO, "ast memory error!!\n");
-			clear_input_buffers(sh);
-			continue ;
-	    }
+			if ((lex = parse_lexer(sh->buffer)) == NULL)
+			{
+				ft_printf(STDERR_FILENO, "lexical error!!\n");
+				clear_input_buffers(sh);
+				continue ;
+			}
+		    if (!(ast = (t_ast **)ft_memalloc(sizeof(t_ast *) * get_nbr_instructions(lex) + 1)))
+		    {
+		        ft_printf(STDERR_FILENO, "ast memory error!!\n");
+				clear_input_buffers(sh);
+				continue ;
+		    }
 
-	    if (!(ast = parse_ast(ast, lex)))
-		{
-	        ft_printf(STDERR_FILENO, "ast syntax error!!\n");
-			clear_input_buffers(sh);
-			continue ;
-		}
+		    if (!(ast = parse_ast(ast, lex)))
+			{
+		        ft_printf(STDERR_FILENO, "ast syntax error!!\n");
+				clear_input_buffers(sh);
+				continue ;
+			}
 //        print_error_ast();
-	    print_trees(ast);
-	    free_ast(lex);
-	    free_trees(ast);
+//		    print_trees(ast);
+
+			t_ast	*ptr;
+			ptr = ast[0];
+
+			while (ptr->next)
+				ptr = ptr->next;	//go to last command
+
+			while (ptr != ast[0])	//backtrack till we get to first node
+			{
+				t_process *p = process_prepare(sh, ptr->name);
+				int ec = process_execute(sh, p);
+				(void)process_destroy(p);
+
+				if (ptr->parent != NULL)
+				{
+					if (ptr->parent->type == OP_AND)
+					{
+						if (ec == 0)
+						{
+							ptr = ptr->parent->right;
+							p = process_prepare(sh, ptr->name);
+							ec = process_execute(sh, p);
+							(void)process_destroy(p);
+						}
+					}
+					else if (ptr->parent->type == OP_OR)
+					{
+						if (ec != 0)
+						{
+							ptr = ptr->parent->right;
+							p = process_prepare(sh, ptr->name);
+							ec = process_execute(sh, p);
+							(void)process_destroy(p);
+						}
+					}
+
+				}
+				ptr = ptr->parent->parent;
+
+			}
+
+
+
+
+
+
+		    free_ast(lex);
+		    free_trees(ast);
 ///////////////////////////////////
 	
-		execute(sh);
+//			execute(sh, sh->buffer);
+
+		}
 		clear_input_buffers(sh);
 	}
 	clean_up(sh);

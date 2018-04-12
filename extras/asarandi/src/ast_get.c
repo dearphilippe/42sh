@@ -8,7 +8,7 @@ t_type      get_type(char *str)
         return (RED_PIPE);
     if (ft_strlen(str ) == 2)
     {
-       if (IS_OP_AND(str))
+       if (IS_OP_OR(str))
             return (OP_OR);
         if (IS_OP_AND(str))
             return (OP_AND);

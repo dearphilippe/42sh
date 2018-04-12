@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 16:20:50 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 18:37:23 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 19:10:53 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	destroy_char_array(char **array);
 void	destroy_list_of_executables(t_shell *sh);
 void	display_shell_prompt(void);
 void	end_of_input(t_shell *sh);
-void	execute(t_shell *sh);
+void	execute(t_shell *sh, char *cmd);
 //int		execute_external_cmd(t_shell *sh);
 int		execute_external_cmd(t_shell *sh, t_process *p);
 void	fatal_error(t_shell *sh);
