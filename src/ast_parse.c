@@ -8,15 +8,23 @@ t_ast     *parse_lexer(char *str)
     t_ast   *node;
     char    *word;
     char    *term;
+    int     res;
 
     lex = NULL;
     word = NULL;
     term = NULL;
     while (str && *str)
     {
+      //  printf("[%c]\n", *str);
         if (*str == '\'' || *str == '"')
          {
-             str += parse_quote(&word, str);
+             if (!(res = parse_quote(&word, str)))
+             {
+             //    printf("res [%d]\n", res);
+
+                 return (NULL);
+             }
+             str += res;
              continue ;
          }
         else if (*str && *str != ' ' && (term = get_type_string(str)))
@@ -46,34 +54,55 @@ t_ast     *parse_lexer(char *str)
     return (validate_lexer(lex));
 }
 
-// TODO fix error when passing ; at the end of echo ''
-// TODO check quotes
 int     parse_quote(char **word, char *str)
+{
+    int res;
+    int i;
+
+    i = 0;
+    if (!str || (*str != '\'' && *str != '"'))
+        return (0);
+    if (*str && *str == '\'' && !(res = parse_quote_single(str)))
+        return (0);
+    if (*str && *str == '"' && !(res = parse_quote_double(str)))
+        return (0);
+    while (i++ < res)
+    {
+        if (!str)
+            return (0);
+        *word = ft_str_append(*word, *str++);
+    }
+    return (res);
+}
+
+int     parse_quote_single(char *str)
 {
     int i;
 
     i = 1;
-    if (*str == '\'' && str++)
-    {
-        if (str && *str && *str == '\'' && ++i)
-            return (i);
-        *word = ft_str_append(*word, '\'');
-        while (str && *str && ++i && *str != '\'')
-            *word = ft_str_append(*word, *str++);
-        if (str && *str == '\'' && ++i)
-            *word = ft_str_append(*word, '\'');
-    }
-    else if (*str == '"' && str++)
-    {
-        if (str && *str && *str == '"' && ++i)
-            return (i);
-        *word = ft_str_append(*word, '"');
-        while (str && str[0] && str[0] == '"' && str[-1] != '\\' && ++i)
-            *word = ft_str_append(*word, *str++);
-        if (str && *str == '"' && ++i)
-            *word = ft_str_append(*word, '"');
-    }
-    return (i);
+    if (!str || !*str || *str++ != '\'')
+        return (0);
+    while (str && *str && *str != '\'' && ++i)
+        str++;
+    if (str && *str == '\'')
+        return (++i);
+    return (0);
+}
+
+int     parse_quote_double(char *str)
+{
+    int i;
+
+    i = 1;
+    if (!str || !*str || *str++ != '"')
+        return (0);
+    if (str && *str && *str == '"')
+        return (++i);
+    while (str && *str && str[0] != '"' && str[-1] != '\\' && ++i)
+        str++;
+    if (str && str[0] == '"' && str[-1] != '\\')
+        return (++i);
+    return (0);
 }
 
 t_ast     **parse_ast(t_ast **ast, t_ast *lex)
