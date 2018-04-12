@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.h                                            :+:      :+:    :+:   */
+/*   search_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/26 11:34:10 by passef            #+#    #+#             */
-/*   Updated: 2018/04/05 16:31:54 by passef           ###   ########.fr       */
+/*   Created: 2018/04/11 13:43:16 by passef            #+#    #+#             */
+/*   Updated: 2018/04/11 13:49:14 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_struct.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-typedef struct	s_env
+int main(int ac, char const * const *av)
 {
-	char	*buff;
-}				t_env;
+	char	*var;
+	int		i;
+
+	i = 0;
+
+	if (ac > 1)
+		var = getenv(av[1]);
+
+	if (!var)
+		printf("n'existe pas\n");
+	else
+		printf("%s : %s\n", av[1], var);
+
+	return (0);
+}

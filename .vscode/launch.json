@@ -17,7 +17,7 @@
 			"name": "(lldb) Launch",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/minishell/minishell",
+			"program": "${workspaceFolder}/a.out",
 			"args": [],
 			"stopAtEntry": true,
 			"cwd": "${workspaceFolder}",

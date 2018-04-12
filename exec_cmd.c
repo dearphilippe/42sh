@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.h                                            :+:      :+:    :+:   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/26 11:34:10 by passef            #+#    #+#             */
-/*   Updated: 2018/04/05 16:31:54 by passef           ###   ########.fr       */
+/*   Created: 2018/04/11 16:46:50 by passef            #+#    #+#             */
+/*   Updated: 2018/04/11 17:09:02 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_struct.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-typedef struct	s_env
+int main(int ac, char const * const *av)
 {
-	char	*buff;
-}				t_env;
+	system("clear");
+
+	return (0);
+}

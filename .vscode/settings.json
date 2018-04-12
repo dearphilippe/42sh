@@ -2,6 +2,14 @@
     "editor.renderWhitespace": "boundary",
     "editor.insertSpaces": false,
     "files.associations": {
-        "shell.h": "c"
+        "shell.h": "c",
+        "string.h": "c",
+        "ft_struct.h": "c",
+        "term.h": "c",
+        "stdbool.h": "c",
+        "libft.h": "c",
+        "stdlib.h": "c",
+        "stdarg.h": "c",
+        "termios.h": "c"
     }
 }

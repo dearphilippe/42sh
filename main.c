@@ -6,16 +6,11 @@
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 11:11:24 by passef            #+#    #+#             */
-/*   Updated: 2018/04/02 19:23:45 by passef           ###   ########.fr       */
+/*   Updated: 2018/04/04 19:38:58 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
-
-void	init_e(t_env *e)
-{
-	
-}
 
 /*
 ** Initialize the prompt with basic loop
@@ -39,9 +34,9 @@ char	*fts_read_line(void)
 
 	while (42)
 	{
-		get_next_line(1, &buff_size);
-		// read(1, &buff, buff_size);
-		// ft_putstr(&buff[i]);
+		// get_next_line(1, &buff_size);
+		read(1, &buff, buff_size);
+		ft_putstr(&buff[i]);
 	}
 }
 

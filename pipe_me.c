@@ -1,32 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process.c                                          :+:      :+:    :+:   */
+/*   pipe_me.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/29 09:15:55 by passef            #+#    #+#             */
-/*   Updated: 2018/04/05 09:53:30 by passef           ###   ########.fr       */
+/*   Created: 2018/04/08 13:51:43 by passef            #+#    #+#             */
+/*   Updated: 2018/04/11 11:11:19 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
 #include <stdio.h>
-#include <sys/wait.h>
+#include <unistd.h>
+#include <errno.h>
 
-int		main(int argc, char **argv)
+void	error_handling(int child_pid)
 {
-	pid_t	fat;
+	int status;
 
-	fat = fork();
-	if (fat > 0)
+	if (wait(&status) == -1)
 	{
-		wait(NULL);
-		printf("fat");
+		perror("Anormal exit");
 	}
-	if (fat == 0)
+}
+
+int		launch_process(pid_t	pid)
+{
+	pid = fork();
+
+	while ((pid == -1) && (pid == EAGAIN))
+		pid = fork();
+
+	return (EXIT_SUCCESS);
+}
+
+int main(void)
+{
+	pid_t	pid;
+
+	pid = fork();
+
+	if (pid == 0)
 	{
-		sleep(60);
-		execve("/bin/ls", argv, NULL);
+		printf("fils");
 	}
+	printf("%d", (int)pid);
+
+	return (0);
 }
