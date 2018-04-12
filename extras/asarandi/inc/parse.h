@@ -13,9 +13,9 @@
 
 # define IS_SEP(x) (!ft_strcmp_withspace(x, ";"))
 
-# define IS_TERM(x) (IS_OP(x) || IS_SEP(x) || IS_RED_PIPE(x))
+# define IS_TERM(x) (IS_OP(x) || IS_SEP(x) || IS_RED(x))
 
-# include "libft.h"
+# include "../libft/libft.h"
 
 // TODO to delete
 # include <stdio.h>
@@ -56,11 +56,12 @@ void	free_trees(t_ast **ast);
  */
 t_type      get_type(char *str);
 int         get_nbr_instructions(t_ast *lex);
+int         get_nbr_redirection(char *str);
+char         *get_type_string(char *str);
 
 /**
  * helper.c
  */
-char    *contain_term(char *str);
 char    *remove_start_space(char *str);
 
 /**
@@ -84,8 +85,8 @@ void	print_error_ast(void);
  * ast.c
  */
 t_ast				*ast_new(char *name, t_type type);
-t_ast				*ast_enast(t_ast *head, t_ast *node);
-t_ast				*ast_deast(t_ast *head);
+t_ast				*ast_enqueue(t_ast *head, t_ast *node);
+t_ast				*ast_dequeue(t_ast *head);
 t_ast				*ast_deast_front(t_ast *head);
 int					ast_len(t_ast *head);
 

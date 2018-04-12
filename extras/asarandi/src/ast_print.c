@@ -4,13 +4,12 @@ void	print_ast(t_ast *node)
 {
     while (node)
     {
-        ft_putstr(node->name);
         ft_putstr("[");
-        ft_putnbr(node->type);
+        ft_putstr(node->name);
         ft_putstr("]");
         if (node->right)
         {
-            ft_putstr("\t-> RIGHT[");
+            ft_putstr("\t->\t[");
             ft_putstr(node->right->name);
             ft_putstr("]");
             ft_putstr("[");
@@ -24,11 +23,16 @@ void	print_ast(t_ast *node)
 
 void	print_trees(t_ast **ast)
 {
+    int i;
+
+    i = 0;
     while (ast && *ast)
     {
-        printf("#\n");
+        ft_putstr("***** TREE [");
+        ft_putnbr(i++);
+        ft_putstr("] *****\n");
         print_ast(*ast);
-        printf("*****\n");
+        ft_putstr("***** END *****\n\n");
         ast++;
     }
 }

@@ -52,6 +52,7 @@ FILES		=	ft_str_append.c \
 				ft_strclr.c \
 				ft_strcmp.c \
 				ft_strcpy.c \
+				ft_strcpy_alloc.c\
 				ft_strdel.c \
 				ft_strdup.c \
 				ft_strequ.c \

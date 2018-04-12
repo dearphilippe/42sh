@@ -18,7 +18,7 @@ t_ast			*ast_new(char *name, t_type type)
 	return (node);
 }
 
-t_ast			*ast_enast(t_ast *head, t_ast *node)
+t_ast			*ast_enqueue(t_ast *head, t_ast *node)
 {
 	t_ast *cursor;
 
@@ -33,7 +33,7 @@ t_ast			*ast_enast(t_ast *head, t_ast *node)
 	return (head);
 }
 
-t_ast			*ast_deast(t_ast *head)
+t_ast			*ast_dequeue(t_ast *head)
 {
 	t_ast	*cpy;
 

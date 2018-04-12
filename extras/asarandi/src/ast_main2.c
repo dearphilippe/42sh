@@ -5,8 +5,7 @@ int     main(void)
     t_ast *lex;
     t_ast **ast;
 
-    //lex = parse_lexer("echo 'hello \" world' ; ls -la rep | grep \"repertoire 1\" && sed -a -b fichier2");
-    lex = parse_lexer("ls -la /bin | touch file | echo \"hello \n  world\" && ls doc && mkdir folder");
+     lex = parse_lexer("mkdir folder | grep *file >> echo 'doc' ; ls -la /bin > mkdir file > doc2 | touch fichier2 | folder3 >>doc ; touch file");
     if (!lex)
     {
         print_error_lexer();

@@ -4,10 +4,10 @@
  */
 t_ast     *parse_lexer(char *str)
 {
-    t_ast *lex;
+    t_ast   *lex;
+    t_ast   *node;
     char    *word;
     char    *term;
-    t_ast *node;
 
     lex = NULL;
     word = NULL;
@@ -19,14 +19,14 @@ t_ast     *parse_lexer(char *str)
              str += parse_quote(&word, str);
              continue ;
          }
-        if (*str && (*str == '|' || *str == '&' || *str == ';') && (term = contain_term(str)))
+        else if (*str && *str != ' ' && (term = get_type_string(str)))
         {
             node = ast_new(remove_start_space(word), CMD);
-            if (node && !(lex = ast_enast(lex, node)))
+            if (node && !(lex = ast_enqueue(lex, node)))
                 return (NULL);
             ft_strdel(&word);
             word = NULL;
-            if (!(lex = ast_enast(lex, ast_new(term, get_type(term)))))
+            if (!(lex = ast_enqueue(lex, ast_new(term, get_type(term)))))
                 return (NULL);
             str += ft_strlen(term);
             ft_strdel(&term);
@@ -38,7 +38,7 @@ t_ast     *parse_lexer(char *str)
     if (ft_strlen(word))
     {
         node = ast_new(remove_start_space(word), CMD);
-        if (node && !(lex = ast_enast(lex, node)))
+        if (node && !(lex = ast_enqueue(lex, node)))
             return (NULL);
         ft_strdel(&word);
         word = NULL;
@@ -46,6 +46,8 @@ t_ast     *parse_lexer(char *str)
     return (validate_lexer(lex));
 }
 
+// TODO fix error when passing ; at the end of echo ''
+// TODO check quotes
 int     parse_quote(char **word, char *str)
 {
     int i;
@@ -84,7 +86,7 @@ t_ast     **parse_ast(t_ast **ast, t_ast *lex)
     {
         if (lex->type == SEP)
             ast[++i] = NULL;
-        else if (!(ast[i] = ast_enast(ast[i], ast_new(lex->name, lex->type))))
+        else if (!(ast[i] = ast_enqueue(ast[i], ast_new(lex->name, lex->type))))
             return (NULL);
         lex = lex->next;
     }
