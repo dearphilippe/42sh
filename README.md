@@ -45,3 +45,9 @@ feature suggestion? maybe have help builtin describe each builtin separately, ie
  --setenv without parameters calls env() builtin (always returns 0)
 -usetenv will return 0 if it succeeds, or 1 if given too few arguments, for ex "unsetenv" without a parameter will fail, return 1
 
+the basics of a shell
+
+	The shell runs in three different steps
+	1. ) Read: read the commnad from standard input
+	2. ) Parse: Separate the command string into a program and arguments.
+3. ) Execute: Run the parsed command.
