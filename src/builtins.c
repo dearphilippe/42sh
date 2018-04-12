@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:06:58 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 18:36:54 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 20:49:45 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,19 @@ int	builtin_exit(t_shell *sh, char **argv)
 	return (exit_code);
 }
 
+
+void builtin_help_cd(void)
+{
+	ft_printf(1, "cd means compact disc\n");
+}
+
 int	builtin_help(t_shell *sh, char **argv)
 {
 	sh->argc += 0;
 	argv[0] += 0;
+	if (ft_strcmp(argv[1], "cd") == 0)
+		builtin_help_cd();
+
 	ft_printf(STDOUT_FILENO, "this is a help message for %s\n", SHELL_NAME);
 	ft_printf(STDOUT_FILENO, "\t\tcd\t\tthis is a help message\n");
 	ft_printf(STDOUT_FILENO, "\t\techo\t\tthis is a help message\n");

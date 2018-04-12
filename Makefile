@@ -44,7 +44,7 @@ all:$(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft/
-	make -C libft/ft_printf/
+#	make -C libft/ft_printf/
 	$(CC) $(FLAGS) -o $@ $^ $(LIB)
 
 objdir:
@@ -63,10 +63,10 @@ again: rmobj rmbin all
 
 clean: rmobj
 	make clean -C libft/
-	make clean -C libft/ft_printf/
+#	make clean -C libft/ft_printf/
 
 fclean: clean rmbin
 	make fclean -C libft/
-	make fclean -C libft/ft_printf/
+#	make fclean -C libft/ft_printf/
 
 re: fclean all

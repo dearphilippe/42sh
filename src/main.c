@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 19:41:04 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 22:47:03 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,48 +174,64 @@ int		main(int argc, char **argv, char **envp)
 //		    print_trees(ast);
 
 			t_ast	*ptr;
-			ptr = ast[0];
+			t_ast	*right;
+
+
+
+
+			int i;
+
+			i = 0;
+			while (ast[i] != NULL)
+			{
+			ptr = ast[i];
+			int ec2;
+
 
 			while (ptr->next)
 				ptr = ptr->next;	//go to last command
 
-			while (ptr != ast[0])	//backtrack till we get to first node
-			{
-				t_process *p = process_prepare(sh, ptr->name);
-				int ec = process_execute(sh, p);
-				(void)process_destroy(p);
+			t_process *p = process_prepare(sh, ptr->name);
+			int ec = process_execute(sh, p);
+			(void)process_destroy(p);
 
-				if (ptr->parent != NULL)
-				{
-					if (ptr->parent->type == OP_AND)
+			ptr = ptr->parent;
+
+			while (ptr)	//backtrack till we get to first node
+			{
+
+					if (ptr->type == OP_AND)
 					{
-						if (ec == 0)
+						if (ec == 0)	//success
 						{
-							ptr = ptr->parent->right;
-							p = process_prepare(sh, ptr->name);
-							ec = process_execute(sh, p);
+							right = ptr->right;
+							p = process_prepare(sh, right->name);
+							ec2 = process_execute(sh, p);
 							(void)process_destroy(p);
+							if (ec2 != 0)
+								ec = 1;		//if second command failed, expression is false, 1
 						}
+
 					}
-					else if (ptr->parent->type == OP_OR)
+					else if (ptr->type == OP_OR)
 					{
 						if (ec != 0)
 						{
-							ptr = ptr->parent->right;
-							p = process_prepare(sh, ptr->name);
-							ec = process_execute(sh, p);
+							right = ptr->right;
+							p = process_prepare(sh, right->name);
+							ec2 = process_execute(sh, p);
 							(void)process_destroy(p);
+							if (ec2 == 0)
+								ec = 0;	//if second command is successful, then expression is true, success, 0
 						}
 					}
-
-				}
-				ptr = ptr->parent->parent;
+					ptr = ptr->parent;
 
 			}
+			sh->exit_code = ec;
+			i++;
 
-
-
-
+			}
 
 
 		    free_ast(lex);
