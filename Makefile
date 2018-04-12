@@ -38,7 +38,7 @@ OBJ			= $(addprefix obj/,$(OBJFILES))
 CC			= gcc
 FLAGS		= -g -Wextra -Wall -Werror
 INC			= -I libft/ -I libft/ft_printf/ -I inc/
-LIB			= -L libft/ -lft -L libft/ft_printf/ -lftprintf -ltermcap
+LIB			= -L libft/ -lft -ltermcap
 
 all:$(NAME)
 

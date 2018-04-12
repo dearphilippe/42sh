@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 22:47:03 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 23:21:23 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,9 +191,14 @@ int		main(int argc, char **argv, char **envp)
 			while (ptr->next)
 				ptr = ptr->next;	//go to last command
 
+			int ec;
+			ec = 0;
 			t_process *p = process_prepare(sh, ptr->name);
-			int ec = process_execute(sh, p);
-			(void)process_destroy(p);
+			if (p != NULL)
+			{
+				ec = process_execute(sh, p);
+				(void)process_destroy(p);
+			}
 
 			ptr = ptr->parent;
 
@@ -206,10 +211,13 @@ int		main(int argc, char **argv, char **envp)
 						{
 							right = ptr->right;
 							p = process_prepare(sh, right->name);
-							ec2 = process_execute(sh, p);
-							(void)process_destroy(p);
-							if (ec2 != 0)
-								ec = 1;		//if second command failed, expression is false, 1
+							if (p != NULL)
+							{
+								ec2 = process_execute(sh, p);
+								(void)process_destroy(p);				
+								if (ec2 != 0)
+									ec = 1;		//if second command failed, expression is false, 1
+							}
 						}
 
 					}
@@ -219,10 +227,13 @@ int		main(int argc, char **argv, char **envp)
 						{
 							right = ptr->right;
 							p = process_prepare(sh, right->name);
-							ec2 = process_execute(sh, p);
-							(void)process_destroy(p);
-							if (ec2 == 0)
-								ec = 0;	//if second command is successful, then expression is true, success, 0
+							if (p != NULL)
+							{
+								ec2 = process_execute(sh, p);
+								(void)process_destroy(p);
+								if (ec2 == 0)
+									ec = 0;	//if second command is successful, then expression is true, success, 0
+							}
 						}
 					}
 					ptr = ptr->parent;

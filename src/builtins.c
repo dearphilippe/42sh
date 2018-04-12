@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:06:58 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 20:49:45 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 23:27:00 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	builtin_help(t_shell *sh, char **argv)
 {
 	sh->argc += 0;
 	argv[0] += 0;
-	if (ft_strcmp(argv[1], "cd") == 0)
+	if ((argv[1] != NULL) && (ft_strcmp(argv[1], "cd") == 0))
 		builtin_help_cd();
 
 	ft_printf(STDOUT_FILENO, "this is a help message for %s\n", SHELL_NAME);
