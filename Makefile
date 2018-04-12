@@ -37,14 +37,13 @@ SRC			= $(addprefix src/,$(SRCFILES))
 OBJ			= $(addprefix obj/,$(OBJFILES))
 CC			= gcc
 FLAGS		= -g -Wextra -Wall -Werror
-INC			= -I libft/ -I libft/ft_printf/ -I inc/
+INC			= -I libft/inc -I inc/
 LIB			= -L libft/ -lft -ltermcap
 
 all:$(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft/
-#	make -C libft/ft_printf/
 	$(CC) $(FLAGS) -o $@ $^ $(LIB)
 
 objdir:
@@ -63,10 +62,8 @@ again: rmobj rmbin all
 
 clean: rmobj
 	make clean -C libft/
-#	make clean -C libft/ft_printf/
 
 fclean: clean rmbin
 	make fclean -C libft/
-#	make fclean -C libft/ft_printf/
 
 re: fclean all
