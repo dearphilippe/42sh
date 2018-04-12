@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 15:43:22 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 18:43:43 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,32 +73,66 @@ t_shell	*init_shell(int argc, char **argv, char **envp)
 	return (sh);
 }
 
-void	execute(t_shell *sh)
+void		process_destroy(t_process *p)
 {
-	int			r;
-	int			i;
-	static int	(*builtin_functions[]) (t_shell *) = {&builtin_echo,
+	if (p->argv != NULL)
+		destroy_char_array(p->argv);
+	free(p);
+	return ;
+}
+
+t_process	*process_prepare(t_shell *sh, char *cmd)
+{
+	t_process	*p;
+
+	p = ft_memalloc(sizeof(t_process));
+	p->argv = build_child_argv_list(sh, cmd);
+	if (p->argv == NULL)
+	{
+		free(p);
+		return (NULL);
+	}
+	p->envp = sh->envp;
+	return (p);
+}
+
+int			process_execute(t_shell *sh, t_process *p)
+{
+	int		r;
+	static int	(*builtin_functions[]) (t_shell *, char **) = {&builtin_echo,
 		&builtin_cd, &builtin_setenv, &builtin_unsetenv, &builtin_env,
 		&builtin_exit, &builtin_help};
 
-	sh->state = STATE_EXEC;
-	i = 0;
-	if (build_child_argv_list(sh, &i, 0, 1) == 1)
+	if (p->argv[0] != NULL)
 	{
- 		if (sh->child_argv[0] != NULL)
+		if ((r = builtin_cmd_index(p->argv[0])) != -1)
 		{
-			if ((r = builtin_cmd_index(sh->child_argv[0])) != -1)
-				sh->exit_code = builtin_functions[r](sh);
-			else
-				sh->exit_code = execute_external_cmd(sh);
+			p->exit_code = builtin_functions[r](sh, p->argv);
 		}
-		if (sh->buffer[i] == ';')
+		else
 		{
-			ft_strcpy(sh->buffer, &sh->buffer[i + 1]);
-			execute(sh);
+			p->exit_code = execute_external_cmd(sh, p);
 		}
+		return (p->exit_code);
 	}
+	return (EXIT_FAILURE);
 }
+
+void	execute(t_shell *sh)
+{
+	t_process	*p;
+
+	p = process_prepare(sh, sh->buffer);
+	if (p != NULL)
+	{
+		p->exit_code = process_execute(sh, p);
+		sh->exit_code = p->exit_code;
+		(void)process_destroy(p);
+	}
+	return ;
+}
+
+
 
 int		main(int argc, char **argv, char **envp)
 {

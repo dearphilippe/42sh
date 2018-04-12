@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:50:54 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 12:06:23 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 18:15:27 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,19 @@ typedef struct		s_av
 	char			*out;
 	char			*key;
 	char			*val;
+	char			**argv;
 }					t_av;
+
+
+typedef struct		s_process
+{
+	char			**argv;
+	char			**envp;
+	pid_t			pid;
+	int				exit_code;
+	int				status;
+	int				fd[2];
+}					t_process;
 
 typedef struct		s_exec
 {

@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:06:58 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 15:49:47 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 18:36:54 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,22 @@ int		builtin_cmd_index(char *cmd)
 	return (-1);
 }
 
-int		builtin_echo(t_shell *sh)
+int		builtin_echo(t_shell *sh, char **argv)
 {
 	int	dash_n;
 	int	i;
 
 	dash_n = 0;
-	if (sh->child_argv[1] != NULL)
+	sh->exit_code += 0;	//spaghetti
+	if (argv[1] != NULL)
 	{
-		if (ft_strcmp(sh->child_argv[1], "-n") == 0)
+		if (ft_strcmp(argv[1], "-n") == 0)
 			dash_n = 1;
 		i = 1 + dash_n;
-		while (sh->child_argv[i] != NULL)
+		while (argv[i] != NULL)
 		{
-			ft_printf(STDOUT_FILENO, "%s", sh->child_argv[i]);
-			if (sh->child_argv[++i] != NULL)
+			ft_printf(STDOUT_FILENO, "%s", argv[i]);
+			if (argv[++i] != NULL)
 				ft_printf(STDOUT_FILENO, " ");
 		}
 	}
@@ -62,15 +63,15 @@ char	*builtin_cd_get_kv(t_shell *sh, char *variable)
 	return (result);
 }
 
-int	builtin_exit(t_shell *sh)
+int	builtin_exit(t_shell *sh, char **argv)
 {
 	int	exit_code;
 
-	if ((sh->child_argv[1] != NULL) && 
-			((is_numeric_string(sh->child_argv[1])) ||
-			 ((sh->child_argv[1][0] == '-') &&
-			  (is_numeric_string(&sh->child_argv[1][1])))))
-		exit_code = ft_atoi(sh->child_argv[1]);
+	if ((argv[1] != NULL) && 
+			((is_numeric_string(argv[1])) ||
+			 ((argv[1][0] == '-') &&
+			  (is_numeric_string(&argv[1][1])))))
+		exit_code = ft_atoi(argv[1]);
 	else
 		exit_code = sh->exit_code;
 	ft_printf(STDERR_FILENO, "exit\n");
@@ -79,9 +80,10 @@ int	builtin_exit(t_shell *sh)
 	return (exit_code);
 }
 
-int	builtin_help(t_shell *sh)
+int	builtin_help(t_shell *sh, char **argv)
 {
 	sh->argc += 0;
+	argv[0] += 0;
 	ft_printf(STDOUT_FILENO, "this is a help message for %s\n", SHELL_NAME);
 	ft_printf(STDOUT_FILENO, "\t\tcd\t\tthis is a help message\n");
 	ft_printf(STDOUT_FILENO, "\t\techo\t\tthis is a help message\n");

@@ -6,21 +6,21 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 07:11:01 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 12:52:50 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 18:34:26 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	builtin_setenv_kv(t_shell *sh, int arg_count)
+int	builtin_setenv_kv(t_shell *sh, char **argv, int arg_count)
 {
 	char	*key;
 	char	*value;
 
-	key = sh->child_argv[1];
+	key = argv[1];
 	value = EMPTY_STRING;
 	if (arg_count == 3)
-		value = sh->child_argv[2];
+		value = argv[2];
 	if (is_alphanumeric_string(key) == 1)
 	{
 		if (ft_isalpha(key[0]))
@@ -36,17 +36,17 @@ int	builtin_setenv_kv(t_shell *sh, int arg_count)
 	return (1); //failure
 }
 
-int		builtin_setenv(t_shell *sh)
+int		builtin_setenv(t_shell *sh, char **argv)
 {
 	int		count;
 
-	count = count_char_array(sh->child_argv);
+	count = count_char_array(argv);
 	if (count == 1)
-		return (builtin_env(sh));
+		return (builtin_env(sh, argv));
 	else if (count == 2)
-		return (builtin_setenv_kv(sh, 2));
+		return (builtin_setenv_kv(sh, argv, 2));
 	else if (count == 3)
-		return (builtin_setenv_kv(sh, 3));
+		return (builtin_setenv_kv(sh, argv, 3));
 	else if (count > 3)
 	{
 		ft_printf(STDERR_FILENO, "setenv: %s\n", E_TOOMANY);
@@ -55,17 +55,17 @@ int		builtin_setenv(t_shell *sh)
 	return (0);	//success
 }
 
-int		builtin_unsetenv(t_shell *sh)
+int		builtin_unsetenv(t_shell *sh, char **argv)
 {
 	char	*key;
 	int		i;
 	int		count;
 
-	count = count_char_array(sh->child_argv);
+	count = count_char_array(argv);
 	i = 1;
 	while (i < count)
 	{
-		key = sh->child_argv[i];
+		key = argv[i];
 		kv_array_remove_key(sh->envp, key);
 		i++;
 	}
@@ -77,11 +77,12 @@ int		builtin_unsetenv(t_shell *sh)
 	return (0);	//success
 }
 
-int		builtin_env(t_shell *sh)
+int		builtin_env(t_shell *sh, char **argv)
 {
 	int	i;
 
 	i = 0;
+	argv[1] += 0;
 	while (sh->envp[i] != NULL)
 	{
 		ft_printf(STDOUT_FILENO, "%s\n", sh->envp[i]);

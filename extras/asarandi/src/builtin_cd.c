@@ -6,36 +6,36 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 15:46:44 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 12:38:54 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 18:35:38 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*builtin_cd_get_path(t_shell *sh)
+char	*builtin_cd_get_path(t_shell *sh, char **argv)
 {
 	char	*tempo;
 	char	*path;
 
 	path = NULL;
 	tempo = builtin_cd_get_kv(sh, "HOME");
-	if ((sh->child_argv[1] == NULL) || (ft_strcmp(sh->child_argv[1], "~") == 0))
+	if ((argv[1] == NULL) || (ft_strcmp(argv[1], "~") == 0))
 	{
 		if (tempo != NULL)
 			path = ft_strdup(tempo);
 	}
-	else if (ft_strncmp(sh->child_argv[1], "~/", 2) == 0)
+	else if (ft_strncmp(argv[1], "~/", 2) == 0)
 	{
 		if (tempo != NULL)
-			path = dir_slash_exec(tempo, &sh->child_argv[1][2]);
+			path = dir_slash_exec(tempo, &argv[1][2]);
 	}
-	else if ((ft_strcmp(sh->child_argv[1], "-")) == 0)
+	else if ((ft_strcmp(argv[1], "-")) == 0)
 	{
 		if ((tempo = builtin_cd_get_kv(sh, "OLDPWD")) != NULL)
 			path = ft_strdup(tempo);
 	}
 	else
-		path = ft_strdup(sh->child_argv[1]);
+		path = ft_strdup(argv[1]);
 	return (path);
 }
 
@@ -57,17 +57,17 @@ int		builtin_cd_save_cwd(t_shell *sh, char *variable)
 	return (1);	//failure
 }
 
-int		builtin_cd(t_shell *sh)
+int		builtin_cd(t_shell *sh, char **argv)
 {
 	char	*path;
 	int		r;
 
-	if (count_char_array(sh->child_argv) > 2)
+	if (count_char_array(argv) > 2)
 	{
 		(void)ft_printf(STDERR_FILENO, E_TOOMANY2, "cd");
 		return (1);	//failure
 	}
-	path = builtin_cd_get_path(sh);
+	path = builtin_cd_get_path(sh, argv);
 	if (path != NULL)
 	{
 		builtin_cd_save_cwd(sh, "OLDPWD");

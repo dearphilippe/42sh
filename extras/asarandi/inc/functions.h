@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 16:20:50 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 13:03:13 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/11 18:37:23 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 
 # include "minishell.h"
 
-typedef struct s_shell	t_shell;
-typedef struct s_av		t_av;
-typedef struct s_exec	t_exec;
+
+typedef struct s_shell		t_shell;
+typedef struct s_av			t_av;
+typedef struct s_process	t_process;
+typedef struct s_exec		t_exec;
 
 int		is_numeric_string(char *str);
 char	**add_element_to_char_array(char **array, char *string);
@@ -25,7 +27,8 @@ char	**create_char_array_copy(char **src, int extra);
 char	**history_array(t_shell *sh);
 char	*basename(char *str);
 char	*builtin_cd_get_kv(t_shell *sh, char *variable);
-char	*builtin_cd_get_path(t_shell *sh);
+//char	*builtin_cd_get_path(t_shell *sh);
+char    *builtin_cd_get_path(t_shell *sh, char **argv);
 char	*create_kv_string(char *key, char *value);
 char	*dir_slash_exec(char *dir, char *cmd);
 char	*file_get_contents(char *filename);
@@ -33,7 +36,8 @@ char	*find_command_path(t_shell *sh, char *cmd);
 char	*history_file_name(t_shell *sh);
 char	*history_get_item(t_shell *sh, int index);
 char	*kv_array_get_key_value(char **array, char *key);
-int		build_child_argv_list(t_shell *sh, int *i, int k, int sub_op);
+char    **build_child_argv_list(t_shell *sh, char *cmd);
+//int		build_child_argv_list(t_shell *sh, int *i, int k, int sub_op);
 int		builtin_cmd_index(char *cmd);
 int		count_char_array(char **array);
 int		is_valid_executable_file(char *filename);
@@ -54,19 +58,22 @@ int		is_alphanumeric_string(char *str);
 int		string_has_whitespace(char *str);
 int		unmatched_quote_error(t_av *av, char quote);
 t_shell	*init_shell(int argc, char **argv, char **envp);
-t_av	*init_av_buffers(t_shell *sh);
-void	add_string_to_child_argv(t_shell *sh, char *str, int *k);
+t_av    *init_av_buffers(char *cmd);
+//t_av	*init_av_buffers(t_shell *sh);
+//void	add_string_to_child_argv(t_shell *sh, char *str, int *k);
+void    add_string_to_child_argv(t_av *av, char *str, int *k);
 void	add_to_list_of_executables(t_shell *sh, char *cmd);
 void	build_list_of_executables(t_shell *sh, char **folders);
-int		builtin_cd(t_shell *sh);
+int		builtin_cd(t_shell *sh, char **argv);
 int		builtin_cd_save_cwd(t_shell *sh, char *variable);
-int		builtin_echo(t_shell *sh);
-int		builtin_env(t_shell *sh);
-int		builtin_exit(t_shell *sh);
-int		builtin_help(t_shell *sh);
-int		builtin_setenv(t_shell *sh);
-int		builtin_setenv_kv(t_shell *sh, int arg_count);
-int		builtin_unsetenv(t_shell *sh);
+int		builtin_echo(t_shell *sh, char **argv);
+int		builtin_env(t_shell *sh, char **argv);
+int		builtin_exit(t_shell *sh, char **argv);
+int		builtin_help(t_shell *sh, char **argv);
+int		builtin_setenv(t_shell *sh, char **argv);
+int     builtin_setenv_kv(t_shell *sh, char **argv, int arg_count);
+//int		builtin_setenv_kv(t_shell *sh, int arg_count);
+int		builtin_unsetenv(t_shell *sh, char **argv);
 void	check_special_keys(t_shell *sh);
 void	clean_up(t_shell *sh);
 void	cleanup_av_buffers(t_av *av);
@@ -76,10 +83,12 @@ void	destroy_list_of_executables(t_shell *sh);
 void	display_shell_prompt(void);
 void	end_of_input(t_shell *sh);
 void	execute(t_shell *sh);
-int		execute_external_cmd(t_shell *sh);
+//int		execute_external_cmd(t_shell *sh);
+int		execute_external_cmd(t_shell *sh, t_process *p);
 void	fatal_error(t_shell *sh);
 void	fatal_error_message(t_shell *sh, char *msg);
-int		fork_exec_wait(t_shell *sh, char *fullpath);
+int		fork_exec_wait(t_shell *sh, t_process *p, char *fullpath);
+//int		fork_exec_wait(t_shell *sh, char *fullpath);
 void	history_append_to_file(t_shell *sh);
 void	increase_buffer(t_shell *sh);
 void	init_input_buffer(t_shell *sh);
