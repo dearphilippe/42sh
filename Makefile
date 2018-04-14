@@ -57,8 +57,13 @@ rmobj:
 
 rmbin:
 	rm -rf $(NAME)
+	rm -rf ASTDEMO
 
 again: rmobj rmbin all
+
+ast:
+	make -C libft/
+	gcc -o ASTDEMO src/ast*.c -L libft/ -l ft -I libft/inc
 
 clean: rmobj
 	make clean -C libft/
