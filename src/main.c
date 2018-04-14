@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 23:21:23 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/14 00:54:40 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,13 +132,77 @@ void	execute(t_shell *sh, char *cmd)
 	return ;
 }
 
+int		ast_ambiguous_error(char *msg)
+{
+	ft_printf(STDERR_FILENO, msg);
+	return (1);
+}
+
+// ast error checking,
+// if > or >> is followed by | display error message "Ambiguous output redirect."
+// if | is followed by < display error message "Ambiguous input redirect."
+
+int		ast_is_ambiguous(t_ast *ast)
+{
+	t_ast	*ptr;
+
+	ptr = ast;
+	while (ptr->next)
+		ptr = ptr->next;	//go to last command
+	ptr = ptr->parent;
+
+	while ((ptr) && (ptr->parent))
+	{
+		if ((ptr->type == RED_PIPE) && (ptr->parent->type == RED_PREV))
+			return (ast_ambiguous_error("Ambiguous input redirect.\n"));
+		if ((ptr->type == RED_NEXT) && (ptr->parent->type == RED_PIPE))
+			return (ast_ambiguous_error("Ambiguous output redirect.\n"));
+		if ((ptr->type == RED_NNEXT) && (ptr->parent->type == RED_PIPE))
+			return (ast_ambiguous_error("Ambiguous output redirect.\n"));
+		ptr = ptr->parent;
+	}
+	return (0);
+}
+
+t_ast	**ast_create_tree(char *str)
+{
+	t_ast	*lex;
+	t_ast	**ast;
+
+	if ((lex = parse_lexer(str)) == NULL)
+	{
+		ft_printf(STDERR_FILENO, "ast lexical error!\n");
+		return (NULL);
+	}
+    if (!(ast = (t_ast **)ft_memalloc(sizeof(t_ast *) * get_nbr_instructions(lex) + 1)))
+    {
+		free_ast(lex);
+        ft_printf(STDERR_FILENO, "ast memory error!\n");
+		return (NULL);
+    }
+    if (!(ast = parse_ast(ast, lex)))
+	{
+		free_ast(lex);
+		free_trees(ast);
+        ft_printf(STDERR_FILENO, "ast syntax error!\n");
+		return (NULL);
+	}
+//	print_trees(ast);
+	free_ast(lex);
+	return (ast);
+}
 
 
 int		main(int argc, char **argv, char **envp)
 {
 	t_shell		*sh;
-    t_ast		*lex;
     t_ast		**ast;
+	t_ast		*ptr;
+	int			i;
+	int			ec2;
+	int			ec;
+	t_process	*p;
+
 
 	sh = init_shell(argc, argv, envp);
 	while (1)
@@ -147,110 +211,65 @@ int		main(int argc, char **argv, char **envp)
 		raw_read(sh);
 		if (sh->buffer == NULL)
 			break ;
-		if (ft_strlen(sh->buffer) != 0)
+		if ((ft_strlen(sh->buffer) != 0) && ((ast = ast_create_tree(sh->buffer)) != NULL))
 		{
-				
-///////////////////////////////////
-			if ((lex = parse_lexer(sh->buffer)) == NULL)
-			{
-				ft_printf(STDERR_FILENO, "lexical error!!\n");
-				clear_input_buffers(sh);
-				continue ;
-			}
-		    if (!(ast = (t_ast **)ft_memalloc(sizeof(t_ast *) * get_nbr_instructions(lex) + 1)))
-		    {
-		        ft_printf(STDERR_FILENO, "ast memory error!!\n");
-				clear_input_buffers(sh);
-				continue ;
-		    }
-
-		    if (!(ast = parse_ast(ast, lex)))
-			{
-		        ft_printf(STDERR_FILENO, "ast syntax error!!\n");
-				clear_input_buffers(sh);
-				continue ;
-			}
-//        print_error_ast();
-//		    print_trees(ast);
-
-			t_ast	*ptr;
-			t_ast	*right;
-
-
-
-
-			int i;
-
 			i = 0;
+			ec = 0;
 			while (ast[i] != NULL)
 			{
-			ptr = ast[i];
-			int ec2;
-
-
-			while (ptr->next)
-				ptr = ptr->next;	//go to last command
-
-			int ec;
-			ec = 0;
-			t_process *p = process_prepare(sh, ptr->name);
-			if (p != NULL)
-			{
-				ec = process_execute(sh, p);
-				(void)process_destroy(p);
-			}
-
-			ptr = ptr->parent;
-
-			while (ptr)	//backtrack till we get to first node
-			{
-
-					if (ptr->type == OP_AND)
+				ptr = ast[i];
+				if (ast_is_ambiguous(ptr) == 0)
+				{
+					while (ptr->next)
+						ptr = ptr->next;	//go to last command
+					while (ptr)
 					{
-						if (ec == 0)	//success
+						if ((ptr->parent) && (IS_RED(ptr->parent->name)))
 						{
-							right = ptr->right;
-							p = process_prepare(sh, right->name);
-							if (p != NULL)
+							//build process group
+							ft_printf(1, "parent is a redirection\n");
+							if (ptr->next == NULL)	//bottom process
 							{
-								ec2 = process_execute(sh, p);
-								(void)process_destroy(p);				
-								if (ec2 != 0)
-									ec = 1;		//if second command failed, expression is false, 1
+
+							}
+							else
+							{
+
 							}
 						}
-
-					}
-					else if (ptr->type == OP_OR)
-					{
-						if (ec != 0)
+						else	//single process  or  parent is logical operator
 						{
-							right = ptr->right;
-							p = process_prepare(sh, right->name);
-							if (p != NULL)
+							if ((ptr->next == NULL) && ((p = process_prepare(sh, ptr->name)) != NULL))	//bottom process
 							{
-								ec2 = process_execute(sh, p);
+								ec = process_execute(sh, p);
 								(void)process_destroy(p);
-								if (ec2 == 0)
-									ec = 0;	//if second command is successful, then expression is true, success, 0
+							}
+							else
+							{
+								if ((ptr->type == OP_AND) && (ec == 0) && ((p = process_prepare(sh, ptr->right->name)) != NULL))
+								{
+									ec2 = process_execute(sh, p);
+									(void)process_destroy(p);				
+									if (ec2 != 0)
+										ec = 1;	//if second command failed, expression is false, 1
+								}
+								else if ((ptr->type == OP_OR) && (ec != 0) && ((p = process_prepare(sh, ptr->right->name)) != NULL))
+								{
+									ec2 = process_execute(sh, p);
+									(void)process_destroy(p);
+									if (ec2 == 0)
+										ec = 0;	//if second command is successful, then expression is true, success, 0
+								}
+						
 							}
 						}
+						ptr = ptr->parent;
 					}
-					ptr = ptr->parent;
-
+				}
+				i++;
 			}
 			sh->exit_code = ec;
-			i++;
-
-			}
-
-
-		    free_ast(lex);
 		    free_trees(ast);
-///////////////////////////////////
-	
-//			execute(sh, sh->buffer);
-
 		}
 		clear_input_buffers(sh);
 	}

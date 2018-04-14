@@ -5,7 +5,7 @@ int     main(void)
     t_ast *lex;
     t_ast **ast;
 
-     lex = parse_lexer("echo \"$HOME\"asd && cd $PWD || cat '");
+     lex = parse_lexer("echo \"$HOME\"asd && cd $PWD || cat ");
 			 //mkdir folder | grep *file >> echo 'doc' ; ls -la /bin > mkdir file > doc2 | touch fichier2 | folder3 >>doc ; touch file");
     if (!lex)
     {
