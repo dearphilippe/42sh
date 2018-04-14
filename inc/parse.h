@@ -7,6 +7,9 @@
 # define IS_RED_PIPE(x) (!ft_strcmp_withspace(x, "|"))
 # define IS_RED(x) (IS_RED_NEXT(x) || IS_RED_NNEXT(x) || IS_RED_PREV(x) || IS_RED_PIPE(x))
 
+# define IS_RED_AC(x) (IS_RED_NEXT(x) || IS_RED_NNEXT(x) || IS_RED_PREV(x))
+# define IS_OP_AC(x) (IS_OP_AND(x) || IS_OP_OR(x) || IS_RED_PREV(x))
+
 # define IS_OP_AND(x) (!ft_strcmp_withspace(x, "&&"))
 # define IS_OP_OR(x) (!ft_strcmp_withspace(x, "||"))
 # define IS_OP(x) (IS_OP_AND(x) || IS_OP_OR(x))
@@ -22,26 +25,26 @@
 
 typedef enum    e_type
 {
-                CMD,
+				CMD,
 
-                RED_NEXT,
-                RED_NNEXT,
-                RED_PREV,
+				RED_NEXT,
+				RED_NNEXT,
+				RED_PREV,
 
-                RED_PIPE,
-                OP_AND,
-                OP_OR,
-                SEP,
-                ROOT
-}               t_type;
+				RED_PIPE,
+				OP_AND,
+				OP_OR,
+				SEP,
+				ROOT
+}				t_type;
 
 typedef struct		s_ast
 {
-    char			*name;
-    t_type          type;
-    struct s_ast	*parent;
-    struct s_ast	*next;
-    struct s_ast	*right;
+	char			*name;
+	t_type			type;
+	struct s_ast	*parent;
+	struct s_ast	*next;
+	struct s_ast	*right;
 }					t_ast;
 
 

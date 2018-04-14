@@ -35,7 +35,7 @@ OBJFILES	= $(SRCFILES:%.c=%.o)
 SRC			= $(addprefix src/,$(SRCFILES))
 OBJ			= $(addprefix obj/,$(OBJFILES))
 CC			= gcc
-FLAGS		= -g -Wextra -Wall -Werror
+FLAGS		= -O2 -Wextra -Wall -Werror
 INC			= -I libft/inc -I inc/
 LIB			= -L libft/ -lft -ltermcap
 
