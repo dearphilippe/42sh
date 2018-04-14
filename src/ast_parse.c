@@ -15,15 +15,10 @@ t_ast     *parse_lexer(char *str)
     term = NULL;
     while (str && *str)
     {
-      //  printf("[%c]\n", *str);
         if (*str == '\'' || *str == '"')
          {
              if (!(res = parse_quote(&word, str)))
-             {
-             //    printf("res [%d]\n", res);
-
                  return (NULL);
-             }
              str += res;
              continue ;
          }
@@ -56,53 +51,76 @@ t_ast     *parse_lexer(char *str)
 
 int     parse_quote(char **word, char *str)
 {
+    if (!str || (*str != '\'' && *str != '"'))
+        return (0);
+    if (*str && *str == '\'')
+        return (parse_quote_single(word, str));
+    if (*str && *str == '"')
+        return (parse_quote_double(word, str));
+    return (0);
+}
+
+int     parse_quote_single(char **word, char *str)
+{
+    char *cpy;
     int res;
     int i;
 
+    res = 1;
     i = 0;
-    if (!str || (*str != '\'' && *str != '"'))
+    cpy = str;
+    if (!str || !*str || *str++ != '\'')
         return (0);
-    if (*str && *str == '\'' && !(res = parse_quote_single(str)))
+    if (str && *str && *str == '\'')
+        return (++res);
+    while (str && *str && ++res)
+    {
+        if (*str == '\'' && str[-1] != '\\')
+            break ;
+        str++;
+    }
+    if (!str || !*str || *str != '\'')
         return (0);
-    if (*str && *str == '"' && !(res = parse_quote_double(str)))
-        return (0);
+    ++res;
     while (i++ < res)
     {
-        if (!str)
+        if (!cpy)
             return (0);
-        *word = ft_str_append(*word, *str++);
+        *word = ft_str_append(*word, *cpy++);
     }
     return (res);
 }
 
-int     parse_quote_single(char *str)
+int     parse_quote_double(char **word, char *str)
 {
+    char *cpy;
+    int res;
     int i;
 
-    i = 1;
-    if (!str || !*str || *str++ != '\'')
-        return (0);
-    while (str && *str && *str != '\'' && ++i)
-        str++;
-    if (str && *str == '\'')
-        return (++i);
-    return (0);
-}
-
-int     parse_quote_double(char *str)
-{
-    int i;
-
-    i = 1;
+    res = 1;
+    i = 0;
+    str = delete_backslash_in_double_quote(str);
+    cpy = str;
     if (!str || !*str || *str++ != '"')
         return (0);
     if (str && *str && *str == '"')
-        return (++i);
-    while (str && *str && str[0] != '"' && str[-1] != '\\' && ++i)
+        return (++res);
+    while (str && *str && ++res)
+    {
+        if (*str == '"' && str[-1] != '\\')
+            break ;
         str++;
-    if (str && str[0] == '"' && str[-1] != '\\')
-        return (++i);
-    return (0);
+    }
+    if (!str || !*str || *str != '\"')
+        return (0);
+    ++res;
+    while (i++ < res)
+    {
+        if (!cpy)
+            return (0);
+        *word = ft_str_append(*word, *cpy++);
+    }
+    return (res);
 }
 
 t_ast     **parse_ast(t_ast **ast, t_ast *lex)

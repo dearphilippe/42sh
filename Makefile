@@ -3,7 +3,6 @@ SRCFILES	=	ast.c \
 				ast_free.c \
 				ast_get.c \
 				ast_helper.c \
-				ast_main.c \
 				ast_parse.c \
 				ast_print.c \
 				ast_validate.c \
@@ -57,8 +56,13 @@ rmobj:
 
 rmbin:
 	rm -rf $(NAME)
+	rm -rf ASTDEMO
 
 again: rmobj rmbin all
+
+ast:
+	make -C libft/
+	gcc -o ASTDEMO src/ast*.c -L libft/ -l ft -I libft/inc
 
 clean: rmobj
 	make clean -C libft/
