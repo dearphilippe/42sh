@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:06:58 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/12 01:50:57 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/14 10:40:18 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char *g_punani_list[] = {
 
 int		builtin_cmd_index(char *cmd)
 {
-	int			i;
+	int	i;
 	const char	*builtin_list[] = {
 		"echo", "cd", "setenv", "unsetenv", "env", "exit", "help"};
 
@@ -64,7 +64,7 @@ int		builtin_echo(t_shell *sh, char **argv)
 	return (0);
 }
 
-char	*builtin_cd_get_kv(t_shell *sh, char *variable)
+char		*builtin_cd_get_kv(t_shell *sh, char *variable)
 {
 	char	*result;
 
@@ -75,7 +75,7 @@ char	*builtin_cd_get_kv(t_shell *sh, char *variable)
 	return (result);
 }
 
-int	builtin_exit(t_shell *sh, char **argv)
+int		builtin_exit(t_shell *sh, char **argv)
 {
 	int	exit_code;
 
@@ -94,7 +94,7 @@ int	builtin_exit(t_shell *sh, char **argv)
 
 void	help_selection(char *cmd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (g_builtin_list[i] != '\0')
@@ -102,7 +102,7 @@ void	help_selection(char *cmd)
 		if (g_builtin_list[i] && (i >= 0))
 		{
 			if (ft_strcmp(cmd ,g_builtin_list[i]) == 0)
-				return (void)printf("Only if I'm %s -> %s\n", \
+				return (void)printf("\n\033[37;1m\t%s\033[0m -> %s\n\n", \
 				g_builtin_list[i], g_punani_list[i]);
 			i++;
 		}
@@ -112,29 +112,18 @@ void	help_selection(char *cmd)
 void	help_list(void)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
+	cmd_title();
 	while (g_builtin_list[i] != '\0')
 	{
-		if (g_builtin_list[i] && (i >= 0))
-		{
-			printf("Only if im %s -> ", g_builtin_list[i]);
-			if (i == 0)
-				printf("\taccess directories/folder\n");
-			else if (i == 1)
-				printf("\tprint stuff\n");
-			else if (i == 2)
-				printf("\tenv stuff\n");
-			else if (i == 3)
-				printf("\texit stuff\n");
-			else if (i == 4)
-				printf("\tsetenv stuff\n");
-			else if (i == 5)
-				printf("\tunsetenv stuff\n");
-			else
-				break ;
-			i++;
-		}
+		j++;
+		if (i >= 0 && i < 6)
+			printf("\n(%d) Only if I'm \033[37;1m%s\033[0m\n\n", \
+			j, g_builtin_list[i]);
+		i++;
 	}
 }
 
@@ -145,8 +134,9 @@ int	builtin_help(t_shell *sh, char **argv)
 	if (argv[1] != NULL)
 	{
 		if (argv[2])
-			return(int)printf("No more than 1 help command. Do `help [cmd]`\n");
-		help_selection(argv[1]);
+			ft_printf(1, "No more than 1 help command. Do `help [cmd]`\n");
+		else
+			help_selection(argv[1]);
 	}
 	else
 		help_list();
