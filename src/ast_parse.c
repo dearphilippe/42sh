@@ -13,23 +13,12 @@ t_ast     *parse_lexer(char *str)
     lex = NULL;
     word = NULL;
     term = NULL;
-  //  printf("[%s]\n", str);
     while (str && *str)
     {
-        printf("[%c]\n", *str++);
-    }
-    exit(1);
-    while (str && *str)
-    {
-        printf("[%c]\n", *str);
         if (*str == '\'' || *str == '"')
          {
              if (!(res = parse_quote(&word, str)))
-             {
-             //    printf("res [%d]\n", res);
-
                  return (NULL);
-             }
              str += res;
              continue ;
          }
@@ -98,7 +87,7 @@ int     parse_quote_single(char *str)
 int     parse_quote_double(char *str)
 {
     int i;
-
+// printf("[%s]\n", str);
     i = 1;
     if (!str || !*str || *str++ != '"')
         return (0);
