@@ -1,11 +1,20 @@
 #include "parse.h"
+#include "get_next_line.h"
+#include <fcntl.h>
 
 int     main(void)
 {
     t_ast *lex;
     t_ast **ast;
+    char *line;
 
-     lex = parse_lexer("echo \"$HOME\"asd && cd $PWD || cat ");
+    int fd = open("file", O_RDONLY);
+    line = NULL;
+    get_next_line(fd, &line);
+   // printf("{%s}\n", line);
+
+    // lex = parse_lexer("\d");
+    lex = parse_lexer(line);
 			 //mkdir folder | grep *file >> echo 'doc' ; ls -la /bin > mkdir file > doc2 | touch fichier2 | folder3 >>doc ; touch file");
     if (!lex)
     {
