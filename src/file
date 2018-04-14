@@ -1,1 +1,1 @@
-echo "hello \n world"
+echo 'hello \"' world

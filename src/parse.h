@@ -63,14 +63,15 @@ char         *get_type_string(char *str);
  * helper.c
  */
 char    *remove_start_space(char *str);
+char    *delete_backslash_in_double_quote(char *str);
 
 /**
  * lexer.c
  */
 t_ast		*parse_lexer(char *str);
 int			parse_quote(char **word, char *str);
-int			parse_quote_single(char *str);
-int			parse_quote_double(char *str);
+int			parse_quote_single(char **word, char *str);
+int			parse_quote_double(char **word, char *str);
 t_ast		**parse_ast(t_ast **ast, t_ast *lex);
 t_ast		*parse_tree(t_ast *lex);
 
