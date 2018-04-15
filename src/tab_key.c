@@ -6,7 +6,7 @@
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:25:17 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/13 12:11:17 by passef           ###   ########.fr       */
+/*   Updated: 2018/04/14 17:24:39 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,3 @@ void	key_tab_function(t_shell *sh)
 	}
 	return ;
 }
-
-	//sh->buf_i position actuel du curseur
-	/*
-	** il faut que lorsque l'utilisateur commence a taper je cherches la premiere fois qu'il tape tab, s'il tape tab pour la premiere fois
-	avant de taper espace alors je lui suggere la liste des commandes sinon je suggere à l'utilisateur la liste des fichiers.
-	** Si l'utilisateur a taper une operations comme ET, PIPE,  alors je recommences 
-	*/

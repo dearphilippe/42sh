@@ -1,4 +1,5 @@
-NAME		= minishell
+NAME		=	42sh
+
 SRCFILES	=	ast.c \
 				ast_free.c \
 				ast_get.c \
@@ -30,7 +31,8 @@ SRCFILES	=	ast.c \
 				tab_columns.c \
 				tab_key.c \
 				tab_utils.c \
-				termcaps.c
+				termcaps.c \
+
 OBJFILES	= $(SRCFILES:%.c=%.o)
 SRC			= $(addprefix src/,$(SRCFILES))
 OBJ			= $(addprefix obj/,$(OBJFILES))
