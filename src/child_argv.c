@@ -6,13 +6,13 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:57:11 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 18:42:17 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 04:07:50 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	cleanup_av_buffers(t_av *av)
+void		cleanup_av_buffers(t_av *av)
 {
 	if (av->out != NULL)
 		free(av->out);
@@ -22,10 +22,10 @@ void	cleanup_av_buffers(t_av *av)
 	return ;
 }
 
-void	add_string_to_child_argv(t_av *av, char *str, int *k)
+void		add_string_to_child_argv(t_av *av, char *str, int *k)
 {
-	char **old_array;
-	char *new_string;
+	char	**old_array;
+	char	*new_string;
 
 	if ((str == NULL) || (str[0] == 0))
 		return ;
@@ -38,20 +38,18 @@ void	add_string_to_child_argv(t_av *av, char *str, int *k)
 	return ;
 }
 
-int		is_end_of_argument(char c)
+int			is_end_of_argument(char c)
 {
 	if (ft_isspace(c))
 		return (1);
 	if (c == 0)
 		return (1);
-//	if (c == COMMAND_SEPARATOR)
-//		return (1);
 	return (0);
 }
 
-int		mini_parse(t_shell *sh, t_av *av, int *i, int *k)
+int			mini_parse(t_shell *sh, t_av *av, int *i, int *k)
 {
-	int	r;
+	int		r;
 
 	r = 1;
 	if (av->in[*i] == STRONG_QUOTE)
@@ -69,8 +67,8 @@ int		mini_parse(t_shell *sh, t_av *av, int *i, int *k)
 	return (r);
 }
 
-char	**build_child_argv_list(t_shell *sh, char *cmd)
-{	
+char		**build_child_argv_list(t_shell *sh, char *cmd)
+{
 	char	**result;
 	t_av	*av;
 	int		i;

@@ -1,16 +1,19 @@
 #include "parse.h"
 
-// TODO implement fonction
+/*
+** TODO implement fonction
+*/
+
 void	free_ast(t_ast *head)
 {
-  head->name = NULL;
+	head->name = NULL;
 }
 
 void	free_trees(t_ast **ast)
 {
-    while (ast && *ast)
-    {
-        free_ast(*ast);
-        ast++;
-    }
+	while (ast && *ast)
+	{
+		free_ast(*ast);
+		ast++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 23:21:23 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 04:10:48 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	clean_up(t_shell *sh)
 		free(sh);
 }
 
-void	sigint_handler(int signo)
+void		sigint_handler(int signo)
 {
 	ft_printf(STDOUT_FILENO, "\n");
 	if (signo == SIGINT)
@@ -46,7 +46,7 @@ void	sigint_handler(int signo)
 	}
 }
 
-t_shell	*init_shell(int argc, char **argv, char **envp)
+t_shell		*init_shell(int argc, char **argv, char **envp)
 {
 	t_shell	*sh;
 	char	**folders;
@@ -118,7 +118,7 @@ int			process_execute(t_shell *sh, t_process *p)
 	return (EXIT_FAILURE);
 }
 
-void	execute(t_shell *sh, char *cmd)
+void		execute(t_shell *sh, char *cmd)
 {
 	t_process	*p;
 
@@ -132,9 +132,7 @@ void	execute(t_shell *sh, char *cmd)
 	return ;
 }
 
-
-
-int		main(int argc, char **argv, char **envp)
+int			main(int argc, char **argv, char **envp)
 {
 	t_shell		*sh;
     t_ast		*lex;
@@ -176,9 +174,6 @@ int		main(int argc, char **argv, char **envp)
 			t_ast	*ptr;
 			t_ast	*right;
 
-
-
-
 			int i;
 
 			i = 0;
@@ -186,7 +181,6 @@ int		main(int argc, char **argv, char **envp)
 			{
 			ptr = ast[i];
 			int ec2;
-
 
 			while (ptr->next)
 				ptr = ptr->next;	//go to last command
@@ -243,7 +237,6 @@ int		main(int argc, char **argv, char **envp)
 			i++;
 
 			}
-
 
 		    free_ast(lex);
 		    free_trees(ast);

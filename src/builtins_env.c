@@ -6,13 +6,13 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 07:11:01 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 18:34:26 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 04:06:38 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	builtin_setenv_kv(t_shell *sh, char **argv, int arg_count)
+int			builtin_setenv_kv(t_shell *sh, char **argv, int arg_count)
 {
 	char	*key;
 	char	*value;
@@ -36,7 +36,7 @@ int	builtin_setenv_kv(t_shell *sh, char **argv, int arg_count)
 	return (1); //failure
 }
 
-int		builtin_setenv(t_shell *sh, char **argv)
+int			builtin_setenv(t_shell *sh, char **argv)
 {
 	int		count;
 
@@ -55,7 +55,7 @@ int		builtin_setenv(t_shell *sh, char **argv)
 	return (0);	//success
 }
 
-int		builtin_unsetenv(t_shell *sh, char **argv)
+int			builtin_unsetenv(t_shell *sh, char **argv)
 {
 	char	*key;
 	int		i;
@@ -77,9 +77,9 @@ int		builtin_unsetenv(t_shell *sh, char **argv)
 	return (0);	//success
 }
 
-int		builtin_env(t_shell *sh, char **argv)
+int			builtin_env(t_shell *sh, char **argv)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	argv[1] += 0;

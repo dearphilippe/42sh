@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:50:54 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 02:36:44 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/15 02:51:00 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct		s_av
 
 typedef struct		s_process
 {
+	char			*fullpath;
 	char			**argv;
 	char			**envp;
 	pid_t			pid;
@@ -45,6 +46,12 @@ typedef struct		s_process
 	int				status;
 	int				fd[2];
 }					t_process;
+
+typedef	struct		s_group
+{
+	t_process		**p;
+
+}					t_group;
 
 typedef struct		s_exec
 {
