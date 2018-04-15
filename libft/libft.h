@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 17:51:15 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/10 21:55:43 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 01:48:45 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include <unistd.h>
 # include <string.h>
 # define BUFF_SIZE 1
+
+typedef struct		s_queue
+{
+	t_node			*first;
+	t_node		 	*last;
+}					t_queue;
 
 typedef struct		s_list
 {

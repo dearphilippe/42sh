@@ -6,7 +6,7 @@
 #    By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/20 17:41:00 by asarandi          #+#    #+#              #
-#    Updated: 2018/04/10 21:56:26 by asarandi         ###   ########.fr        #
+#    Updated: 2018/04/14 18:02:29 by ztisnes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ FILES		=	ft_str_append.c \
 				ft_tolower.c \
 				ft_toupper.c \
 				ft_uriencode.c \
+				queue.c \
 				get_next_line.c
 
 OBJ			= $(FILES:%.c=%.o)
