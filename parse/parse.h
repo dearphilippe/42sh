@@ -6,7 +6,11 @@
 /*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:42:37 by ytuz              #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2018/04/14 10:19:19 by ytuz             ###   ########.fr       */
+=======
 /*   Updated: 2018/04/13 20:51:12 by asarandi         ###   ########.fr       */
+>>>>>>> 0d146ee6414f04558588c8c5546cbc2484cddf91
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +63,9 @@ void				free_run_numbers(t_run *run_numbers);
 void				redirect(t_run *run_numbers);
 void				execute(t_run *run_numbers);
 int					check_if_condition(char *address);
+int					is_word_equal(char *word_head, char *reference);
+int					is_conditional(char *word_head);
+void				redirect(run_numbers);
+void				execute(run_numbers);
 
 #endif

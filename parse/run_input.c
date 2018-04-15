@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run_pipe.c                                         :+:      :+:    :+:   */
+/*   run_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/13 20:36:32 by ytuz              #+#    #+#             */
-/*   Updated: 2018/04/14 21:43:18 by ytuz             ###   ########.fr       */
+/*   Created: 2018/04/13 16:32:47 by ytuz              #+#    #+#             */
+/*   Updated: 2018/04/13 16:37:53 by ytuz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-void	run_pipe(t_run *run_numbers)
+void	run_input(char ***env, char *input_head)
 {
-	while (*(run_numbers->command_head) != 0 &&
-			*(run_numbers->command_head) != ';' &&
-			is_conditional(run_numbers->command_head) == FALSE)
+	t_run	*run_numbers;
+	
+	input_head = skip_spaces(input_head);
+	run_numbers = MEMALLOC(run_numbers, 1);
+	run_numbers->env = env;
+	run_numbers->input_head = input_head;
+	pipe(run_numbers->pipe);
+	run_numbers->command_head = run_numbers->input_head;
+	run_numbers->last_process_status = 1;
+	while (run_numbers->command_head != 0)
 	{
-		run_stream(run_numbers);
-		if (*(run_numbers->command_head) == '|')
-		{:wq
-
-			run_numbers->is_pipe = 1;
-			run_numbers->command_head++;
-		}
+		run_job(run_numbers);
 	}
+	free_run_numbers(run_numbers);
 }

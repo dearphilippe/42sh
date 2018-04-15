@@ -6,7 +6,7 @@
 /*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 19:27:30 by ytuz              #+#    #+#             */
-/*   Updated: 2018/04/13 20:38:17 by ytuz             ###   ########.fr       */
+/*   Updated: 2018/04/14 10:18:12 by ytuz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,24 @@ static void	dup_three(int first_fd, int second_fd, int third_fd)
 	dup(third_fd);
 }
 
+static int	is_numbered_redirect(char *word_head)
+{
+	if (ft_strnequ(word_head, "0<", 2) == TRUE ||
+		ft_strnequ(word_head, "1>", 2) == TRUE ||
+		ft_strnequ(word_head, "2>", 2) == TRUE)
+		return (TRUE);
+	return (FALSE);
+}
+
 void		run_stream(t_run *run_numbers)
 {
 	char	*parser;
 
 	dup_three(0, 1, 2);
-	parser = run_numbers->command_start;
+	parser = run_numbers->command_head;
 	while (*parser != 0 && ft_strchr("><;|", *parser == 0)
-			&& check_numbered_redirect(parser) == 0 &&
-			check_if_condition(
+			&& check_numbered_redirect(parser) == FALSE &&
+			is_conditional(parser) == FALSE)
 		parser = get_next_word(command_end);
 	run_numbers->command_end = parser;
 	redirect(run_numbers);

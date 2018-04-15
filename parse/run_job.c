@@ -6,13 +6,13 @@
 /*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 16:32:47 by ytuz              #+#    #+#             */
-/*   Updated: 2018/04/13 20:31:41 by ytuz             ###   ########.fr       */
+/*   Updated: 2018/04/14 21:36:20 by ytuz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-void	run_input(char ***env, char *input_head)
+void	run_job(char ***env, char *input_head)
 {
 	t_run	*run_numbers;
 

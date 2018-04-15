@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run_pipe.c                                         :+:      :+:    :+:   */
+/*   word_length.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/13 20:36:32 by ytuz              #+#    #+#             */
-/*   Updated: 2018/04/14 21:43:18 by ytuz             ###   ########.fr       */
+/*   Created: 2018/04/10 06:46:45 by ytuz              #+#    #+#             */
+/*   Updated: 2018/04/10 06:57:53 by ytuz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "shell.h"
 
-void	run_pipe(t_run *run_numbers)
+unsigned int	tsh_word_length(char *word)
 {
-	while (*(run_numbers->command_head) != 0 &&
-			*(run_numbers->command_head) != ';' &&
-			is_conditional(run_numbers->command_head) == FALSE)
-	{
-		run_stream(run_numbers);
-		if (*(run_numbers->command_head) == '|')
-		{:wq
+	unsigned int	length;
+	char			*current;
 
-			run_numbers->is_pipe = 1;
-			run_numbers->command_head++;
-		}
+	length = 0;
+	current = *(word + length);
+	while (current != 0 && current != ' ' && current != ';')
+	{
+		length++;
+		current = *(word + length);
 	}
+	return (length);
 }

@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run_pipe.c                                         :+:      :+:    :+:   */
+/*   is_word_equal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/13 20:36:32 by ytuz              #+#    #+#             */
-/*   Updated: 2018/04/14 21:43:18 by ytuz             ###   ########.fr       */
+/*   Created: 2018/04/14 09:51:57 by ytuz              #+#    #+#             */
+/*   Updated: 2018/04/14 09:56:13 by ytuz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
-
-void	run_pipe(t_run *run_numbers)
+int	is_word_equal(char *word_head, char *reference)
 {
-	while (*(run_numbers->command_head) != 0 &&
-			*(run_numbers->command_head) != ';' &&
-			is_conditional(run_numbers->command_head) == FALSE)
-	{
-		run_stream(run_numbers);
-		if (*(run_numbers->command_head) == '|')
-		{:wq
+	int	equality_result;
 
-			run_numbers->is_pipe = 1;
-			run_numbers->command_head++;
-		}
-	}
+	equality_result = ft_strnequ(word_head, reference,
+		count_word_length(word_length));
+	return (equality_result);
 }
