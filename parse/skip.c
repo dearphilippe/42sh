@@ -6,7 +6,7 @@
 /*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 16:40:06 by ytuz              #+#    #+#             */
-/*   Updated: 2018/04/13 11:09:46 by ytuz             ###   ########.fr       */
+/*   Updated: 2018/04/15 14:43:20 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ unsigned int	tsh_count_word_length(char *word_address)
 	char	*word_head;
 
 	word_head = word_address;
-	while(*word_address != 0 && *count_address != ' ')
+	while (*word_address != 0 && *count_address != ' ')
 		word__address++;
 	return ((unsigned int)(word_address - word_head));
 }

@@ -6,7 +6,7 @@
 /*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 16:32:47 by ytuz              #+#    #+#             */
-/*   Updated: 2018/04/13 16:37:53 by ytuz             ###   ########.fr       */
+/*   Updated: 2018/04/15 14:41:06 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	run_input(char ***env, char *input_head)
 {
 	t_run	*run_numbers;
-	
+
 	input_head = skip_spaces(input_head);
 	run_numbers = MEMALLOC(run_numbers, 1);
 	run_numbers->env = env;

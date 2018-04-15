@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:06:58 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 23:27:00 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 14:39:11 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		builtin_echo(t_shell *sh, char **argv)
 	int	i;
 
 	dash_n = 0;
-	sh->exit_code += 0;	//spaghetti
+	sh->exit_code += 0;
 	if (argv[1] != NULL)
 	{
 		if (ft_strcmp(argv[1], "-n") == 0)
@@ -63,14 +63,14 @@ char	*builtin_cd_get_kv(t_shell *sh, char *variable)
 	return (result);
 }
 
-int	builtin_exit(t_shell *sh, char **argv)
+int		builtin_exit(t_shell *sh, char **argv)
 {
 	int	exit_code;
 
-	if ((argv[1] != NULL) && 
+	if ((argv[1] != NULL) &&
 			((is_numeric_string(argv[1])) ||
-			 ((argv[1][0] == '-') &&
-			  (is_numeric_string(&argv[1][1])))))
+				((argv[1][0] == '-') &&
+					(is_numeric_string(&argv[1][1])))))
 		exit_code = ft_atoi(argv[1]);
 	else
 		exit_code = sh->exit_code;
@@ -80,19 +80,12 @@ int	builtin_exit(t_shell *sh, char **argv)
 	return (exit_code);
 }
 
-
-void builtin_help_cd(void)
-{
-	ft_printf(1, "cd means compact disc\n");
-}
-
-int	builtin_help(t_shell *sh, char **argv)
+int		builtin_help(t_shell *sh, char **argv)
 {
 	sh->argc += 0;
 	argv[0] += 0;
 	if ((argv[1] != NULL) && (ft_strcmp(argv[1], "cd") == 0))
 		builtin_help_cd();
-
 	ft_printf(STDOUT_FILENO, "this is a help message for %s\n", SHELL_NAME);
 	ft_printf(STDOUT_FILENO, "\t\tcd\t\tthis is a help message\n");
 	ft_printf(STDOUT_FILENO, "\t\techo\t\tthis is a help message\n");

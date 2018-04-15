@@ -6,7 +6,7 @@
 /*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 07:09:00 by ytuz              #+#    #+#             */
-/*   Updated: 2018/04/10 08:07:54 by ytuz             ###   ########.fr       */
+/*   Updated: 2018/04/15 14:40:34 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static unsigned int	tsh_get_path_length(char *path)
 		length++;
 	return (length);
 }
-
 
 static int			tsh_check_path(char *path, t_tsh_run *run_subset)
 {

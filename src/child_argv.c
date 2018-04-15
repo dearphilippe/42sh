@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:57:11 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 18:42:17 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 14:37:09 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int		is_end_of_argument(char c)
 		return (1);
 	if (c == 0)
 		return (1);
-//	if (c == COMMAND_SEPARATOR)
-//		return (1);
 	return (0);
 }
 
@@ -70,7 +68,7 @@ int		mini_parse(t_shell *sh, t_av *av, int *i, int *k)
 }
 
 char	**build_child_argv_list(t_shell *sh, char *cmd)
-{	
+{
 	char	**result;
 	t_av	*av;
 	int		i;

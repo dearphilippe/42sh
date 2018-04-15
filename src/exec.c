@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 06:00:59 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 18:18:54 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 14:36:45 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		execute_external_cmd(t_shell *sh, t_process *p)
 			(void)ft_printf(STDERR_FILENO,
 					"%s: %s: command not found\n", SHELL_NAME, p->argv[0]);
 			p->exit_code = 1;
-			return (p->exit_code);	//failure
+			return (p->exit_code);
 		}
 		fullpath = dir_slash_exec(path, p->argv[0]);
 		tcsetattr(STDIN_FILENO, TCSANOW, &sh->t_original);

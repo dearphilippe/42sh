@@ -6,7 +6,7 @@
 /*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 11:55:42 by ytuz              #+#    #+#             */
-/*   Updated: 2018/04/13 12:26:31 by ytuz             ###   ########.fr       */
+/*   Updated: 2018/04/15 14:44:02 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	tsh_check_output_redirect(char *redirect_head)
 	return (SUCCESS);
 }
 
-int	tsh_redirect_output(t_tsh_run *run_numbers)
+int			tsh_redirect_output(t_tsh_run *run_numbers)
 {
 	int		fd;
 	int		is_append;

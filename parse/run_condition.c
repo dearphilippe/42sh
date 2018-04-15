@@ -6,7 +6,7 @@
 /*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 20:31:52 by ytuz              #+#    #+#             */
-/*   Updated: 2018/04/14 10:09:30 by ytuz             ###   ########.fr       */
+/*   Updated: 2018/04/15 14:42:41 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	skip_until_next_condition(t_run *run_numbers)
 	char	*current_position;
 
 	current_position = run_numbers->command_head;
-	while (*current_position != 0 && ft_strchr(";|&", current_position)	== 0)
+	while (*current_position != 0 && ft_strchr(";|&", current_position == 0))
 		current_position = get_next_word(current_position);
 	run_numbers->command_head = current_position;
 }
