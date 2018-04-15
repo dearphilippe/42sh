@@ -17,83 +17,86 @@
 
 # include "libft.h"
 
-// TODO to delete
-# include <stdio.h>
-
-typedef enum    e_type
+typedef enum		e_type
 {
-                CMD,
-
-                RED_NEXT,
-                RED_NNEXT,
-                RED_PREV,
-
-                RED_PIPE,
-                OP_AND,
-                OP_OR,
-                SEP,
-                ROOT
-}               t_type;
+	CMD,
+	RED_NEXT,
+	RED_NNEXT,
+	RED_PREV,
+	RED_PIPE,
+	OP_AND,
+	OP_OR,
+	SEP,
+	ROOT
+}					t_type;
 
 typedef struct		s_ast
 {
-    char			*name;
-    t_type          type;
-    struct s_ast	*parent;
-    struct s_ast	*next;
-    struct s_ast	*right;
+	char			*name;
+	t_type			type;
+	struct s_ast	*parent;
+	struct s_ast	*next;
+	struct s_ast	*right;
 }					t_ast;
 
+/*
+** free.c
+*/
 
-/**
- * free.c
- */
-void	free_ast(t_ast *head);
-void	free_trees(t_ast **ast);
+void				free_ast(t_ast *head);
+void				free_trees(t_ast **ast);
 
-/**
- * get.c
- */
-t_type      get_type(char *str);
-int         get_nbr_instructions(t_ast *lex);
-int         get_nbr_redirection(char *str);
-char         *get_type_string(char *str);
+/*
+** get.c
+*/
 
-/**
- * helper.c
- */
-char    *remove_start_space(char *str);
+t_type				get_type(char *str);
+int					get_nbr_instructions(t_ast *lex);
+int					get_nbr_redirection(char *str);
+char				*get_type_string(char *str);
 
-/**
- * lexer.c
- */
-t_ast		*parse_lexer(char *str);
-int			parse_quote(char **word, char *str);
-t_ast		**parse_ast(t_ast **ast, t_ast *lex);
-t_ast		*parse_tree(t_ast *lex);
+/*
+** helper.c
+*/
 
-/**
- * print.c
- */
-void	print_ast(t_ast *node);
-void	print_trees(t_ast **ast);
-void	print_lexer_start_error(char *name);
-void	print_error_lexer(void);
-void	print_error_ast(void);
+char				*remove_start_space(char *str);
 
-/**
- * ast.c
- */
+/*
+** lexer.c
+*/
+
+t_ast				*parse_lexer(char *str);
+int					parse_quote(char **word, char *str);
+int					parse_quote_single(char *str);
+int					parse_quote_double(char *str);
+t_ast				**parse_ast(t_ast **ast, t_ast *lex);
+t_ast				*parse_tree(t_ast *lex);
+
+/*
+** print.c
+*/
+
+void				print_ast(t_ast *node);
+void				print_trees(t_ast **ast);
+void				print_lexer_start_error(char *name);
+void				print_error_lexer(void);
+void				print_error_ast(void);
+
+/*
+** ast.c
+*/
+
 t_ast				*ast_new(char *name, t_type type);
 t_ast				*ast_enqueue(t_ast *head, t_ast *node);
 t_ast				*ast_dequeue(t_ast *head);
 t_ast				*ast_deast_front(t_ast *head);
 int					ast_len(t_ast *head);
 
-/**
- * validate.c
- */
-t_ast *validate_lexer(t_ast *lex);
-t_ast     *validate_ast(t_ast *ast);
+/*
+** validate.c
+*/
+
+t_ast				*validate_lexer(t_ast *lex);
+t_ast				*validate_ast(t_ast *ast);
 
 #endif

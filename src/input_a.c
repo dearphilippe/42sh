@@ -6,13 +6,13 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:47:31 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/10 22:58:55 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 04:11:54 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_input_buffer(t_shell *sh)
+void		init_input_buffer(t_shell *sh)
 {
 	sh->buffer = ft_memalloc(PAGE_SIZE);
 	sh->bufsize = PAGE_SIZE;
@@ -27,7 +27,7 @@ void	init_input_buffer(t_shell *sh)
 	display_shell_prompt();
 }
 
-void	increase_buffer(t_shell *sh)
+void		increase_buffer(t_shell *sh)
 {
 	char	*newbuf;
 
@@ -40,7 +40,7 @@ void	increase_buffer(t_shell *sh)
 	return ;
 }
 
-void	raw_read(t_shell *sh)
+void		raw_read(t_shell *sh)
 {
 	init_input_buffer(sh);
 	while (1)
@@ -59,7 +59,7 @@ void	raw_read(t_shell *sh)
 	return ;
 }
 
-void	clear_input_buffers(t_shell *sh)
+void		clear_input_buffers(t_shell *sh)
 {
 	if (sh->partial_input != NULL)
 		free(sh->partial_input);

@@ -6,13 +6,13 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:25:17 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/08 16:06:24 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 03:48:25 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_exec	**tab_array_of_matches(t_shell *sh)
+t_exec		**tab_array_of_matches(t_shell *sh)
 {
 	t_exec	**result;
 	t_exec	*ptr;
@@ -35,7 +35,7 @@ t_exec	**tab_array_of_matches(t_shell *sh)
 	return (result);
 }
 
-void	tab_remove_duplicates(t_exec **array, int *count)
+void		tab_remove_duplicates(t_exec **array, int *count)
 {
 	int		i;
 	int		k;
@@ -63,7 +63,7 @@ void	tab_remove_duplicates(t_exec **array, int *count)
 	}
 }
 
-int		tab_mini_complete(t_shell *sh, t_exec **a)
+int			tab_mini_complete(t_shell *sh, t_exec **a)
 {
 	char	c;
 	int		i_len;
@@ -84,7 +84,7 @@ int		tab_mini_complete(t_shell *sh, t_exec **a)
 	return (0);
 }
 
-void	key_tab_function(t_shell *sh)
+void		key_tab_function(t_shell *sh)
 {
 	t_exec	**matches;
 	int		i;

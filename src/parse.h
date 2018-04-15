@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 15:04:20 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 15:09:03 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 15:27:53 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # define IS_SEP(x) (!ft_strcmp_withspace(x, ";"))
 # define IS_TERM(x) (IS_OP(x) || IS_SEP(x) || IS_RED(x))
 # include "../libft/inc/libft.h"
-# include <stdio.h>
 
 typedef enum		e_type
 {
@@ -69,7 +68,10 @@ char				*get_type_string(char *str);
 */
 
 char				*remove_start_space(char *str);
+<<<<<<< HEAD
 char				*delete_backslash_in_double_quote(char *str);
+=======
+>>>>>>> b3771fa60cbccefc701a0580981c8cab029e52ed
 
 /*
 ** lexer.c
@@ -77,8 +79,13 @@ char				*delete_backslash_in_double_quote(char *str);
 
 t_ast				*parse_lexer(char *str);
 int					parse_quote(char **word, char *str);
+<<<<<<< HEAD
 int					parse_quote_single(char **word, char *str);
 int					parse_quote_double(char **word, char *str);
+=======
+int					parse_quote_single(char *str);
+int					parse_quote_double(char *str);
+>>>>>>> b3771fa60cbccefc701a0580981c8cab029e52ed
 t_ast				**parse_ast(t_ast **ast, t_ast *lex);
 t_ast				*parse_tree(t_ast *lex);
 

@@ -35,8 +35,12 @@ char	*get_type_string(char *str)
 {
 	char *dest;
 
+<<<<<<< HEAD
+	if (ft_strlen(str) >= 2 && (dest = ft_strcpy_alloc(str, 2)) && IS_TERM(dest))
+=======
 	if (ft_strlen(str) >= 2 &&
 			(dest = ft_strcpy_alloc(str, 2)) && IS_TERM(dest))
+>>>>>>> c2dffcec1eb6007c98ac0d447d7d8abb83e7d2e4
 		return (dest);
 	if (ft_strlen(str) && (dest = ft_strcpy_alloc(str, 1)) && IS_TERM(dest))
 		return (dest);
@@ -45,7 +49,11 @@ char	*get_type_string(char *str)
 
 int		get_nbr_instructions(t_ast *lex)
 {
+<<<<<<< HEAD
+	int	i;
+=======
 	int i;
+>>>>>>> c2dffcec1eb6007c98ac0d447d7d8abb83e7d2e4
 
 	if (!lex)
 		return (0);
@@ -63,7 +71,11 @@ int		get_nbr_instructions(t_ast *lex)
 
 int		get_nbr_redirection(char *str)
 {
+<<<<<<< HEAD
+	int	i;
+=======
 	int i;
+>>>>>>> c2dffcec1eb6007c98ac0d447d7d8abb83e7d2e4
 
 	i = 0;
 	while (str && *str)
