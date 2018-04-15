@@ -6,7 +6,7 @@
 /*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 11:35:37 by ytuz              #+#    #+#             */
-/*   Updated: 2018/04/14 22:51:18 by ytuz             ###   ########.fr       */
+/*   Updated: 2018/04/15 14:59:14 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 int	tsh_redirect_input(t_tsh_run *run_numbers)
 {
 	int		fd;
+
 	run_numbers->stream_end = tsh_skip_spaces(run_numbers->stream_end);
 	if (*(run_numbers->stream_end) != '<' &&
-			ft_strnequ(run_numbers->stream_end, "0>", 2) == 0))
+			ft_strnequ(run_numbers->stream_end, "0>", 2) == 0)
 		return (FAILURE);
 	if (*(run_numbers->stream_end) == '0')
 		run_numbers->stream_end++;
