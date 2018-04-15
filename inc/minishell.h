@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:50:54 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 18:15:27 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 02:36:44 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct		s_av
 	char			**argv;
 }					t_av;
 
-
 typedef struct		s_process
 {
 	char			**argv;
@@ -55,20 +54,13 @@ typedef struct		s_exec
 
 typedef struct		s_shell
 {
-	int				exit_code;
-	int				argc;
-	char			**argv;
-	char			**envp;
-	char			*buffer;
-	size_t			bufsize;
-	size_t			input_size;
-	size_t			buf_i;
-	char			*partial_input;
-	char			**history;
-	int				history_count;
-	int				history_i;
+	struct termios	t_original;
+	struct termios	t_custom;
+	t_exec			*exec;
+	t_exec			*last_exec;
 	char			keycode[10];
-	size_t			cursor;
+	char			*buffer;
+	char			*partial_input;
 	char			*carriage_return;
 	char			*clear_down;
 	char			*clear_till_eol;
@@ -78,13 +70,19 @@ typedef struct		s_shell
 	char			*cursor_move_down;
 	char			*cursor_move_up;
 	char			**child_argv;
-	struct termios	t_original;
-	struct termios	t_custom;
+	char			**history;
+	char			**argv;
+	char			**envp;
+	size_t			bufsize;
+	size_t			input_size;
+	size_t			buf_i;
+	size_t			cursor;
+	int				exit_code;
+	int				argc;
+	int				history_count;
+	int				history_i;
 	int				custom_terminal;
 	int				state;
-	t_exec			*exec;
-	t_exec			*last_exec;
-
 }					t_shell;
 
 t_shell	*g_sh;
