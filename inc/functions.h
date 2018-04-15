@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 16:20:50 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 19:10:53 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 02:25:13 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FUNCTIONS_H
 
 # include "minishell.h"
-
 
 typedef struct s_shell		t_shell;
 typedef struct s_av			t_av;
