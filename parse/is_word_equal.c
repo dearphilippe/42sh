@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   is_word_equal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/08 15:43:33 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 14:51:31 by ztisnes          ###   ########.fr       */
+/*   Created: 2018/04/14 09:51:57 by ytuz              #+#    #+#             */
+/*   Updated: 2018/04/14 09:56:13 by ytuz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-void	fatal_error(t_shell *sh)
+int	is_word_equal(char *word_head, char *reference)
 {
-	clean_up(sh);
-	exit(EXIT_FAILURE);
-}
+	int	equality_result;
 
-void	fatal_error_message(t_shell *sh, char *msg)
-{
-	msg[0] += 0;
-	perror(SHELL_NAME);
-	fatal_error(sh);
+	equality_result = ft_strnequ(word_head, reference,
+		count_word_length(word_length));
+	return (equality_result);
 }

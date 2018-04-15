@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/08 15:43:33 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 14:51:31 by ztisnes          ###   ########.fr       */
+/*   Created: 2018/04/13 20:20:07 by ytuz              #+#    #+#             */
+/*   Updated: 2018/04/13 20:54:55 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parse.h"
 
-void	fatal_error(t_shell *sh)
+void	redirect(t_run *run_numbers)
 {
-	clean_up(sh);
-	exit(EXIT_FAILURE);
-}
+	char	*parser;
 
-void	fatal_error_message(t_shell *sh, char *msg)
-{
-	msg[0] += 0;
-	perror(SHELL_NAME);
-	fatal_error(sh);
-}
+	parser = run_numbers = command_end;
+	while (*parser != 0 && 

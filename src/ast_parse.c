@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ast_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ztisnes <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/15 03:53:24 by ztisnes           #+#    #+#             */
-/*   Updated: 2018/04/15 03:57:56 by ztisnes          ###   ########.fr       */
+/*   Created: 2018/04/15 14:07:46 by asarandi          #+#    #+#             */
+/*   Updated: 2018/04/15 15:13:43 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-/*
-** Don't send space at the end of the string
-*/
-
-t_ast		*parse_lexer(char *str)
+t_ast	*parse_lexer(char *str)
 {
 	t_ast	*lex;
 	t_ast	*node;
@@ -32,9 +28,7 @@ t_ast		*parse_lexer(char *str)
 		if (*str == '\'' || *str == '"')
 		{
 			if (!(res = parse_quote(&word, str)))
-			{
 				return (NULL);
-			}
 			str += res;
 			continue ;
 		}
@@ -67,58 +61,81 @@ t_ast		*parse_lexer(char *str)
 
 int		parse_quote(char **word, char *str)
 {
-	int	res;
-	int	i;
-
-	i = 0;
 	if (!str || (*str != '\'' && *str != '"'))
 		return (0);
-	if (*str && *str == '\'' && !(res = parse_quote_single(str)))
+	if (*str && *str == '\'')
+		return (parse_quote_single(word, str));
+	if (*str && *str == '"')
+		return (parse_quote_double(word, str));
+	return (0);
+}
+
+int		parse_quote_single(char **word, char *str)
+{
+	char	*cpy;
+	int		res;
+	int		i;
+
+	res = 1;
+	i = 0;
+	cpy = str;
+	if (!str || !*str || *str++ != '\'')
 		return (0);
-	if (*str && *str == '"' && !(res = parse_quote_double(str)))
+	if (str && *str && *str == '\'')
+		return (++res);
+	while (str && *str && ++res)
+	{
+		if (*str == '\'' && str[-1] != '\\')
+			break ;
+		str++;
+	}
+	if (!str || !*str || *str != '\'')
 		return (0);
+	++res;
 	while (i++ < res)
 	{
-		if (!str)
+		if (!cpy)
 			return (0);
-		*word = ft_str_append(*word, *str++);
+		*word = ft_str_append(*word, *cpy++);
 	}
 	return (res);
 }
 
-int		parse_quote_single(char *str)
+int		parse_quote_double(char **word, char *str)
 {
-	int	i;
+	char	*cpy;
+	int		res;
+	int		i;
 
-    i = 1;
-	if (!str || !*str || *str++ != '\'')
-		return (0);
-	while (str && *str && *str != '\'' && ++i)
-		str++;
-	if (str && *str == '\'')
-		return (++i);
-	return (0);
-}
-
-int		parse_quote_double(char *str)
-{
-	int	i;
-
-	i = 1;
+	res = 1;
+	i = 0;
+	str = delete_backslash_in_double_quote(str);
+	cpy = str;
 	if (!str || !*str || *str++ != '"')
 		return (0);
 	if (str && *str && *str == '"')
-		return (++i);
-	while (str && *str && str[0] != '"' && str[-1] != '\\' && ++i)
+		return (++res);
+	while (str && *str && ++res)
+	{
+		if (*str == '"' && str[-1] != '\\')
+			break ;
 		str++;
-	if (str && str[0] == '"' && str[-1] != '\\')
-		return (++i);
-	return (0);
+	}
+	if (!str || !*str || *str != '\"')
+		return (0);
+	++res;
+	while (i++ < res)
+	{
+		if (!cpy)
+			return (0);
+		*word = ft_str_append(*word, *cpy++);
+	}
+	return (res);
 }
 
-t_as	**parse_ast(t_ast **ast, t_ast *lex)
+t_ast	**parse_ast(t_ast **ast, t_ast *lex)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	ast[i] = NULL;
@@ -141,7 +158,7 @@ t_as	**parse_ast(t_ast **ast, t_ast *lex)
 	return (ast);
 }
 
-t_ast		*parse_tree(t_ast *lex)
+t_ast	*parse_tree(t_ast *lex)
 {
 	t_ast	*ast;
 	t_ast	*op;
@@ -157,7 +174,8 @@ t_ast		*parse_tree(t_ast *lex)
 		if (lex->type == CMD || !(op = ast_new(lex->name, lex->type)))
 			return (NULL);
 		lex = lex->next;
-		if (!lex || lex->type != CMD || !(right = ast_new(lex->name, lex->type)))
+		if (!lex || lex->type != CMD ||
+				!(right = ast_new(lex->name, lex->type)))
 			return (NULL);
 		op->next = ast;
 		op->right = right;

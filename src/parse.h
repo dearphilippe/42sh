@@ -15,7 +15,7 @@
 
 # define IS_TERM(x) (IS_OP(x) || IS_SEP(x) || IS_RED(x))
 
-# include "../libft/libft.h"
+# include "../libft/inc/libft.h"
 
 typedef enum		e_type
 {

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ast_validate.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/15 14:08:01 by asarandi          #+#    #+#             */
+/*   Updated: 2018/04/15 15:10:02 by ztisnes          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parse.h"
 
-t_ast		*validate_lexer(t_ast *lex)
+t_ast	*validate_lexer(t_ast *lex)
 {
 	t_ast	*cpy;
 
@@ -16,11 +28,7 @@ t_ast		*validate_lexer(t_ast *lex)
 	return (cpy);
 }
 
-/*
-**TODO implement method
-*/
-
-t_ast		*validate_ast(t_ast *ast)
+t_ast	*validate_ast(t_ast *ast)
 {
 	return (ast);
 }

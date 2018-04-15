@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 15:46:44 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 04:02:30 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/15 15:09:21 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,11 @@ int		builtin_cd_save_cwd(t_shell *sh, char *variable)
 	{
 		kv_array_set_key_value(&sh->envp, variable, cwd);
 		free(cwd);
-		return (0);	//success
+		return (0);
 	}
 	else
 		perror(SHELL_NAME);
-//		ft_printf(STDERR_FILENO, "%s\n", E_CWDFAIL);
-	return (1);	//failure
+	return (1);
 }
 
 int		builtin_cd(t_shell *sh, char **argv)
@@ -65,7 +64,7 @@ int		builtin_cd(t_shell *sh, char **argv)
 	if (count_char_array(argv) > 2)
 	{
 		(void)ft_printf(STDERR_FILENO, E_TOOMANY2, "cd");
-		return (1);	//failure
+		return (1);
 	}
 	path = builtin_cd_get_path(sh, argv);
 	if (path != NULL)
@@ -76,10 +75,10 @@ int		builtin_cd(t_shell *sh, char **argv)
 		if (r == -1)
 		{
 			perror(SHELL_NAME);
-			return (1);	//failure
+			return (1);
 		}
 		else
-			return (builtin_cd_save_cwd(sh, "PWD"));	//success, maybe
+			return (builtin_cd_save_cwd(sh, "PWD"));
 	}
-	return (1);	//failure
+	return (1);
 }

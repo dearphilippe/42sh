@@ -3,7 +3,6 @@ SRCFILES	=	ast.c \
 				ast_free.c \
 				ast_get.c \
 				ast_helper.c \
-				ast_main.c \
 				ast_parse.c \
 				ast_print.c \
 				ast_validate.c \
@@ -37,14 +36,13 @@ SRC			= $(addprefix src/,$(SRCFILES))
 OBJ			= $(addprefix obj/,$(OBJFILES))
 CC			= gcc
 FLAGS		= -g -Wextra -Wall -Werror
-INC			= -I libft/ -I libft/ft_printf/ -I inc/
+INC			= -I libft/inc -I inc/
 LIB			= -L libft/ -lft -ltermcap
 
 all:$(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft/
-#	make -C libft/ft_printf/
 	$(CC) $(FLAGS) -o $@ $^ $(LIB)
 
 objdir:
@@ -58,15 +56,18 @@ rmobj:
 
 rmbin:
 	rm -rf $(NAME)
+	rm -rf ASTDEMO
 
 again: rmobj rmbin all
 
+ast:
+	make -C libft/
+	gcc -o ASTDEMO src/ast*.c -L libft/ -l ft -I libft/inc
+
 clean: rmobj
 	make clean -C libft/
-#	make clean -C libft/ft_printf/
 
 fclean: clean rmbin
 	make fclean -C libft/
-#	make fclean -C libft/ft_printf/
 
 re: fclean all

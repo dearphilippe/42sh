@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:57:11 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 04:07:50 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/15 14:52:23 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int			mini_parse(t_shell *sh, t_av *av, int *i, int *k)
 	return (r);
 }
 
-char		**build_child_argv_list(t_shell *sh, char *cmd)
+char	**build_child_argv_list(t_shell *sh, char *cmd)
 {
 	char	**result;
 	t_av	*av;

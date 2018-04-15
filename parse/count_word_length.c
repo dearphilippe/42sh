@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   count_word_length.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/08 15:43:33 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 14:51:31 by ztisnes          ###   ########.fr       */
+/*   Created: 2018/04/13 16:00:51 by ytuz              #+#    #+#             */
+/*   Updated: 2018/04/13 18:58:35 by ytuz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-void	fatal_error(t_shell *sh)
+unsigned int	count_word_length(char *word_head)
 {
-	clean_up(sh);
-	exit(EXIT_FAILURE);
-}
+	char	*word_end;
 
-void	fatal_error_message(t_shell *sh, char *msg)
-{
-	msg[0] += 0;
-	perror(SHELL_NAME);
-	fatal_error(sh);
+	word_end = word_head;
+	while (*word_end != 0 && *word_end != ' ' && *word_end != ';')
+		word_end++;
+	return ((unsigned int)(word_end - word_head));
 }

@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   is_conditional.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/08 15:43:33 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 14:51:31 by ztisnes          ###   ########.fr       */
+/*   Created: 2018/04/14 10:04:57 by ytuz              #+#    #+#             */
+/*   Updated: 2018/04/14 10:10:03 by ytuz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parse.h"
 
-void	fatal_error(t_shell *sh)
+int	is_conditional(char *word_head)
 {
-	clean_up(sh);
-	exit(EXIT_FAILURE);
-}
-
-void	fatal_error_message(t_shell *sh, char *msg)
-{
-	msg[0] += 0;
-	perror(SHELL_NAME);
-	fatal_error(sh);
+	if (is_word_equal(word_head, "&&") == TRUE ||
+		is_word_equal(word_head, "||") == TRUE)
+		return (TRUE);
+	return (FALSE);
 }

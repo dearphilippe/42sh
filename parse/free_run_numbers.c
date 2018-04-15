@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   free_run_numbers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/08 15:43:33 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 14:51:31 by ztisnes          ###   ########.fr       */
+/*   Created: 2018/04/13 16:13:47 by ytuz              #+#    #+#             */
+/*   Updated: 2018/04/13 16:16:37 by ytuz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parse.h"
 
-void	fatal_error(t_shell *sh)
+void	free_run_numbers(t_run *run_numbers)
 {
-	clean_up(sh);
-	exit(EXIT_FAILURE);
-}
-
-void	fatal_error_message(t_shell *sh, char *msg)
-{
-	msg[0] += 0;
-	perror(SHELL_NAME);
-	fatal_error(sh);
+	if (run_numbers == 0)
+		return ;
+	if (input_head != 0)
+		free(input_head);
+	free(run_numbers);
 }
