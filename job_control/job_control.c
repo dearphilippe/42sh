@@ -6,7 +6,7 @@
 /*   By: ztisnes <ztisnes@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 23:50:39 by ztisnes           #+#    #+#             */
-/*   Updated: 2018/04/15 05:43:08 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/15 16:35:22 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,3 +49,5 @@ void	builtin_jobs(t_exec *cmd, t_shell *sh)
 	*/
 }
 void	builtin_ampersand()
+{
+}

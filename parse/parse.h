@@ -6,8 +6,7 @@
 /*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:42:37 by ytuz              #+#    #+#             */
-/*   Updated: 2018/04/15 00:02:32 by ytuz             ###   ########.fr       */
-/*   Updated: 2018/04/13 20:51:12 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 16:34:21 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +15,32 @@
 # define MEMALLOC(A, B) (A*)ft_memalloc(sizeof(A) * B)
 
 /*
- * # include "main_header_path.h"
- */
+** # include "main_header_path.h"
+*/
 
-typedef struct	s_run
+typedef struct		s_run
 {
-	int			pipe[2];
-	int			last_process_status;
-	char		is_pipe;
-	char		*input_head;
-	char		*command_head;
-	char		*command_end;
-	char		*stream_end;
-	char		***env;
-	pid_t		pid;
-}				t_run;
+	int				pipe[2];
+	int				last_process_status;
+	char			is_pipe;
+	char			*input_head;
+	char			*command_head;
+	char			*command_end;
+	char			*stream_end;
+	char			***env;
+	pid_t			pid;
+}					t_run;
 
 /*
- * main_struct =
- * the general struct that contains relevant information
- */
+** main_struct =
+** the general struct that contains relevant information
+*/
 
 /*
- * run_numbers is the name of the typedef t_run
- * as in
- * t_run	*run_numbers;
- */
+** run_numbers is the name of the typedef t_run
+** as in
+** t_run	*run_numbers;
+*/
 
 void				run_job(char ***env, char *input_head);
 void				run_condition(t_run *run_numbers);

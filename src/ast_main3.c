@@ -6,13 +6,12 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 14:07:34 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 14:30:52 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 16:31:31 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-#include "get_next_line.h"
-#include <fcntl.h>
+#include "minishell.h"
 
 int	ast_main3(void)
 {
@@ -33,8 +32,7 @@ int	ast_main3(void)
 	if (!(ast = (t_ast **)ft_memalloc(sizeof(t_ast *) *
 					get_nbr_instructions(lex) + 1)))
 	{
-		print_error_ast();
-		return (1);
+		return (print_error_ast());
 	}
 	if (!(ast = parse_ast(ast, lex)))
 		print_error_ast();

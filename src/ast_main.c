@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ast_main.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/15 16:28:37 by asarandi          #+#    #+#             */
+/*   Updated: 2018/04/15 16:28:44 by asarandi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parse.h"
 
 int		ast_main(void)
@@ -6,7 +18,6 @@ int		ast_main(void)
 	t_ast **ast;
 
 	lex = parse_lexer("ls -l && echo \"hello\"; ls -la");
-		//mkdir folder | grep *file >> echo 'doc' ; ls -la /bin > mkdir file > doc2 | touch fichier2 | folder3 >>doc ; touch file");
 	if (!lex)
 	{
 		print_error_lexer();

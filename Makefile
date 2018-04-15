@@ -15,6 +15,7 @@ SRCFILES	=	ast.c \
 				error.c \
 				exec.c \
 				file_op.c \
+				header.c \
 				history.c \
 				history_keys.c \
 				input_a.c \

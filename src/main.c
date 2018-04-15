@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/14 20:27:12 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 16:51:07 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ int		group_process_wait(t_process **group)
 	while (group[i] != NULL)
 	{
 		status = group[i]->exit_code;
-		ft_printf(1, "{cyan} pid = %d, exit code = %d{eoc}\n", group[i]->pid, status);
+//		ft_printf(1, "{cyan} pid = %d, exit code = %d{eoc}\n", group[i]->pid, status);
 		i++;
 	}
 	return (status);
