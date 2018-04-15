@@ -6,7 +6,7 @@
 /*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 19:27:30 by ytuz              #+#    #+#             */
-/*   Updated: 2018/04/14 10:18:12 by ytuz             ###   ########.fr       */
+/*   Updated: 2018/04/14 23:11:01 by ytuz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		run_stream(t_run *run_numbers)
 		parser = get_next_word(command_end);
 	run_numbers->command_end = parser;
 	redirect(run_numbers);
-	execute(run_numbers);
+	run_numbers->last_process_status = execute(run_numbers);
 	close_three(0, 1, 2);
 	run_numbers->command_head = run_numbers->stream_end;
 }

@@ -6,11 +6,8 @@
 /*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 15:42:37 by ytuz              #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/04/14 10:19:19 by ytuz             ###   ########.fr       */
-=======
+/*   Updated: 2018/04/15 00:02:32 by ytuz             ###   ########.fr       */
 /*   Updated: 2018/04/13 20:51:12 by asarandi         ###   ########.fr       */
->>>>>>> 0d146ee6414f04558588c8c5546cbc2484cddf91
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +63,10 @@ int					check_if_condition(char *address);
 int					is_word_equal(char *word_head, char *reference);
 int					is_conditional(char *word_head);
 void				redirect(run_numbers);
-void				execute(run_numbers);
+int					execute(run_numbers);
+void				check_functions(t_run *run_numbers,
+						char **av, char ***env, int *status);
+int					check_executables(t_run *run_numbers,
+						char **av, char ***env, int *status);
 
 #endif

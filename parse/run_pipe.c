@@ -6,7 +6,7 @@
 /*   By: ytuz <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 20:36:32 by ytuz              #+#    #+#             */
-/*   Updated: 2018/04/14 21:43:18 by ytuz             ###   ########.fr       */
+/*   Updated: 2018/04/14 22:43:14 by ytuz             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void	run_pipe(t_run *run_numbers)
 	{
 		run_stream(run_numbers);
 		if (*(run_numbers->command_head) == '|')
-		{:wq
-
+		{
 			run_numbers->is_pipe = 1;
 			run_numbers->command_head++;
 		}
