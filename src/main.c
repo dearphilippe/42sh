@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/14 04:11:23 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/14 20:27:12 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,10 +140,6 @@ int		ast_ambiguous_error(char *msg)
 	return (1);
 }
 
-// ast error checking,
-// if > or >> is followed by | display error message "Ambiguous output redirect."
-// if | is followed by < display error message "Ambiguous input redirect."
-
 int		ast_is_ambiguous(t_ast *ast)
 {
 	t_ast	*ptr;
@@ -189,7 +185,6 @@ t_ast	**ast_create_tree(char *str)
         ft_printf(STDERR_FILENO, "ast syntax error!\n");
 		return (NULL);
 	}
-//	print_trees(ast);
 	free_ast(lex);
 	return (ast);
 }
@@ -208,79 +203,57 @@ void	group_process_destroy(t_process **group)
 	return ;
 }
 
-/*
-int		fork_exec_wait(t_shell *sh, t_process *p, char *fullpath)
-{
-	if ((p->pid = fork()) == -1)
-		fatal_error_message(sh, E_FORK);
-	else if (p->pid == 0)
-		execve(fullpath, p->argv, p->envp);
-	if (waitpid(p->pid, &p->status, 0) == -1)
-	{
-		(void)perror(SHELL_NAME);
-		return (1);
-	}
-	if (WIFEXITED(p->status))
-		p->exit_code = WEXITSTATUS(p->status);
-	return (p->exit_code);
-}
-
-int		execute_external_cmd(t_shell *sh, t_process *p)
-{
-	char	*path;
-	char	*fullpath;
-
-	if (is_valid_executable_file(p->argv[0]) == 1)
-		return (fork_exec_wait(sh, p, p->argv[0]));
-	else
-	{
-		if ((path = find_command_path(sh, p->argv[0])) == NULL)
-		{
-			(void)ft_printf(STDERR_FILENO,
-					"%s: %s: command not found\n", SHELL_NAME, p->argv[0]);
-			p->exit_code = 1;
-			return (p->exit_code);	//failure
-		}
-		fullpath = dir_slash_exec(path, p->argv[0]);
-		tcsetattr(STDIN_FILENO, TCSANOW, &sh->t_original);
-		p->exit_code = fork_exec_wait(sh, p, fullpath);
-		tcsetattr(STDIN_FILENO, TCSANOW, &sh->t_custom);
-		free(path);
-		free(fullpath);
-	}
-	return (p->exit_code);
-}
-*/
 int		group_process_wait(t_process **group)
 {
 	int i;
+	int pid;
+	int	status;
 
+	pid = 0;
+	status = 0;
+	while ((pid = wait(&status)) != -1)	/* pick up all the dead children */
+	{
+		i = 0;
+		while (group[i])
+		{
+			if (group[i]->pid == pid)
+			{
+				group[i]->exit_code = WEXITSTATUS(status);	
+				break ;
+			}
+			i++;
+		}
+	}
 	i = 0;
 	while (group[i] != NULL)
 	{
-/*		while ((group[i]->pid = wait(&group[i]->status)) != -1)
-		{
-			if (group[i + 1] != NULL)
-			{
-				close(group[i]->fd[0]);
-				close(group[i]->fd[1]);
-			}
-
-			ft_printf(1, "{green}process [%s], pid %d exits with status %d{eoc}\n", group[i]->argv[0], group[i]->pid, WEXITSTATUS(group[i]->status));
-		}
-*/		
-		
-		sleep(1);
-		if (group[i + 1] != NULL)
-		{
-			close(group[i]->fd[0]);
-			close(group[i]->fd[1]);
-		}
-		
+		status = group[i]->exit_code;
+		ft_printf(1, "{cyan} pid = %d, exit code = %d{eoc}\n", group[i]->pid, status);
 		i++;
-
 	}
-	return (0);
+	return (status);
+}
+
+void	group_fork_exec(t_process *p, int i, int count, int *pipes)
+{
+	if ((p->pid = fork()) == 0)
+	{
+		if (i < count - 1)
+			dup2(pipes[(i * 2) + 1], 1);
+		if ((i > 0) && (i < count))
+			dup2(pipes[(i * 2) - 2], 0);
+		i = 0;
+		while (i < count - 1)
+		{
+			close(pipes[i * 2]);
+			close(pipes[(i * 2) + 1]);
+			i++;
+		}
+		execve(p->fullpath, p->argv, p->envp);
+	}
+	else if (p->pid == -1)
+		(void)fatal_error_message(g_sh, E_FORK);
+	return ;
 }
 
 int		group_process_execute(t_shell *sh, t_process **group)
@@ -288,7 +261,20 @@ int		group_process_execute(t_shell *sh, t_process **group)
 	int		i;
 	char	*path;
 	char	*fullpath;
+	int		count;
+	int		*pipes;
 
+	i = 0;
+	while (group[i] != NULL)
+		i++;
+	count = i;
+	pipes = ft_memalloc((count) * 2 * sizeof(int));
+	i = 0;
+	while (i < count - 1)
+	{
+		pipe(pipes + (i * 2));
+		i++;
+	}
 	i = 0;
 	while (group[i])
 	{
@@ -305,43 +291,16 @@ int		group_process_execute(t_shell *sh, t_process **group)
 			group[i]->fullpath = dir_slash_exec(path, group[i]->argv[0]);
 			free(path);
 		}
-		//pipe
-		//fork
-		//dup
-
-		if (group[i + 1] != NULL)
-			pipe(group[i]->fd);
-
-		group[i]->pid = fork();
-		if (group[i]->pid == 0)
-		{
-			if (i == 0)
-				close(group[i]->fd[0]);
-
-			if (group[i + 1] != NULL)
-				dup2(group[i]->fd[1], 1);
-	
-			if (i > 0)
-				dup2(group[i - 1]->fd[0], 0);
-
-			if (group[i + 1] == NULL)
-				close(group[i - 1]->fd[1]);
-//			else
-//				close(group[i]->fd[0]);
-//			else
-//				close(group[i]->fd[0]);
-//			if (group[i + 1] == NULL)
-//				close(group[i]->fd[0]);
-			
-			execve(group[i]->fullpath, group[i]->argv, group[i]->envp);
-		}
-		else if (group[i]->pid == -1)
-		{
-//			perror(SHELL_NAME);
-			fatal_error_message(sh, E_FORK);
-			return (1);	//failed to fork
-		}
+		(void)group_fork_exec(group[i], i, count, pipes);
 		i++;
+	}
+	i = 0;
+	while (i < count - 1)
+	{
+		close(pipes[i * 2]);
+		close(pipes[(i * 2) + 1]);
+		i++;
+
 	}
 	return (0);
 }
@@ -409,6 +368,10 @@ int		main(int argc, char **argv, char **envp)
 
 								tcsetattr(STDIN_FILENO, TCSANOW, &sh->t_original);
 								(void)group_process_execute(sh, group);
+//								int i = 0;
+//								while (group[i] != NULL)
+//									i++;
+//								while (i--)
 								(void)group_process_wait(group);
 								(void)group_process_destroy(group);
 								tcsetattr(STDIN_FILENO, TCSANOW, &sh->t_custom);
