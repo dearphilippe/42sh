@@ -6,13 +6,13 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:09:44 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 04:08:05 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/06 05:10:42 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char		**create_char_array_copy(char **src, int extra)
+char	**create_char_array_copy(char **src, int extra)
 {
 	char	**dst;
 	int		count;
@@ -31,10 +31,10 @@ char		**create_char_array_copy(char **src, int extra)
 	return (dst);
 }
 
-void		destroy_char_array(char **array)
+void	destroy_char_array(char **array)
 {
-	int		count;
-	int		i;
+	int	count;
+	int	i;
 
 	count = count_char_array(array);
 	i = 0;
@@ -47,9 +47,9 @@ void		destroy_char_array(char **array)
 	return ;
 }
 
-int			count_char_array(char **array)
+int		count_char_array(char **array)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (array[i] != NULL)
@@ -57,7 +57,7 @@ int			count_char_array(char **array)
 	return (i);
 }
 
-char		**add_element_to_char_array(char **array, char *string)
+char	**add_element_to_char_array(char **array, char *string)
 {
 	char	**new_array;
 	int		count;

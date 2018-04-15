@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 07:11:01 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 14:52:53 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/15 14:35:38 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		builtin_setenv_kv(t_shell *sh, char **argv, int arg_count)
 	return (1);
 }
 
-int			builtin_setenv(t_shell *sh, char **argv)
+int		builtin_setenv(t_shell *sh, char **argv)
 {
 	int		count;
 
@@ -55,7 +55,7 @@ int			builtin_setenv(t_shell *sh, char **argv)
 	return (0);
 }
 
-int			builtin_unsetenv(t_shell *sh, char **argv)
+int		builtin_unsetenv(t_shell *sh, char **argv)
 {
 	char	*key;
 	int		i;
@@ -77,9 +77,9 @@ int			builtin_unsetenv(t_shell *sh, char **argv)
 	return (0);
 }
 
-int			builtin_env(t_shell *sh, char **argv)
+int		builtin_env(t_shell *sh, char **argv)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	argv[1] += 0;

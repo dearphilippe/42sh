@@ -6,13 +6,13 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 06:00:59 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 14:51:08 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/15 14:36:45 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			fork_exec_wait(t_shell *sh, t_process *p, char *fullpath)
+int		fork_exec_wait(t_shell *sh, t_process *p, char *fullpath)
 {
 	if ((p->pid = fork()) == -1)
 		fatal_error_message(sh, E_FORK);
@@ -28,7 +28,7 @@ int			fork_exec_wait(t_shell *sh, t_process *p, char *fullpath)
 	return (p->exit_code);
 }
 
-int			execute_external_cmd(t_shell *sh, t_process *p)
+int		execute_external_cmd(t_shell *sh, t_process *p)
 {
 	char	*path;
 	char	*fullpath;

@@ -1,6 +1,5 @@
 NAME		= minishell
-SRCFILES	=	42sh_header.c \
-				ast.c \
+SRCFILES	=	ast.c \
 				ast_free.c \
 				ast_get.c \
 				ast_helper.c \
@@ -20,7 +19,6 @@ SRCFILES	=	42sh_header.c \
 				history_keys.c \
 				input_a.c \
 				input_b.c \
-				job_control.c \
 				kv_array.c \
 				main.c \
 				norme.c \

@@ -12,7 +12,7 @@
 
 #include "parse.h"
 
-t_ast		*ast_new(char *name, t_type type)
+t_ast			*ast_new(char *name, t_type type)
 {
 	t_ast	*node;
 
@@ -30,9 +30,9 @@ t_ast		*ast_new(char *name, t_type type)
 	return (node);
 }
 
-t_ast		*ast_enqueue(t_ast *head, t_ast *node)
+t_ast			*ast_enqueue(t_ast *head, t_ast *node)
 {
-	t_ast	*cursor;
+	t_ast *cursor;
 
 	if (!node)
 		return (head);
@@ -45,7 +45,7 @@ t_ast		*ast_enqueue(t_ast *head, t_ast *node)
 	return (head);
 }
 
-t_ast		*ast_dequeue(t_ast *head)
+t_ast			*ast_dequeue(t_ast *head)
 {
 	t_ast	*cpy;
 
@@ -65,7 +65,7 @@ t_ast		*ast_dequeue(t_ast *head)
 	return (cpy);
 }
 
-int			ast_len(t_ast *head)
+int				ast_len(t_ast *head)
 {
 	int		i;
 

@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 16:03:23 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 03:48:43 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/08 18:22:15 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	col_if_flag_print_newline(int *f)
 void	col_print_loop(int cw, int nc, int count, t_exec **a)
 {
 	int	i;
-	int	j;
-	int	f;
-	int	nr;
+	int j;
+	int f;
+	int nr;
 
 	nr = 0;
 	while (nr * nc < count)

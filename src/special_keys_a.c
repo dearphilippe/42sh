@@ -6,17 +6,17 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:16:43 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 03:47:41 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/06 08:00:38 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			check_special_keys(t_shell *sh)
+void	check_special_keys(t_shell *sh)
 {
 	int			i;
-	int			len;
 	const char	*key;
+	int			len;
 	const char	*special_keys[] = {KEY_UP_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW,
 		KEY_RIGHT_ARROW, KEY_BACKSPACE, KEY_DELETE, KEY_CTRL_A, KEY_CTRL_E,
 		KEY_CTRL_K, KEY_CTRL_L, KEY_TAB};
@@ -61,7 +61,7 @@ void	key_right_arrow_function(t_shell *sh)
 	return ;
 }
 
-void		key_backspace_function(t_shell *sh)
+void	key_backspace_function(t_shell *sh)
 {
 	size_t	tempo;
 
@@ -81,7 +81,7 @@ void		key_backspace_function(t_shell *sh)
 	return ;
 }
 
-void		key_delete_function(t_shell *sh)
+void	key_delete_function(t_shell *sh)
 {
 	size_t	tempo;
 

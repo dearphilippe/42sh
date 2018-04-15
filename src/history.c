@@ -6,13 +6,13 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:14:52 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 03:44:44 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/06 06:16:06 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char		*history_get_item(t_shell *sh, int index)
+char	*history_get_item(t_shell *sh, int index)
 {
 	char	**history;
 	int		count;
@@ -30,7 +30,7 @@ char		*history_get_item(t_shell *sh, int index)
 	return (result);
 }
 
-void		history_append_to_file(t_shell *sh)
+void	history_append_to_file(t_shell *sh)
 {
 	int		fd;
 	char	*filename;
@@ -47,7 +47,7 @@ void		history_append_to_file(t_shell *sh)
 	return ;
 }
 
-char		*history_file_name(t_shell *sh)
+char	*history_file_name(t_shell *sh)
 {
 	char	*home;
 	char	*fullpath;
@@ -59,7 +59,7 @@ char		*history_file_name(t_shell *sh)
 	return (fullpath);
 }
 
-char		**history_array(t_shell *sh)
+char	**history_array(t_shell *sh)
 {
 	char	*filename;
 	char	*data;
