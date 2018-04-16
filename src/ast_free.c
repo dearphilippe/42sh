@@ -14,14 +14,15 @@
 
 void	free_ast(t_ast *head)
 {
-	head->name = NULL;
+	if (head)
+		ft_strdel(&head->name);
 }
 
 void	free_trees(t_ast **ast)
 {
 	while (ast && *ast)
 	{
-		free_ast(*ast);
+		ast_dequeue(*ast);
 		ast++;
 	}
 }
