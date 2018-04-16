@@ -15,8 +15,8 @@
 
 # include "functions.h"
 # include "parse.h"
-# include "../libft/inc/libft.h"
-# include "../libft/inc/libftprintf.h"
+# include "libft.h"
+# include "libftprintf.h"
 # include <unistd.h>
 # include <fcntl.h>
 # include <sys/wait.h>
