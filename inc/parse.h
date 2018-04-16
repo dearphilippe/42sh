@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 15:04:20 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 17:04:59 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 21:22:45 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # define IS_RED_NNEXT(x) (!ft_strcmp_withspace(x, ">>"))
 # define IS_RED_PREV(x) (!ft_strcmp_withspace(x, "<"))
 # define IS_RED_PIPE(x) (!ft_strcmp_withspace(x, "|"))
-# define IS_RED(x) (IS_RED_NEXT(x) || IS_RED_NNEXT(x) || IS_RED_PREV(x) || IS_RED_PIPE(x))
+# define IS_RED1(x) (IS_RED_NEXT(x) || IS_RED_NNEXT(x) || IS_RED_PREV(x))
+# define IS_RED(x) (IS_RED1(x) || IS_RED_PIPE(x))
 # define IS_OP_AND(x) (!ft_strcmp_withspace(x, "&&"))
 # define IS_OP_OR(x) (!ft_strcmp_withspace(x, "||"))
 # define IS_OP(x) (IS_OP_AND(x) || IS_OP_OR(x))
