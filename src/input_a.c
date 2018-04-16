@@ -14,8 +14,8 @@
 
 void	init_input_buffer(t_shell *sh)
 {
-	sh->buffer = ft_memalloc(PAGE_SIZE);
-	sh->bufsize = PAGE_SIZE;
+	sh->buffer = ft_memalloc(POOGE);
+	sh->bufsize = POOGE;
 	sh->buf_i = 0;
 	sh->input_size = 0;
 	sh->history = history_array(sh);
@@ -31,12 +31,12 @@ void	increase_buffer(t_shell *sh)
 {
 	char	*newbuf;
 
-	if ((newbuf = ft_memalloc(sh->bufsize + PAGE_SIZE)) == NULL)
+	if ((newbuf = ft_memalloc(sh->bufsize + POOGE)) == NULL)
 		fatal_error_message(sh, E_NOMEM);
 	ft_strncpy(newbuf, sh->buffer, sh->bufsize);
 	free(sh->buffer);
 	sh->buffer = newbuf;
-	sh->bufsize += PAGE_SIZE;
+	sh->bufsize += POOGE;
 	return ;
 }
 

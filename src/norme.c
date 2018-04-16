@@ -21,12 +21,12 @@ t_av	*init_av_buffers(char *cmd)
 	av->argv = ft_memalloc(sizeof(char *));
 	av->argv[0] = NULL;
 	av->in = cmd;
-	if ((av->out = ft_memalloc(PAGE_SIZE * 2)) == NULL)
+	if ((av->out = ft_memalloc(POOGE * 2)) == NULL)
 	{
 		cleanup_av_buffers(av);
 		return (NULL);
 	}
-	if ((av->key = ft_memalloc(PAGE_SIZE)) == NULL)
+	if ((av->key = ft_memalloc(POOGE)) == NULL)
 	{
 		cleanup_av_buffers(av);
 		return (NULL);

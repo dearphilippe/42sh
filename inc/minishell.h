@@ -97,7 +97,7 @@ t_shell	*g_sh;
 
 # define SHELL_PROMPT		"$> "
 # define SHELL_NAME			"minishell"
-# define PAGE_SIZE			4096
+# define POOGE				4096
 # define E_NOMEM			"out of memory"
 # define E_READFAIL			"read() failed"
 # define E_GNLFAIL			"get_next_line() failed"
