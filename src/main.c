@@ -12,10 +12,10 @@
 
 #include "../inc/minishell.h"
 
-void 		ptr_null(t_shell *sh, t_ast	**ptr)
+void		ptr_null(t_shell *sh, t_ast **ptr)
 {
-	t_ast	*tmp;
-	int		k;
+	t_ast		*tmp;
+	int			k;
 	t_process	**group;
 
 	k = 1;
@@ -26,7 +26,6 @@ void 		ptr_null(t_shell *sh, t_ast	**ptr)
 		k += 1;
 	}
 	group = ft_memalloc(sizeof(t_process *) * (k + 1));
-
 	k = 0;
 	group[k++] = process_prepare(sh, (*ptr)->name);
 	(*ptr) = (*ptr)->parent;
@@ -35,29 +34,70 @@ void 		ptr_null(t_shell *sh, t_ast	**ptr)
 		group[k++] = process_prepare(sh, (*ptr)->right->name);
 		(*ptr) = (*ptr)->parent;
 	}
-	tcsetattr(STDIN_FILENO, TCSANOW,
-			  &sh->t_original);
+	tcsetattr(STDIN_FILENO, TCSANOW, &sh->t_original);
 	(void)group_process_execute(sh, group, 0, 0);
 	(void)group_process_wait(group);
 	(void)group_process_destroy(group);
 	tcsetattr(STDIN_FILENO, TCSANOW, &sh->t_custom);
 }
 
-void		main_helper(t_shell	*sh)
+void		ptr_not_null(t_shell *sh, t_ast **ptr, t_process **p, int *ec)
+{
+	int		ec2;
+
+	if (((*ptr)->next == NULL) &&
+			((*p = process_prepare(sh, (*ptr)->name)) != NULL))
+	{
+		*ec = process_execute(sh, *p);
+		(void)process_destroy(*p);
+		return ;
+	}
+	if (((*ptr)->type == OP_AND) && (ec == 0) &&
+		((*p = process_prepare(sh, (*ptr)->right->name)) != NULL))
+	{
+		ec2 = process_execute(sh, *p);
+		(void)process_destroy(*p);
+		if (ec2 != 0)
+			*ec = 1;
+	}
+	else if (((*ptr)->type == OP_OR) && (*ec != 0) &&
+			((*p = process_prepare(sh, (*ptr)->right->name)) != NULL))
+	{
+		ec2 = process_execute(sh, *p);
+		(void)process_destroy(*p);
+		if (ec2 == 0)
+			*ec = 0;
+	}
+}
+
+void		main_ptr(t_shell *sh, t_ast **ptr, t_process **p, int *ec)
+{
+	while ((*ptr))
+	{
+		if (((*ptr)->parent) && (IS_RED((*ptr)->parent->name)))
+		{
+			ft_printf(1, "parent is a redirection\n");
+			if ((*ptr)->next == NULL)
+				ptr_null(sh, ptr);
+		}
+		else
+			ptr_not_null(sh, ptr, p, ec);
+		if ((*ptr) != NULL)
+			(*ptr) = (*ptr)->parent;
+	}
+}
+
+void		main_helper(t_shell *sh, int ec)
 {
 	int			i;
-	int			ec2;
-	int			ec;
 	t_process	*p;
 	t_ast		*ptr;
 	t_ast		**ast;
 
-
+	i = 0;
 	if ((ft_strlen(sh->buffer) != 0) &&
-		((ast = ast_create_tree(sh->buffer)) != NULL))
+			((ast = ast_create_tree(sh->buffer)) != NULL))
 	{
-		i = 0;
-		ec = 0;
 		while (ast[i] != NULL)
 		{
 			ptr = ast[i];
@@ -65,49 +105,7 @@ void		main_helper(t_shell	*sh)
 			{
 				while (ptr->next)
 					ptr = ptr->next;
-				while (ptr)
-				{
-					if ((ptr->parent) && (IS_RED(ptr->parent->name)))
-					{
-						ft_printf(1, "parent is a redirection\n");
-						if (ptr->next == NULL)
-						{
-							ptr_null(sh, &ptr);
-						}
-					}
-					else
-					{
-						if ((ptr->next == NULL) &&
-							((p = process_prepare(sh, ptr->name)) != NULL))
-						{
-							ec = process_execute(sh, p);
-							(void)process_destroy(p);
-						}
-						else
-						{
-							if ((ptr->type == OP_AND) && (ec == 0) &&
-								((p = process_prepare(sh, ptr->right->name))
-								 != NULL))
-							{
-								ec2 = process_execute(sh, p);
-								(void)process_destroy(p);
-								if (ec2 != 0)
-									ec = 1;
-							}
-							else if ((ptr->type == OP_OR) && (ec != 0) &&
-									 ((p = process_prepare(sh, ptr->right->name))
-									  != NULL))
-							{
-								ec2 = process_execute(sh, p);
-								(void)process_destroy(p);
-								if (ec2 == 0)
-									ec = 0;
-							}
-						}
-					}
-					if (ptr != NULL)
-						ptr = ptr->parent;
-				}
+				main_ptr(sh, &ptr, &p, &ec);
 			}
 			i++;
 		}
@@ -116,10 +114,12 @@ void		main_helper(t_shell	*sh)
 	}
 }
 
-int		main(int argc, char **argv, char **envp)
+int			main(int argc, char **argv, char **envp)
 {
 	t_shell		*sh;
+	int			ec;
 
+	ec = 0;
 	sh = init_shell(argc, argv, envp);
 	while (1)
 	{
@@ -127,7 +127,7 @@ int		main(int argc, char **argv, char **envp)
 		raw_read(sh);
 		if (sh->buffer == NULL)
 			break ;
-		main_helper(sh);
+		main_helper(sh, ec);
 		clear_input_buffers(sh);
 	}
 	clean_up(sh);
