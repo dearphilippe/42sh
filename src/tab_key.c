@@ -6,7 +6,7 @@
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:25:17 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 12:40:35 by passef           ###   ########.fr       */
+/*   Updated: 2018/04/15 20:08:19 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	key_tab_function(t_shell *sh)
 	t_exec	**matches;
 	int		i;
 
+	auto_complete(sh);
 	if ((sh->input_size > 0) && (string_has_whitespace(sh->buffer) == 0))
 	{
 		matches = tab_array_of_matches(sh);

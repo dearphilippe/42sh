@@ -6,7 +6,7 @@
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:53:35 by passef            #+#    #+#             */
-/*   Updated: 2018/04/15 17:40:44 by passef           ###   ########.fr       */
+/*   Updated: 2018/04/15 20:54:34 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,9 @@ void			insert_node(t_autoNode *root, char *word)
 		nCrawl = nCrawl->child[i];
 		lvl++;
 	}
-
 	nCrawl->isLeaf = 1;
+
+	return;
 }
 
 int				search(t_autoNode *root, const char *word)
@@ -114,55 +115,70 @@ t_autoNode		*build_trie(char **tab)
 	return (root);
 }
 
-int				main(int argc, char **argv, char **envp)
+
+int	directory_count_entries(char *path)
 {
-	t_autoNode *root;
+	DIR				*dirp;
+	struct dirent	*dp;
+	int				i;
 
-	root = initNode();
-	char **keys;
-	keys = malloc(sizeof(keys) * 6);
-
-	keys[0] = "Phil";
-	keys[1] = "alëx";
-	keys[2] = "Bac$ir";
-	keys[3] = "=ei4";
-	keys[4] = "L	eo";
-	keys[5] = "p-f";
-	keys[6] = NULL;
-	
-	root = build_trie(keys);
-	char output[][32] = {"Not in the team", "Present is the place"};
-	printf("%s --- %s\n", "Bac$ir", output[search(root, "Bac$ir")] );
-	printf("%s --- %s\n", "L	eo", output[search(root, "L	eo")] );
-	printf("%s --- %s\n", "p-f", output[search(root, "p-f")] );
-	printf("%s --- %s\n", "thaw", output[search(root, "thaw")] );
-
-	return (0);
+	if (path == NULL)
+		return (-1);
+	if ((dirp = opendir(path)) == NULL)
+	{
+		perror("autocomplete");
+		return (-1);
+	}
+	i = 0;
+	while ((dp = readdir(dirp)) != NULL)
+		i++;
+	closedir(dirp);
+	return (i);
 }
 
-/*
-void		display_complete(t_shell *sh)
+
+char **directory_get_contents(char *path)
 {
-	DIR	*cDir;
-	struct dirent *dp;
-	char	name;
+	DIR				*dirp;
+	struct dirent	*dp;
+	int				i;
+	char			**vector;
 
-	if (cDir = opendir("."))
+	if ((i = directory_count_entries(path)) == -1)
+		return (NULL);
+	vector = ft_memalloc((i + 1) * sizeof(char *));
+	if (path == NULL)
+		return (NULL);
+	if ((dirp = opendir(path)) == NULL)
 	{
-		return (EXIT_FAILURE);
+		perror("autocomplete");
+		return (NULL);
 	}
-	name = "Documents";
-
-	while (cDir)
-	{
-		if ((dp = readdir(cDir)) != NULL)
-		{
-			if (ft_strcmp(dp->d_name, name) == 0)
-			{
-				closedir(cDir);
-				return (0);
-			}
-		}
-	}
+	i = 0;
+	while ((dp = readdir(dirp)) != NULL)
+		vector[i++] = ft_strdup(dp->d_name);
+	vector[i] = NULL;
+	closedir(dirp);
+	return (vector);
 }
-*/
+
+void	directory_print_contents(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		ft_printf(STDOUT_FILENO, "index = %d, entry = %s\n", i, array[i]);
+		i++;
+	}
+	return ;
+}
+
+void			auto_complete(t_shell *sh)
+{
+	ft_printf(STDIN_FILENO, "ca marche\n");
+
+	return ;
+}
+

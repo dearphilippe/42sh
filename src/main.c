@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/14 04:11:23 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 20:19:02 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -412,9 +412,6 @@ int		main(int argc, char **argv, char **envp)
 								(void)group_process_wait(group);
 								(void)group_process_destroy(group);
 								tcsetattr(STDIN_FILENO, TCSANOW, &sh->t_custom);
-
-
-
 							}
 							else
 							{

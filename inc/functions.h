@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 16:20:50 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 19:10:53 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 20:09:55 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,7 @@ void	tab_remove_duplicates(t_exec **array, int *count);
 void	terminal_init(t_shell *sh);
 void	termios_restore_settings(t_shell *sh);
 void	termios_save_settings(t_shell *sh);
+
+void	auto_complete(t_shell *sh);
 
 #endif

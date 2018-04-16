@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: passef <passef@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/04/15 20:10:29 by passef            #+#    #+#              #
+#    Updated: 2018/04/15 20:50:45 by passef           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME		=	42sh
 
 SRCFILES	=	ast.c \
@@ -32,12 +44,13 @@ SRCFILES	=	ast.c \
 				tab_key.c \
 				tab_utils.c \
 				termcaps.c \
+				auto.c \
 
 OBJFILES	= $(SRCFILES:%.c=%.o)
 SRC			= $(addprefix src/,$(SRCFILES))
 OBJ			= $(addprefix obj/,$(OBJFILES))
 CC			= gcc
-FLAGS		= -O2 -Wextra -Wall -Werror
+FLAGS		= -g -Wextra -Wall -Werror
 INC			= -I libft/inc -I inc/
 LIB			= -L libft/ -lft -ltermcap
 
