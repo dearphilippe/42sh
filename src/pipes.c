@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 21:09:07 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 21:15:51 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 21:19:04 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		*group_process_make_pipes(t_process **group, int *i, int *count)
 	*i = 0;
 	while (group[*i] != NULL)
 		(*i)++;
-	*count = i;
+	*count = *i;
 	pipes = ft_memalloc((*count) * 2 * sizeof(int));
 	*i = 0;
 	while (*i < *count - 1)
