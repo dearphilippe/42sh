@@ -6,7 +6,7 @@
 /*   By: ztisnes <ztisnes@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:59:27 by ztisnes           #+#    #+#             */
-/*   Updated: 2018/04/15 18:59:39 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/15 20:11:16 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_queue				*init_queue(void)
 {
 	t_queue			*node;
+
 	node = (t_queue *)ft_memalloc(sizeof(t_queue));
 	node->first = NULL;
 	node->last = NULL;
@@ -24,6 +25,7 @@ t_queue				*init_queue(void)
 void				ft_enqueue(t_queue *queue, void *content)
 {
 	t_list			*node;
+
 	node = (t_list *)ft_memalloc(sizeof(t_list));
 	node->content = content;
 	node->next = NULL;
@@ -53,14 +55,14 @@ void				*ft_dequeue(t_queue *queue)
 	return (NULL);
 }
 
-void 				*peek_queue(t_queue *queue)
+void				*peek_queue(t_queue *queue)
 {
 	if (queue->first == NULL)
 		return (NULL);
 	return (queue->first->content);
 }
 
-int					isEmpty(t_queue *queue)
+int					is_empty(t_queue *queue)
 {
 	return (queue->first == NULL);
 }

@@ -6,7 +6,7 @@
 #    By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/20 17:41:00 by asarandi          #+#    #+#              #
-#    Updated: 2018/04/15 19:00:16 by ztisnes          ###   ########.fr        #
+#    Updated: 2018/04/15 20:06:50 by asarandi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,22 +84,22 @@ SRCFILES	=	ft_str_append.c \
 				ft_uriencode.c \
 				queue.c \
 				get_next_line.c \
-				ft_printf-add_precision.c \
-				ft_printf-add_width.c \
-				ft_printf-colos.c \
-				ft_printf-float_cosmetics.c \
-				ft_printf-format_csws.c \
-				ft_printf-format_ioux.c \
-				ft_printf-get_char.c \
-				ft_printf-get_double.c \
-				ft_printf-get_specs.c \
-				ft_printf-init_lib.c \
-				ft_printf-is_format.c \
-				ft_printf-iso8601.c \
-				ft_printf-non_numeric.c \
-				ft_printf-print_number.c \
-				ft_printf-string_op.c \
-				ft_printf-wchar_to_utf8.c \
+				ft_printf_add_precision.c \
+				ft_printf_add_width.c \
+				ft_printf_colos.c \
+				ft_printf_float_cosmetics.c \
+				ft_printf_format_csws.c \
+				ft_printf_format_ioux.c \
+				ft_printf_get_char.c \
+				ft_printf_get_double.c \
+				ft_printf_get_specs.c \
+				ft_printf_init_lib.c \
+				ft_printf_is_format.c \
+				ft_printf_iso8601.c \
+				ft_printf_non_numeric.c \
+				ft_printf_print_number.c \
+				ft_printf_string_op.c \
+				ft_printf_wchar_to_utf8.c \
 				ft_printf.c
 
 OBJFILES	= $(SRCFILES:%.c=%.o)
