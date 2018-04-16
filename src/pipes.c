@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/42.h"
 
 int		*group_process_make_pipes(t_process **group, int *i, int *count)
 {

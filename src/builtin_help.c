@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/42.h"
 
 char	*g_builtin_list[] = {
 	"cd", "echo", "env", "exit", "setenv", "unsetenv"

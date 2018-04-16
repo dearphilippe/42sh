@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/42.h"
 
 int		builtin_setenv_kv(t_shell *sh, char **argv, int arg_count)
 {

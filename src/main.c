@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../inc/42.h"
 
 void		ptr_null(t_shell *sh, t_ast **ptr)
 {
