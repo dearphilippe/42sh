@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ast_util.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 15:10:27 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 15:26:14 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 23:14:51 by brabo-hi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "parse.h"
+#include "parse_new.h"
 
 int		ast_ambiguous_error(char *msg)
 {
@@ -66,4 +65,24 @@ t_ast	**ast_create_tree(char *str)
 	}
 	free_ast(lex);
 	return (ast);
+}
+
+void	init_parse_lexer(t_ast **lex, t_ast **node, char **word, char **term)
+{
+	*lex = NULL;
+	*word = NULL;
+	*term = NULL;
+	*node = NULL;
+}
+
+t_ast	*parse_help1(t_ast **lex, t_ast **node, char **word, char **term)
+{
+	*node = ast_new(remove_start_space(*word), CMD);
+	if (*node && !(*lex = ast_enqueue(*lex, *node)))
+		return (NULL);
+	ft_strdel(word);
+	*word = NULL;
+	if (!(*lex = ast_enqueue(*lex, ast_new(*term, get_type(*term)))))
+		return (NULL);
+	return (ast_new("NULL", NUL));
 }

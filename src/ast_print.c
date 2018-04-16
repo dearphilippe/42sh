@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "parse_new.h"
 
 void	print_ast(t_ast *node)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ast_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
+/*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 14:07:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 21:06:40 by passef           ###   ########.fr       */
+/*   Updated: 2018/04/15 23:23:48 by brabo-hi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "parse_new.h"
 
 void	free_ast(t_ast *head)
 {
@@ -24,4 +24,14 @@ void	free_trees(t_ast **ast)
 		free_ast(*ast);
 		ast++;
 	}
+}
+
+size_t	free_parse_ast(char **term)
+{
+	size_t i;
+
+	i = ft_strlen(*term);
+	ft_strdel(term);
+	*term = NULL;
+	return (i);
 }

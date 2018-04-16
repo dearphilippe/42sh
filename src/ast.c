@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "parse_new.h"
 
 t_ast			*ast_new(char *name, t_type type)
 {
