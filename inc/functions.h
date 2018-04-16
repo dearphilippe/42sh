@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 16:20:50 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 16:42:06 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 17:09:30 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int		ft_contains_end_line(char *str);
 int		ft_copy_and_cut(char **str, char **line, int fd);
 int		ft_copy_end_file(char **str, char **line, int fd);
 int		get_nbr_redirection(char *str);
-int		get_next_line(const int fd, char **line);
 int		group_process_execute(t_shell *sh, t_process **group);
 int		group_process_wait(t_process **group);
 int		is_end_of_argument(char c);

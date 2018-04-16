@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 15:14:14 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 15:14:38 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 17:09:52 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ t_shell	*init_shell(int argc, char **argv, char **envp)
 			destroy_char_array(folders);
 		}
 	}
+	(void)header_42();
 	return (sh);
 }

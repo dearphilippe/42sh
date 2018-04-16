@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 15:04:20 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 16:27:24 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 17:04:59 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,10 @@ int					ast_len(t_ast *head);
 
 t_ast				*validate_lexer(t_ast *lex);
 t_ast				*validate_ast(t_ast *ast);
+
+t_ast				**ast_create_tree(char *str);
+int					ast_ambiguous_error(char *msg);
+int					ast_is_ambiguous(t_ast *ast);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:06:58 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 16:45:45 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 16:58:34 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ char *g_builtin_list[] = {
 		"exit", "setenv", "unsetenv"};
 char *g_punani_list[] = {
 		"Compact disc; access to other folders or directories",
-		"Display given string", "Set environment and execute command, or print\
-		environment", "Terminate program", "function inserts or resets the\
-		environment variable name in the current environment list",
-		"function deletes all instances of the variable name pointed to\
-		by name from the list"
+		"Display given string", 
+		"Set environment and execute command, or print environment",
+		"Terminate program",
+		"function inserts or resets the environment variable name in the " \
+			"current environment list",
+		"function deletes all instances of the variable name pointed to by" \
+			" name from the list"
 	};
 
 int		builtin_cmd_index(char *cmd)
