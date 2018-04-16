@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 17:51:15 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 19:24:34 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/15 20:09:24 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ typedef struct		s_list
 typedef struct		s_queue
 {
 	t_list			*first;
-	t_list		 	*last;
+	t_list			*last;
 }					t_queue;
 
 typedef	struct		s_gnl
 {
 	void			*mem;
+	struct s_gnl	*prev;
+	struct s_gnl	*next;
 	size_t			size;
 	int				fd;
 	int				eof;
-	struct s_gnl	*prev;
-	struct s_gnl	*next;
 }					t_gnl;
 
 char				*ft_str_append(char *str, char c);
@@ -93,7 +93,7 @@ int					ft_isdigit(int c);
 int					ft_isprint(int c);
 int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strcpy(char *dst, const char *src);
-char        *ft_strcpy_alloc(char *s, int n);
+char				*ft_strcpy_alloc(char *s, int n);
 char				*ft_strdup(const char *s1);
 size_t				ft_strlen(const char *s);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -110,5 +110,15 @@ char				*ft_uriencode(char *s);
 char				*ft_base64encode(unsigned char *o, size_t size);
 char				*ft_strtolower(char *s);
 char				*ft_strtoupper(char *s);
+
+/*
+** Queue structure
+*/
+
+t_queue				*init_queue(void);
+void				ft_enqueue(t_queue *queue, void *content);
+void				*ft_dequeue(t_queue *queue);
+void				*peek_queue(t_queue *queue);
+int					is_empty(t_queue *queue);
 
 #endif

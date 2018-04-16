@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 17:03:00 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 21:17:15 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		main(int argc, char **argv, char **envp)
 								}
 
 								tcsetattr(STDIN_FILENO, TCSANOW, &sh->t_original);
-								(void)group_process_execute(sh, group);
+								(void)group_process_execute(sh, group, 0, 0);
 //								int i = 0;
 //								while (group[i] != NULL)
 //									i++;

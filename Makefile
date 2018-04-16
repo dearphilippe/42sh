@@ -30,6 +30,7 @@ SRCFILES =	ast.c \
 	main.c \
 	norme.c \
 	path_utils.c \
+	pipes.c \
 	process.c \
 	quotes.c \
 	signal.c \

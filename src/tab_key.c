@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:25:17 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/08 16:06:24 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 19:38:56 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	key_tab_function(t_shell *sh)
 		else if ((i > 1) && (tab_mini_complete(sh, matches) == 0))
 		{
 			tab_print_columns(matches, i);
-			reprint_input(sh);
 		}
 		free(matches);
 		reprint_input(sh);
