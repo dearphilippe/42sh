@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/ft.h"
 
 char	*dir_slash_exec(char *dir, char *cmd)
 {

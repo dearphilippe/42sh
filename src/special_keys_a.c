@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/ft.h"
 
 void	check_special_keys(t_shell *sh)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/ft.h"
 
 t_exec	**tab_array_of_matches(t_shell *sh)
 {

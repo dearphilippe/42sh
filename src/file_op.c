@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/ft.h"
 
 char	*file_get_contents(char *filename)
 {

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   42.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
+/*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/30 19:50:54 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 21:14:00 by passef           ###   ########.fr       */
+/*   Created: 2018/04/16 02:16:30 by brabo-hi          #+#    #+#             */
+/*   Updated: 2018/04/16 02:16:34 by brabo-hi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef FT_H
+# define FT_H
 
 # include "functions.h"
 # include "parse.h"
@@ -96,8 +96,8 @@ typedef struct		s_shell
 t_shell	*g_sh;
 
 # define SHELL_PROMPT		"$> "
-# define SHELL_NAME			"minishell"
-# define PAGE_SIZE			4096
+# define SHELL_NAME			"42sh"
+# define POOGE				4096
 # define E_NOMEM			"out of memory"
 # define E_READFAIL			"read() failed"
 # define E_GNLFAIL			"get_next_line() failed"
@@ -124,7 +124,7 @@ t_shell	*g_sh;
 # define DOLLAR_SIGN		'$'
 # define NUM_BUILTINS		7
 # define NUM_SPECIAL_KEYS	11
-# define HISTORY_FILE		".minishell_history"
+# define HISTORY_FILE		".42sh_history"
 # define KEY_UP_ARROW		"\e[A"
 # define KEY_DOWN_ARROW		"\e[B"
 # define KEY_LEFT_ARROW		"\e[D"
