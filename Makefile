@@ -11,6 +11,7 @@ SRCFILES =	ast.c \
 	ast_validate.c \
 	autocomplete.c \
 	builtin_cd.c \
+	builtin_help.c \
 	builtins.c \
 	builtins_env.c \
 	char_array.c \
