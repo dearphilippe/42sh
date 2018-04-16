@@ -6,7 +6,7 @@
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 00:05:19 by passef            #+#    #+#             */
-/*   Updated: 2018/04/16 00:09:10 by passef           ###   ########.fr       */
+/*   Updated: 2018/04/16 00:24:57 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,5 @@ void				init_parse_lexer(t_ast **lex, t_ast **node,
 					char **word, char **term);
 t_ast				*parse_help1(t_ast **lex, t_ast **node,
 					char **word, char **term);
-
 
 #endif
