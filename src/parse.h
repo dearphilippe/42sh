@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
+/*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 15:04:20 by asarandi          #+#    #+#             */
+<<<<<<< HEAD:inc/parse.h
 /*   Updated: 2018/04/15 22:37:05 by passef           ###   ########.fr       */
+=======
+/*   Updated: 2018/04/15 21:42:28 by brabo-hi         ###   ########.fr       */
+>>>>>>> ast:src/parse.h
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +29,7 @@
 # define IS_SEP(x) (!ft_strcmp_withspace(x, ";"))
 # define IS_TERM(x) (IS_OP(x) || IS_SEP(x) || IS_RED(x))
 # include "../libft/inc/libft.h"
-# include <stdio.h>
+#include "../libft/inc/libftprintf.h"
 
 typedef enum		e_type
 {
@@ -37,7 +41,8 @@ typedef enum		e_type
 	OP_AND,
 	OP_OR,
 	SEP,
-	ROOT
+	ROOT,
+    NUL
 }					t_type;
 
 typedef struct		s_ast
@@ -55,6 +60,7 @@ typedef struct		s_ast
 
 void				free_ast(t_ast *head);
 void				free_trees(t_ast **ast);
+size_t				free_parse_ast(char **term);
 
 /*
 ** get.c
@@ -71,17 +77,24 @@ char				*get_type_string(char *str);
 
 char				*remove_start_space(char *str);
 char				*delete_backslash_in_double_quote(char *str);
+int					set_backslash(char *dest, char *str, int i);
 
 /*
 ** lexer.c
 */
 
 t_ast				*parse_lexer(char *str);
+t_ast				*cpy_ast(char *word, t_ast *lex, t_ast *node);
+t_ast				**parse_ast(t_ast **ast, t_ast *lex);
+t_ast				*parse_tree(t_ast *lex);
+
+/*
+ ** parse_quote.c
+ */
 int					parse_quote(char **word, char *str);
 int					parse_quote_single(char **word, char *str);
 int					parse_quote_double(char **word, char *str);
-t_ast				**parse_ast(t_ast **ast, t_ast *lex);
-t_ast				*parse_tree(t_ast *lex);
+int					copy_str(int i, int res, char **word, char *cpy);
 
 /*
 ** print.c
@@ -110,8 +123,17 @@ int					ast_len(t_ast *head);
 t_ast				*validate_lexer(t_ast *lex);
 t_ast				*validate_ast(t_ast *ast);
 
+/*
+ ** ast_util.c
+ */
+
 t_ast				**ast_create_tree(char *str);
 int					ast_ambiguous_error(char *msg);
 int					ast_is_ambiguous(t_ast *ast);
+<<<<<<< HEAD:inc/parse.h
+=======
+void				init_parse_lexer(t_ast **lex, t_ast **node, char **word, char **term);
+t_ast				*parse_help1(t_ast **lex, t_ast **node, char **word, char **term);
+>>>>>>> ast:src/parse.h
 
 #endif

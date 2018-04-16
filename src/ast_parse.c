@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 14:07:46 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 14:32:05 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 23:23:14 by brabo-hi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ t_ast	*parse_lexer(char *str)
 	char	*term;
 	int		res;
 
-	lex = NULL;
-	word = NULL;
-	term = NULL;
+	init_parse_lexer(&lex, &node, &word, &term);
 	while (str && *str)
 	{
 		if (*str == '\'' || *str == '"')
@@ -30,24 +28,21 @@ t_ast	*parse_lexer(char *str)
 			if (!(res = parse_quote(&word, str)))
 				return (NULL);
 			str += res;
-			continue ;
 		}
 		else if (*str && *str != ' ' && (term = get_type_string(str)))
 		{
-			node = ast_new(remove_start_space(word), CMD);
-			if (node && !(lex = ast_enqueue(lex, node)))
+			if (!(parse_help1(&lex, &node, &word, &term)))
 				return (NULL);
-			ft_strdel(&word);
-			word = NULL;
-			if (!(lex = ast_enqueue(lex, ast_new(term, get_type(term)))))
-				return (NULL);
-			str += ft_strlen(term);
-			ft_strdel(&term);
-			term = NULL;
-			continue ;
+			str += free_parse_ast(&term);
 		}
-		word = ft_str_append(word, *str++);
+		else
+			word = ft_str_append(word, *str++);
 	}
+	return (cpy_ast(word, lex, node));
+}
+
+t_ast	*cpy_ast(char *word, t_ast *lex, t_ast *node)
+{
 	if (ft_strlen(word))
 	{
 		node = ast_new(remove_start_space(word), CMD);
@@ -57,80 +52,6 @@ t_ast	*parse_lexer(char *str)
 		word = NULL;
 	}
 	return (validate_lexer(lex));
-}
-
-int		parse_quote(char **word, char *str)
-{
-	if (!str || (*str != '\'' && *str != '"'))
-		return (0);
-	if (*str && *str == '\'')
-		return (parse_quote_single(word, str));
-	if (*str && *str == '"')
-		return (parse_quote_double(word, str));
-	return (0);
-}
-
-int		parse_quote_single(char **word, char *str)
-{
-	char	*cpy;
-	int		res;
-	int		i;
-
-	res = 1;
-	i = 0;
-	cpy = str;
-	if (!str || !*str || *str++ != '\'')
-		return (0);
-	if (str && *str && *str == '\'')
-		return (++res);
-	while (str && *str && ++res)
-	{
-		if (*str == '\'' && str[-1] != '\\')
-			break ;
-		str++;
-	}
-	if (!str || !*str || *str != '\'')
-		return (0);
-	++res;
-	while (i++ < res)
-	{
-		if (!cpy)
-			return (0);
-		*word = ft_str_append(*word, *cpy++);
-	}
-	return (res);
-}
-
-int		parse_quote_double(char **word, char *str)
-{
-	char	*cpy;
-	int		res;
-	int		i;
-
-	res = 1;
-	i = 0;
-	str = delete_backslash_in_double_quote(str);
-	cpy = str;
-	if (!str || !*str || *str++ != '"')
-		return (0);
-	if (str && *str && *str == '"')
-		return (++res);
-	while (str && *str && ++res)
-	{
-		if (*str == '"' && str[-1] != '\\')
-			break ;
-		str++;
-	}
-	if (!str || !*str || *str != '\"')
-		return (0);
-	++res;
-	while (i++ < res)
-	{
-		if (!cpy)
-			return (0);
-		*word = ft_str_append(*word, *cpy++);
-	}
-	return (res);
 }
 
 t_ast	**parse_ast(t_ast **ast, t_ast *lex)
@@ -173,8 +94,7 @@ t_ast	*parse_tree(t_ast *lex)
 	{
 		if (lex->type == CMD || !(op = ast_new(lex->name, lex->type)))
 			return (NULL);
-		lex = lex->next;
-		if (!lex || lex->type != CMD ||
+		if (!(lex = lex->next) || lex->type != CMD ||
 				!(right = ast_new(lex->name, lex->type)))
 			return (NULL);
 		op->next = ast;

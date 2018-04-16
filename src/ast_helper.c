@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_helper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
+/*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 14:07:25 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 21:08:00 by passef           ###   ########.fr       */
+/*   Updated: 2018/04/15 21:45:55 by brabo-hi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,34 +40,7 @@ char	*delete_backslash_in_double_quote(char *str)
 		{
 			if (!str || !*str)
 				return (NULL);
-			if (*str == 'a')
-				dest[i++] = 7;
-			else if (*str == 'b')
-				dest[i++] = 8;
-			else if (*str == 'f')
-				dest[i++] = 12;
-			else if (*str == 'n')
-				dest[i++] = 10;
-			else if (*str == 'r')
-				dest[i++] = 13;
-			else if (*str == 't')
-				dest[i++] = 9;
-			else if (*str == 'v')
-				dest[i++] = 11;
-			else if (*str == '\\')
-				dest[i++] = 92;
-			else if (*str == '\'')
-				dest[i++] = 39;
-			else if (*str == '"')
-			{
-				dest[i++] = '\\';
-				dest[i++] = 34;
-			}
-			else
-			{
-				dest[i++] = '\\';
-				dest[i++] = *str;
-			}
+			i = set_backslash(dest, str, i);
 			str++;
 			continue ;
 		}
@@ -76,4 +49,31 @@ char	*delete_backslash_in_double_quote(char *str)
 	}
 	dest[i] = '\0';
 	return (dest);
+}
+
+int		set_backslash(char *dest, char *str, int i)
+{
+	if (*str == 'n')
+		dest[i++] = 10;
+	else if (*str == 'r')
+		dest[i++] = 13;
+	else if (*str == 't')
+		dest[i++] = 9;
+	else if (*str == 'v')
+		dest[i++] = 11;
+	else if (*str == '\\')
+		dest[i++] = 92;
+	else if (*str == '\'')
+		dest[i++] = 39;
+	else if (*str == '"')
+	{
+		dest[i++] = '\\';
+		dest[i++] = 34;
+	}
+	else
+	{
+		dest[i++] = '\\';
+		dest[i++] = *str;
+	}
+	return (i);
 }

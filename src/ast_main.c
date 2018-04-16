@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ast_main.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 16:28:37 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 16:28:44 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 21:45:28 by brabo-hi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int		ast_main(void)
+int		main(void)
 {
 	t_ast *lex;
 	t_ast **ast;
 
-	lex = parse_lexer("ls -l && echo \"hello\"; ls -la");
+	lex = parse_lexer("touch fichier ");
 	if (!lex)
 	{
 		print_error_lexer();

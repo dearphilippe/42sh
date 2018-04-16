@@ -97,7 +97,6 @@ void	key_tab_function(t_shell *sh)
 		tab_remove_duplicates(matches, &i);
 		if (i == 1)
 		{
-			ft_strcpy(sh->buffer, basename(matches[0]->cmd));
 			sh->buf_i = ft_strlen(basename(matches[0]->cmd));
 			sh->buffer[sh->buf_i++] = ' ';
 			sh->input_size = sh->buf_i;
