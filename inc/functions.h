@@ -142,5 +142,6 @@ void	tab_remove_duplicates(t_exec **array, int *count);
 void	terminal_init(t_shell *sh);
 void	termios_restore_settings(t_shell *sh);
 void	termios_save_settings(t_shell *sh);
+void	main_helper(t_shell		*sh);
 
 #endif

@@ -132,5 +132,4 @@ void				init_parse_lexer(t_ast **lex, t_ast **node,
 t_ast				*parse_help1(t_ast **lex, t_ast **node,
 					char **word, char **term);
 
-
 #endif
