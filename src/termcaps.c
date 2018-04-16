@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:27:41 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 03:49:17 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/06 06:56:42 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	termios_restore_settings(t_shell *sh)
 	return ;
 }
 
-void		terminal_init(t_shell *sh)
+void	terminal_init(t_shell *sh)
 {
 	char	buf[1024];
 	char	*term;

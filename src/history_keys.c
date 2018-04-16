@@ -6,13 +6,13 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:20:39 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 03:42:04 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/06 07:00:22 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		key_up_arrow_function(t_shell *sh)
+void	key_up_arrow_function(t_shell *sh)
 {
 	char	*result;
 	int		k;

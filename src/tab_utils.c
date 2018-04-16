@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 16:00:36 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 03:48:41 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/08 16:02:04 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		tab_count_matches(t_shell *sh)
 	return (count);
 }
 
-int			tab_all_commands_longer(t_shell *sh, t_exec **a)
+int		tab_all_commands_longer(t_shell *sh, t_exec **a)
 {
 	size_t	k_len;
 	int		i;
@@ -47,7 +47,7 @@ int			tab_all_commands_longer(t_shell *sh, t_exec **a)
 	return (1);
 }
 
-int			tab_all_commands_share_letter(t_exec **a, int index, char c)
+int		tab_all_commands_share_letter(t_exec **a, int index, char c)
 {
 	int		i;
 	char	*cmd;
@@ -63,7 +63,7 @@ int			tab_all_commands_share_letter(t_exec **a, int index, char c)
 	return (1);
 }
 
-int			tab_max_length(t_exec **array)
+int		tab_max_length(t_exec **array)
 {
 	int		i;
 	int		len;
@@ -81,7 +81,7 @@ int			tab_max_length(t_exec **array)
 	return (max_length);
 }
 
-void		tab_bubble_sort(t_exec **a, int count)
+void	tab_bubble_sort(t_exec **a, int count)
 {
 	int		i;
 	int		flag;

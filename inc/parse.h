@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/15 15:04:20 by asarandi          #+#    #+#             */
+/*   Updated: 2018/04/15 17:04:59 by asarandi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSE_H
 # define PARSE_H
 
@@ -6,16 +18,13 @@
 # define IS_RED_PREV(x) (!ft_strcmp_withspace(x, "<"))
 # define IS_RED_PIPE(x) (!ft_strcmp_withspace(x, "|"))
 # define IS_RED(x) (IS_RED_NEXT(x) || IS_RED_NNEXT(x) || IS_RED_PREV(x) || IS_RED_PIPE(x))
-
 # define IS_OP_AND(x) (!ft_strcmp_withspace(x, "&&"))
 # define IS_OP_OR(x) (!ft_strcmp_withspace(x, "||"))
 # define IS_OP(x) (IS_OP_AND(x) || IS_OP_OR(x))
-
 # define IS_SEP(x) (!ft_strcmp_withspace(x, ";"))
-
 # define IS_TERM(x) (IS_OP(x) || IS_SEP(x) || IS_RED(x))
-
-# include "libft.h"
+# include "../libft/inc/libft.h"
+# include <stdio.h>
 
 typedef enum		e_type
 {
@@ -60,6 +69,7 @@ char				*get_type_string(char *str);
 */
 
 char				*remove_start_space(char *str);
+char				*delete_backslash_in_double_quote(char *str);
 
 /*
 ** lexer.c
@@ -67,8 +77,8 @@ char				*remove_start_space(char *str);
 
 t_ast				*parse_lexer(char *str);
 int					parse_quote(char **word, char *str);
-int					parse_quote_single(char *str);
-int					parse_quote_double(char *str);
+int					parse_quote_single(char **word, char *str);
+int					parse_quote_double(char **word, char *str);
 t_ast				**parse_ast(t_ast **ast, t_ast *lex);
 t_ast				*parse_tree(t_ast *lex);
 
@@ -98,5 +108,10 @@ int					ast_len(t_ast *head);
 
 t_ast				*validate_lexer(t_ast *lex);
 t_ast				*validate_ast(t_ast *ast);
+
+t_ast				**ast_create_tree(char *str);
+int					ast_ambiguous_error(char *msg);
+int					ast_is_ambiguous(t_ast *ast);
+
 
 #endif
