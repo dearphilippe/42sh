@@ -6,7 +6,7 @@
 #    By: passef <passef@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/15 23:17:54 by passef            #+#    #+#              #
-#    Updated: 2018/04/15 23:18:00 by passef           ###   ########.fr        #
+#    Updated: 2018/04/16 00:11:00 by passef           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,11 @@ SRCFILES =	ast.c \
 	ast_free.c \
 	ast_get.c \
 	ast_helper.c \
-	ast_main.c \
-	ast_main3.c \
 	ast_parse.c \
 	ast_print.c \
 	ast_util.c \
 	ast_validate.c \
+	ast_parse_quote.c \
 	autocomplete.c \
 	builtin_cd.c \
 	builtin_help.c \

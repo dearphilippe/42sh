@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/15 15:04:20 by asarandi          #+#    #+#             */
-<<<<<<< HEAD:inc/parse.h
-/*   Updated: 2018/04/15 22:37:05 by passef           ###   ########.fr       */
-=======
-/*   Updated: 2018/04/15 21:42:28 by brabo-hi         ###   ########.fr       */
->>>>>>> ast:src/parse.h
+/*   Created: 2018/04/16 00:05:19 by passef            #+#    #+#             */
+/*   Updated: 2018/04/16 00:09:10 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +25,8 @@
 # define IS_SEP(x) (!ft_strcmp_withspace(x, ";"))
 # define IS_TERM(x) (IS_OP(x) || IS_SEP(x) || IS_RED(x))
 # include "../libft/inc/libft.h"
-#include "../libft/inc/libftprintf.h"
+# include "../libft/inc/libftprintf.h"
+# include <stdio.h>
 
 typedef enum		e_type
 {
@@ -42,7 +39,7 @@ typedef enum		e_type
 	OP_OR,
 	SEP,
 	ROOT,
-    NUL
+	NUL
 }					t_type;
 
 typedef struct		s_ast
@@ -89,8 +86,8 @@ t_ast				**parse_ast(t_ast **ast, t_ast *lex);
 t_ast				*parse_tree(t_ast *lex);
 
 /*
- ** parse_quote.c
- */
+** parse_quote.c
+*/
 int					parse_quote(char **word, char *str);
 int					parse_quote_single(char **word, char *str);
 int					parse_quote_double(char **word, char *str);
@@ -124,16 +121,16 @@ t_ast				*validate_lexer(t_ast *lex);
 t_ast				*validate_ast(t_ast *ast);
 
 /*
- ** ast_util.c
- */
+** ast_util.c
+*/
 
 t_ast				**ast_create_tree(char *str);
 int					ast_ambiguous_error(char *msg);
 int					ast_is_ambiguous(t_ast *ast);
-<<<<<<< HEAD:inc/parse.h
-=======
-void				init_parse_lexer(t_ast **lex, t_ast **node, char **word, char **term);
-t_ast				*parse_help1(t_ast **lex, t_ast **node, char **word, char **term);
->>>>>>> ast:src/parse.h
+void				init_parse_lexer(t_ast **lex, t_ast **node,
+					char **word, char **term);
+t_ast				*parse_help1(t_ast **lex, t_ast **node,
+					char **word, char **term);
+
 
 #endif
