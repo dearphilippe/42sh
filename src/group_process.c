@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 15:11:18 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 15:24:10 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 21:16:44 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,26 +72,13 @@ void	group_fork_exec(t_process *p, int i, int count, int *pipes)
 	return ;
 }
 
-int		group_process_execute(t_shell *sh, t_process **group)
+int		group_process_execute(t_shell *sh, t_process **group, int i, int count)
 {
-	int		i;
 	char	*path;
 	char	*fullpath;
-	int		count;
 	int		*pipes;
 
-	i = 0;
-	while (group[i] != NULL)
-		i++;
-	count = i;
-	pipes = ft_memalloc((count) * 2 * sizeof(int));
-	i = 0;
-	while (i < count - 1)
-	{
-		pipe(pipes + (i * 2));
-		i++;
-	}
-	i = 0;
+	pipes = group_process_make_pipes(group, &i, &count);
 	while (group[i])
 	{
 		if (is_valid_executable_file(group[i]->argv[0]) == 1)
@@ -100,10 +87,10 @@ int		group_process_execute(t_shell *sh, t_process **group)
 		{
 			if ((path = find_command_path(sh, group[i]->argv[0])) == NULL)
 			{
-				(void)ft_printf(STDERR_FILENO,
-						"%s: %s: command not found\n",
+				free(path);
+				(void)ft_printf(STDERR_FILENO, "%s: %s: command not found\n",
 						SHELL_NAME, group[i]->argv[0]);
-				return (1);
+				return (group_process_close_pipes(pipes, count) + 1);
 			}
 			group[i]->fullpath = dir_slash_exec(path, group[i]->argv[0]);
 			free(path);
@@ -111,12 +98,5 @@ int		group_process_execute(t_shell *sh, t_process **group)
 		(void)group_fork_exec(group[i], i, count, pipes);
 		i++;
 	}
-	i = 0;
-	while (i < count - 1)
-	{
-		close(pipes[i * 2]);
-		close(pipes[(i * 2) + 1]);
-		i++;
-	}
-	return (0);
+	return (group_process_close_pipes(pipes, count));
 }

@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 16:20:50 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 17:09:30 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 21:17:54 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct s_process	t_process;
 typedef struct s_exec		t_exec;
 typedef	t_process			t_proc;
 
+int		*group_process_make_pipes(t_process **group, int *i, int *count);
+int		group_process_close_pipes(int *pipes, int count);
 char	**add_element_to_char_array(char **array, char *string);
 char	**build_child_argv_list(t_shell *sh, char *cmd);
 char	**create_char_array_copy(char **src, int extra);
@@ -60,7 +62,7 @@ int		ft_contains_end_line(char *str);
 int		ft_copy_and_cut(char **str, char **line, int fd);
 int		ft_copy_end_file(char **str, char **line, int fd);
 int		get_nbr_redirection(char *str);
-int		group_process_execute(t_shell *sh, t_process **group);
+int		group_process_execute(t_shell *sh, t_process **group, int i, int ct);
 int		group_process_wait(t_process **group);
 int		is_end_of_argument(char c);
 int		is_valid_executable_file(char *filename);
