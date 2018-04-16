@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:50:54 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/14 02:45:15 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 21:14:00 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct		s_av
 	char			*val;
 	char			**argv;
 }					t_av;
-
 
 typedef struct		s_process
 {
