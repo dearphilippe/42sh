@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "../inc/parse.h"
 
 int		ast_ambiguous_error(char *msg)
 {

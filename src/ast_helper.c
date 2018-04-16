@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "../inc/parse.h"
 
 char	*remove_start_space(char *str)
 {
