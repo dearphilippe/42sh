@@ -6,7 +6,7 @@
 /*   By: ztisnes <ztisnes@student.42.us.org>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 23:50:39 by ztisnes           #+#    #+#             */
-/*   Updated: 2018/04/16 01:33:00 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/16 01:49:14 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	builtin_jobs(t_io *fd, t_process *sh)
 			free(tmp);
 		}
 	}
+	free(fd);
 }
 
 int main(void)
