@@ -13,7 +13,7 @@
 #ifndef FUNCTIONS_H
 # define FUNCTIONS_H
 
-# include "42.h"
+# include "ft.h"
 # include "parse.h"
 
 typedef struct s_shell		t_shell;
@@ -143,7 +143,7 @@ void	tab_remove_duplicates(t_exec **array, int *count);
 void	terminal_init(t_shell *sh);
 void	termios_restore_settings(t_shell *sh);
 void	termios_save_settings(t_shell *sh);
-void 	ptr_null(t_shell *sh, t_ast	**ptr);
+void	ptr_null(t_shell *sh, t_ast **ptr);
 void	ptr_not_null(t_shell *sh, t_ast	**ptr, t_process **p, int *ec);
 void	main_ptr(t_shell *sh, t_ast	**ptr, t_process **p, int *ec);
 void	main_helper(t_shell *sh, int ec);

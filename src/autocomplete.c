@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/42.h"
+#include "../inc/ft.h"
 
 void	add_to_list_of_executables(t_shell *sh, char *cmd)
 {

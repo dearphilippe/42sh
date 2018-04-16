@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/42.h"
+#include "../inc/ft.h"
 
 void	group_process_destroy(t_process **group)
 {

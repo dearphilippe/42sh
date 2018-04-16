@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/42.h"
+#include "../inc/ft.h"
 
 int		kv_array_get_key_index(char **array, char *key)
 {

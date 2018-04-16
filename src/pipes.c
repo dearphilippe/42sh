@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/42.h"
+#include "../inc/ft.h"
 
 int		*group_process_make_pipes(t_process **group, int *i, int *count)
 {
