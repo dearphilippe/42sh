@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 17:51:15 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 15:04:52 by ztisnes          ###   ########.fr       */
+/*   Updated: 2018/04/15 19:05:02 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,20 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+typedef struct		s_queue
+{
+	t_list			*first;
+	t_list		 	*last;
+}					t_queue;
+
 typedef	struct		s_gnl
 {
 	void			*mem;
+	struct s_gnl	*prev;
+	struct s_gnl	*next;
 	size_t			size;
 	int				fd;
 	int				eof;
-	struct s_gnl	*prev;
-	struct s_gnl	*next;
 }					t_gnl;
 
 char				*ft_str_append(char *str, char c);
@@ -104,5 +110,15 @@ char				*ft_uriencode(char *s);
 char				*ft_base64encode(unsigned char *o, size_t size);
 char				*ft_strtolower(char *s);
 char				*ft_strtoupper(char *s);
+
+/*
+** Queue structure
+*/
+
+t_queue				*init_queue(void);
+void				ft_enqueue(t_queue *queue, void *content);
+void				*ft_dequeue(t_queue *queue);
+void 				*peek_queue(t_queue *queue);
+int					isEmpty(t_queue *queue);
 
 #endif

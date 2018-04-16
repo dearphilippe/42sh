@@ -6,7 +6,7 @@
 #    By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/20 17:41:00 by asarandi          #+#    #+#              #
-#    Updated: 2018/04/12 11:01:07 by asarandi         ###   ########.fr        #
+#    Updated: 2018/04/15 19:00:16 by ztisnes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ SRCFILES	=	ft_str_append.c \
 				ft_tolower.c \
 				ft_toupper.c \
 				ft_uriencode.c \
+				queue.c \
 				get_next_line.c \
 				ft_printf-add_precision.c \
 				ft_printf-add_width.c \
