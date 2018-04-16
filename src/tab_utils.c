@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/42.h"
 
 int		tab_count_matches(t_shell *sh)
 {

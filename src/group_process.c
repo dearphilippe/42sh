@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/42.h"
 
 void	group_process_destroy(t_process **group)
 {

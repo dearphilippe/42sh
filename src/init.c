@@ -10,7 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/42.h"
+
+t_av	*init_av_buffers(char *cmd)
+{
+	t_av	*av;
+
+	if ((av = ft_memalloc(sizeof(t_av))) == NULL)
+		return (NULL);
+	av->argv = ft_memalloc(sizeof(char *));
+	av->argv[0] = NULL;
+	av->in = cmd;
+	if ((av->out = ft_memalloc(POOGE * 2)) == NULL)
+	{
+		cleanup_av_buffers(av);
+		return (NULL);
+	}
+	if ((av->key = ft_memalloc(POOGE)) == NULL)
+	{
+		cleanup_av_buffers(av);
+		return (NULL);
+	}
+	av->val = NULL;
+	return (av);
+}
 
 void	clean_up(t_shell *sh)
 {

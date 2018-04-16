@@ -13,7 +13,7 @@
 #ifndef FUNCTIONS_H
 # define FUNCTIONS_H
 
-# include "minishell.h"
+# include "42.h"
 # include "parse.h"
 
 typedef struct s_shell		t_shell;

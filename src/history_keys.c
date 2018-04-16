@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/42.h"
 
 void	key_up_arrow_function(t_shell *sh)
 {

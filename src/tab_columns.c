@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/42.h"
 
 int		col_print_cmd(char *s, int j, int cw, int nc)
 {

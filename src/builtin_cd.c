@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../inc/42.h"
 
 char	*builtin_cd_get_path(t_shell *sh, char **argv)
 {

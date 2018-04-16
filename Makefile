@@ -39,7 +39,6 @@ SRCFILES =	ast.c \
 	input_b.c \
 	kv_array.c \
 	main.c \
-	norme.c \
 	path_utils.c \
 	pipes.c \
 	process.c \
