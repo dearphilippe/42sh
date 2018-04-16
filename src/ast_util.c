@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse_new.h"
+#include "parse.h"
 
 int		ast_ambiguous_error(char *msg)
 {

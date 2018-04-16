@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse_new.h"
+#include "parse.h"
 
 t_ast	*parse_lexer(char *str)
 {

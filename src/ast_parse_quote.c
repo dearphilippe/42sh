@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse_new.h"
+#include "parse.h"
 
 int		parse_quote(char **word, char *str)
 {
