@@ -10,6 +10,8 @@ SRCFILES	=	42sh_header.c \
 				autocomplete.c \
 				builtin_cd.c \
 				builtins.c \
+				builtin_bg.c \
+				builtin_jobs.c \
 				builtins_env.c \
 				char_array.c \
 				child_argv.c \
@@ -20,7 +22,6 @@ SRCFILES	=	42sh_header.c \
 				history_keys.c \
 				input_a.c \
 				input_b.c \
-				job_control.c \
 				kv_array.c \
 				main.c \
 				norme.c \
