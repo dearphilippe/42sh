@@ -6,7 +6,7 @@
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 17:03:00 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 21:28:41 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ int		main(int argc, char **argv, char **envp)
 									ptr->right->name);
 									ptr = ptr->parent;
 								}
-
+								tcsetattr(STDIN_FILENO, TCSANOW,
+								&sh->t_original);
 								(void)group_process_execute(sh, group, 0, 0);
-								tcsetattr(STDIN_FILENO, TCSANOW, &sh->t_original);
 								(void)group_process_wait(group);
 								(void)group_process_destroy(group);
 								tcsetattr(STDIN_FILENO, TCSANOW, &sh->t_custom);
