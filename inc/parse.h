@@ -6,7 +6,7 @@
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 15:04:20 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 21:22:45 by passef           ###   ########.fr       */
+/*   Updated: 2018/04/15 22:37:05 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,5 @@ t_ast				*validate_ast(t_ast *ast);
 t_ast				**ast_create_tree(char *str);
 int					ast_ambiguous_error(char *msg);
 int					ast_is_ambiguous(t_ast *ast);
-
 
 #endif
