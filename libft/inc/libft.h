@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/20 17:51:15 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/10 21:55:43 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/15 19:24:34 by ztisnes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct		s_queue
+{
+	t_list			*first;
+	t_list		 	*last;
+}					t_queue;
 
 typedef	struct		s_gnl
 {
