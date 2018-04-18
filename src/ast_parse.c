@@ -105,5 +105,19 @@ t_ast	*parse_tree(t_ast *lex)
 		lex = lex->next;
 	}
 	free_ast(cpy);
-	return (validate_ast(ast));
+	return (parse_tree_set_redirect(ast));
+}
+
+t_ast	*parse_tree_set_redirect(t_ast *ast)
+{
+	t_ast	*cpy;
+
+	cpy = ast;
+	while (ast)
+	{
+		if (ast->type == RED_NEXT || ast->type == RED_NNEXT|| ast->type == RED_PREV)
+			ast->right->type = FILES;
+		ast = ast->next;
+	}
+	return (validate_ast(cpy));
 }

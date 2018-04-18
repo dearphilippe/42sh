@@ -31,6 +31,7 @@
 typedef enum		e_type
 {
 	CMD,
+	FILES,
 	RED_NEXT,
 	RED_NNEXT,
 	RED_PREV,
@@ -77,13 +78,14 @@ char				*delete_backslash_in_double_quote(char *str);
 int					set_backslash(char *dest, char *str, int i);
 
 /*
-** lexer.c
+** ast_parse.c
 */
 
 t_ast				*parse_lexer(char *str);
 t_ast				*cpy_ast(char *word, t_ast *lex, t_ast *node);
 t_ast				**parse_ast(t_ast **ast, t_ast *lex);
 t_ast				*parse_tree(t_ast *lex);
+t_ast				*parse_tree_set_redirect(t_ast *ast);
 
 /*
 ** parse_quote.c
