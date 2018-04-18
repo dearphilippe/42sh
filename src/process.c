@@ -6,7 +6,7 @@
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 15:13:20 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/17 22:21:41 by passef           ###   ########.fr       */
+/*   Updated: 2018/04/17 22:57:12 by brabo-hi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ t_process	*process_prepare(t_shell *sh, char *cmd)
 	t_process	*p;
 
 	p = ft_memalloc(sizeof(t_process));
-	p->argv = build_child_argv_list(sh, cmd);
+	p->argv = build_child_argv_list(sh, ast->name);
 	if (p->argv == NULL)
 	{
 		free(p);
 		return (NULL);
 	}
+	p->ast = ast;
 	p->envp = sh->envp;
 	expand_tilde(p->argv, p->envp);
 
@@ -88,12 +89,17 @@ void		execute(t_shell *sh, char *cmd)
 {
 	t_process	*p;
 
-	p = process_prepare(sh, cmd);
-	if (p != NULL)
+	if ((p = ft_memalloc(sizeof(t_process))) == NULL)
+		return ;
+	if ((p->argv = build_child_argv_list(sh, cmd)) == NULL)
 	{
-		p->exit_code = process_execute(sh, p);
-		sh->exit_code = p->exit_code;
-		(void)process_destroy(p);
+		free(p);
+		return ;
 	}
+	p->ast = NULL;
+	p->envp = sh->envp;
+	p->exit_code = process_execute(sh, p);
+	sh->exit_code = p->exit_code;
+	(void)process_destroy(p);
 	return ;
 }
