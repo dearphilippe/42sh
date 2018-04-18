@@ -45,7 +45,7 @@ void		expand_tilde(char **av, char **env)
 	}
 }
 
-t_process	*process_prepare(t_shell *sh, char *cmd)
+t_proc	*process_prepare(t_shell *sh, char *cmd)
 {
 	t_process	*p;
 
