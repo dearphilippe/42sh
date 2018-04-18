@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 16:20:50 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 21:17:54 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/17 22:00:17 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		is_numeric_string(char *str);
 int		string_has_whitespace(char *str);
 int		unmatched_quote_error(t_av *av, char quote);
 t_av	*init_av_buffers(char *cmd);
-t_proc	*process_prepare(t_shell *sh, char *cmd);
+t_proc	*process_prepare(t_shell *sh, t_ast *ast);
 t_shell	*init_shell(int argc, char **argv, char **envp);
 void	execute(t_shell *sh, char *cmd);
 void	process_destroy(t_process *p);
@@ -110,7 +110,7 @@ void	end_of_input(t_shell *sh);
 void	execute(t_shell *sh, char *cmd);
 void	fatal_error(t_shell *sh);
 void	fatal_error_message(t_shell *sh, char *msg);
-void	group_fork_exec(t_process *p, int i, int count, int *pipes);
+void	group_fork_exec(t_process **group, int i, int count, int *pipes);
 void	group_process_destroy(t_process **group);
 void	header_42(void);
 void	header_sh(void);

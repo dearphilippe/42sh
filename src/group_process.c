@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 15:11:18 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 21:16:44 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/17 22:04:31 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,36 @@ int		group_process_wait(t_process **group)
 	return (status);
 }
 
-void	group_fork_exec(t_process *p, int i, int count, int *pipes)
+void	group_fix_redirect(t_process **group, int i, int count, int *pipes)
 {
+	int		fd;
+
+	count += 0;
+	if (group[i + 1] != NULL)
+	{
+		if (group[i + 1]->ast->parent->type == RED_NEXT)
+		{
+			fd = open(group[i + 1]->ast->name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			if (fd == -1)
+				perror(SHELL_NAME);
+			pipes[(i * 2) + 1] = fd;
+		}
+		if (group[i + 1]->ast->parent->type == RED_NNEXT)
+		{
+			fd = open(group[i + 1]->ast->name, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			if (fd == -1)
+				perror(SHELL_NAME);
+			pipes[(i * 2) + 1] = fd;
+		}
+	}
+}
+
+void	group_fork_exec(t_process **group, int i, int count, int *pipes)
+{
+	t_process	*p;
+
+	(void)group_fix_redirect(group, i, count, pipes);
+	p = group[i];
 	if ((p->pid = fork()) == 0)
 	{
 		if (i < count - 1)
@@ -81,21 +109,24 @@ int		group_process_execute(t_shell *sh, t_process **group, int i, int count)
 	pipes = group_process_make_pipes(group, &i, &count);
 	while (group[i])
 	{
-		if (is_valid_executable_file(group[i]->argv[0]) == 1)
-			fullpath = ft_strdup(group[i]->argv[0]);
-		else
+		if (group[i]->ast->type == CMD)
 		{
-			if ((path = find_command_path(sh, group[i]->argv[0])) == NULL)
+			if (is_valid_executable_file(group[i]->argv[0]) == 1)
+				fullpath = ft_strdup(group[i]->argv[0]);
+			else
 			{
+				if ((path = find_command_path(sh, group[i]->argv[0])) == NULL)
+				{
+					free(path);
+					(void)ft_printf(STDERR_FILENO, "%s: %s: command not found\n",
+							SHELL_NAME, group[i]->argv[0]);
+					return (group_process_close_pipes(pipes, count) + 1);
+				}
+				group[i]->fullpath = dir_slash_exec(path, group[i]->argv[0]);
 				free(path);
-				(void)ft_printf(STDERR_FILENO, "%s: %s: command not found\n",
-						SHELL_NAME, group[i]->argv[0]);
-				return (group_process_close_pipes(pipes, count) + 1);
 			}
-			group[i]->fullpath = dir_slash_exec(path, group[i]->argv[0]);
-			free(path);
+			(void)group_fork_exec(group, i, count, pipes);
 		}
-		(void)group_fork_exec(group[i], i, count, pipes);
 		i++;
 	}
 	return (group_process_close_pipes(pipes, count));

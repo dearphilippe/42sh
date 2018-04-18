@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 15:13:20 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 15:20:08 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/17 21:43:42 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,18 @@ void		process_destroy(t_process *p)
 	return ;
 }
 
-t_process	*process_prepare(t_shell *sh, char *cmd)
+t_process	*process_prepare(t_shell *sh, t_ast *ast)
 {
 	t_process	*p;
 
 	p = ft_memalloc(sizeof(t_process));
-	p->argv = build_child_argv_list(sh, cmd);
+	p->argv = build_child_argv_list(sh, ast->name);
 	if (p->argv == NULL)
 	{
 		free(p);
 		return (NULL);
 	}
+	p->ast = ast;
 	p->envp = sh->envp;
 	return (p);
 }
@@ -63,12 +64,17 @@ void		execute(t_shell *sh, char *cmd)
 {
 	t_process	*p;
 
-	p = process_prepare(sh, cmd);
-	if (p != NULL)
+	if ((p = ft_memalloc(sizeof(t_process))) == NULL)
+		return ;
+	if ((p->argv = build_child_argv_list(sh, cmd)) == NULL)
 	{
-		p->exit_code = process_execute(sh, p);
-		sh->exit_code = p->exit_code;
-		(void)process_destroy(p);
+		free(p);
+		return ;
 	}
+	p->ast = NULL;
+	p->envp = sh->envp;
+	p->exit_code = process_execute(sh, p);
+	sh->exit_code = p->exit_code;
+	(void)process_destroy(p);
 	return ;
 }

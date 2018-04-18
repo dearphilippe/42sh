@@ -6,7 +6,7 @@
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/17 20:19:23 by passef           ###   ########.fr       */
+/*   Updated: 2018/04/17 21:37:38 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void		ptr_null(t_shell *sh, t_ast **ptr)
 	}
 	group = ft_memalloc(sizeof(t_process *) * (k + 1));
 	k = 0;
-	group[k++] = process_prepare(sh, (*ptr)->name);
+	group[k++] = process_prepare(sh, (*ptr));
 	(*ptr) = (*ptr)->parent;
 	while (((*ptr)) && (IS_RED((*ptr)->name)))
 	{
-		group[k++] = process_prepare(sh, (*ptr)->right->name);
+		group[k++] = process_prepare(sh, (*ptr)->right);
 		(*ptr) = (*ptr)->parent;
 	}
 	tcsetattr(STDIN_FILENO, TCSANOW, &sh->t_original);
@@ -46,14 +46,14 @@ void		ptr_not_null(t_shell *sh, t_ast **ptr, t_process **p, int *ec)
 	int		ec2;
 
 	if (((*ptr)->next == NULL) &&
-			((*p = process_prepare(sh, (*ptr)->name)) != NULL))
+			((*p = process_prepare(sh, (*ptr))) != NULL))
 	{
 		*ec = process_execute(sh, *p);
 		(void)process_destroy(*p);
 		return ;
 	}
 	if (((*ptr)->type == OP_AND) && (ec == 0) &&
-		((*p = process_prepare(sh, (*ptr)->right->name)) != NULL))
+		((*p = process_prepare(sh, (*ptr)->right)) != NULL))
 	{
 		ec2 = process_execute(sh, *p);
 		(void)process_destroy(*p);
@@ -61,7 +61,7 @@ void		ptr_not_null(t_shell *sh, t_ast **ptr, t_process **p, int *ec)
 			*ec = 1;
 	}
 	else if (((*ptr)->type == OP_OR) && (*ec != 0) &&
-			((*p = process_prepare(sh, (*ptr)->right->name)) != NULL))
+			((*p = process_prepare(sh, (*ptr)->right)) != NULL))
 	{
 		ec2 = process_execute(sh, *p);
 		(void)process_destroy(*p);
