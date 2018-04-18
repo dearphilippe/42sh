@@ -6,7 +6,7 @@
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 21:28:41 by passef           ###   ########.fr       */
+/*   Updated: 2018/04/17 20:19:23 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void		main_ptr(t_shell *sh, t_ast **ptr, t_process **p, int *ec)
 	{
 		if (((*ptr)->parent) && (IS_RED((*ptr)->parent->name)))
 		{
-			ft_printf(1, "parent is a redirection\n");
 			if ((*ptr)->next == NULL)
 				ptr_null(sh, ptr);
 		}
