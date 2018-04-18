@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 15:13:20 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/17 21:43:42 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/17 22:57:12 by brabo-hi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,30 @@ void		process_destroy(t_process *p)
 	return ;
 }
 
-t_process	*process_prepare(t_shell *sh, t_ast *ast)
+void		expand_tilde(char **av, char **env)
+{
+	int		i;
+	char	*home;
+	char	*result;
+
+	i = 1;
+	while (av[i])
+	{
+		if (av[i][0] == '~')
+		{
+			home = kv_array_get_key_value(env, "HOME");
+			if (home != NULL)
+			{
+				result = ft_strjoin(home, &av[i][1]);
+				free(av[i]);
+				av[i] = result;
+			}
+		}
+		i++;
+	}
+}
+
+t_process	*process_prepare(t_shell *sh, char *cmd)
 {
 	t_process	*p;
 
@@ -35,6 +58,8 @@ t_process	*process_prepare(t_shell *sh, t_ast *ast)
 	}
 	p->ast = ast;
 	p->envp = sh->envp;
+	expand_tilde(p->argv, p->envp);
+
 	return (p);
 }
 
