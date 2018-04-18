@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 16:20:50 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/17 22:00:17 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/17 23:14:45 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,5 +147,6 @@ void	ptr_null(t_shell *sh, t_ast **ptr);
 void	ptr_not_null(t_shell *sh, t_ast	**ptr, t_process **p, int *ec);
 void	main_ptr(t_shell *sh, t_ast	**ptr, t_process **p, int *ec);
 void	main_helper(t_shell *sh, int ec);
+void	auto_complete(t_shell *sh);
 
 #endif

@@ -6,51 +6,52 @@
 #    By: passef <passef@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/15 23:17:54 by passef            #+#    #+#              #
-#    Updated: 2018/04/17 20:03:13 by passef           ###   ########.fr        #
+#    Updated: 2018/04/17 23:55:56 by passef           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= 42sh
-SRCFILES =	ast.c \
-	ast_free.c \
-	ast_get.c \
-	ast_helper.c \
-	ast_parse.c \
-	ast_print.c \
-	ast_util.c \
-	ast_validate.c \
-	ast_parse_quote.c \
-	autocomplete.c \
-	builtin_cd.c \
-	builtin_help.c \
-	builtins.c \
-	builtins_env.c \
-	char_array.c \
-	child_argv.c \
-	error.c \
-	exec.c \
-	file_op.c \
-	group_process.c \
-	header.c \
-	history.c \
-	history_keys.c \
-	init.c \
-	input_a.c \
-	input_b.c \
-	kv_array.c \
-	main.c \
-	path_utils.c \
-	pipes.c \
-	process.c \
-	quotes.c \
-	signal.c \
-	special_keys_a.c \
-	special_keys_b.c \
-	string_utils.c \
-	tab_columns.c \
-	tab_key.c \
-	tab_utils.c \
-	termcaps.c \
+NAME	 =		42sh
+SRCFILES =		ast.c \
+				ast_free.c \
+				ast_get.c \
+				ast_helper.c \
+				ast_parse.c \
+				ast_print.c \
+				ast_util.c \
+				ast_validate.c \
+				ast_parse_quote.c \
+				autocomplete.c \
+				builtin_cd.c \
+				builtin_help.c \
+				builtins.c \
+				builtins_env.c \
+				char_array.c \
+				child_argv.c \
+				error.c \
+				exec.c \
+				file_op.c \
+				group_process.c \
+				header.c \
+				history.c \
+				history_keys.c \
+				init.c \
+				input_a.c \
+				input_b.c \
+				kv_array.c \
+				main.c \
+				path_utils.c \
+				pipes.c \
+				process.c \
+				quotes.c \
+				signal.c \
+				special_keys_a.c \
+				special_keys_b.c \
+				string_utils.c \
+				tab_columns.c \
+				tab_key.c \
+				tab_utils.c \
+				termcaps.c \
+				auto.c \
 
 OBJFILES	= $(SRCFILES:%.c=%.o)
 SRC			= $(addprefix src/,$(SRCFILES))

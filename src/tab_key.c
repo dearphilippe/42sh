@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tab_key.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:25:17 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 19:38:56 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/18 01:15:31 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		tab_mini_complete(t_shell *sh, t_exec **a)
 	{
 		i_len = sh->input_size;
 		c = basename(a[0]->cmd)[i_len];
-		if (tab_all_commands_share_letter(a, i_len, c) == 1)
+		if (tab_all_commands_share_letteir(a, i_len, c) == 1)
 		{
 			sh->buffer[i_len] = c;
 			sh->input_size++;
@@ -89,6 +89,7 @@ void	key_tab_function(t_shell *sh)
 	t_exec	**matches;
 	int		i;
 
+	// auto_complete(sh);
 	if ((sh->input_size > 0) && (string_has_whitespace(sh->buffer) == 0))
 	{
 		matches = tab_array_of_matches(sh);
