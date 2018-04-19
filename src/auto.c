@@ -6,7 +6,7 @@
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:53:35 by passef            #+#    #+#             */
-/*   Updated: 2018/04/18 01:18:57 by passef           ###   ########.fr       */
+/*   Updated: 2018/04/18 02:30:47 by passef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ t_autoNode		*build_trie(char **tab)
 }
 
 
-int	directory_count_entries(char *path)
+int				directory_count_entries(char *path)
 {
 	DIR				*dirp;
 	struct dirent	*dp;
@@ -136,7 +136,7 @@ int	directory_count_entries(char *path)
 }
 
 
-char **directory_get_contents(char *path)
+char			**directory_get_contents(char *path)
 {
 	DIR				*dirp;
 	struct dirent	*dp;
@@ -161,7 +161,7 @@ char **directory_get_contents(char *path)
 	return (vector);
 }
 
-void	directory_print_contents(char **array)
+void			directory_print_contents(char **array)
 {
 	int	i;
 
@@ -174,17 +174,86 @@ void	directory_print_contents(char **array)
 	return ;
 }
 
+int		count_array(char **arr)
+{
+	int		i;
+
+	i = 0;
+	while (arr[i])
+		i++;	
+
+	return (i);	
+}
+
+char	**cpy_array(char **arr)
+{
+	int i;
+	char **tmp;
+
+	
+	
+	i = 0;
+	while (arr[i])
+	{
+		
+	}
+}
+
+int		tab_max_len(char **array)
+{
+	int		i;
+	int		len;
+	int		max_len;
+
+	i = 0;
+	max_len = 0;
+	while (array[i] != NULL)
+	{
+		len = ft_strlen(array[i]);
+		if (len > max_len)
+			max_len = len;
+		i++;
+	}
+	return (max_len);
+}
+
+void	tab_print_colum(char **array, int count)
+{
+	int				max_len;
+	int				cw;
+	struct winsize	ws;
+	int				nc;
+
+	ft_printf(STDOUT_FILENO, "\n");
+	max_len = tab_max_len(array);
+	if (ioctl(0, TIOCGWINSZ, &ws) == -1)
+		return ;
+	cw = max_len + 2;
+	nc = ws.ws_col / cw;
+	col_print_loop(cw, nc, count, array);
+}
+
 void	auto_complete(t_shell *sh)
 {
 	char		**dir;
 	t_autoNode	*root;
+	int			i;
+	int			c;
 
 	root = initNode();
+	i = 0;
 	if ((dir = directory_get_contents(".")) != NULL)
 	{
+		while (dir[i] != NULL)
+		{
+			add_to_list_of_executables(sh, dir[i]);
+			i++;
+		}
+		c = count_array(dir);
 		// directory_print_contents(dir);
 		root = build_trie(dir);
-		if (search(root, "parse"))
+		tab_print_col(dir, c);
+		// if (search(root, "parse"))
 			// reprint_input(sh);
 		destroy_char_array(dir);
 	}
@@ -199,6 +268,8 @@ void	auto_complete(t_shell *sh)
 
 Print output colum : tab_print_columns(matches, i);
 Print prompt : reprint_input(sh);
+void	add_to_list_of_executables(t_shell *sh, char *cmd)
+void	destroy_list_of_executables(t_shell *sh);
 
 */
 
