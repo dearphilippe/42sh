@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_get.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
+/*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 14:07:15 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 14:29:51 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/22 02:35:35 by brabo-hi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,14 @@ char	*get_type_string(char *str)
 {
 	char *dest;
 
+	dest = NULL;
 	if (ft_strlen(str) >= 2 &&
 			(dest = ft_strcpy_alloc(str, 2)) && IS_TERM(dest))
 		return (dest);
+	ft_strdel(&dest);
 	if (ft_strlen(str) && (dest = ft_strcpy_alloc(str, 1)) && IS_TERM(dest))
 		return (dest);
+	ft_strdel(&dest);
 	return (NULL);
 }
 

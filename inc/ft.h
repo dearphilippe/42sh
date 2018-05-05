@@ -6,7 +6,7 @@
 /*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 02:16:30 by brabo-hi          #+#    #+#             */
-/*   Updated: 2018/04/17 21:35:27 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/05 13:16:19 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "functions.h"
 # include "parse.h"
-# include "libft.h"
-# include "libftprintf.h"
+# include "../libft/inc/libft.h"
+# include "../libft/inc/libftprintf.h"
 # include <unistd.h>
 # include <fcntl.h>
 # include <sys/wait.h>
@@ -44,7 +44,8 @@ typedef struct		s_process
 	pid_t			pid;
 	int				exit_code;
 	int				status;
-	int				fd[2];
+	int				fd0;
+	int				fd1;
 	t_ast			*ast;
 }					t_process;
 
@@ -76,6 +77,7 @@ typedef struct		s_shell
 	int				history_i;
 	char			keycode[10];
 	size_t			cursor;
+	char			*prompt;
 	char			*carriage_return;
 	char			*clear_down;
 	char			*clear_till_eol;
@@ -97,6 +99,7 @@ typedef struct		s_shell
 t_shell	*g_sh;
 
 # define SHELL_PROMPT		"$> "
+# define SHELL_QUOTE_PROMPT	"quote> "
 # define SHELL_NAME			"42sh"
 # define POOGE				4096
 # define E_NOMEM			"out of memory"
@@ -117,6 +120,7 @@ t_shell	*g_sh;
 # define STRONG_QUOTE		0x27
 # define WEAK_QUOTE			0x22
 # define BACKSLASH			0x5c
+# define TILDE				'~'
 # define COMMAND_SEPARATOR	';'
 # define STATE_READ			1
 # define STATE_EXEC			2

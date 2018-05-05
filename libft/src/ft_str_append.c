@@ -10,21 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/libft.h"
+#include <stdio.h>
 
 char		*ft_str_append(char *str, char c)
 {
 	char	*out;
 	int		i;
+	int		j;
 
 	i = 0;
+	j = 0;
 	if (!(out = ft_strnew(ft_strlen(str) + 2)))
 		return (NULL);
-	while (str && *str)
-		out[i++] = *str++;
+	while (str && str[j])
+		out[i++] = str[j++];
 	out[i++] = c;
 	out[i] = '\0';
-	if (!str)
-		ft_strdel(&str);
+	ft_strdel(&str);
 	return (out);
 }

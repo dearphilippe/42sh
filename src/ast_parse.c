@@ -6,7 +6,7 @@
 /*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 14:07:46 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 23:23:14 by brabo-hi         ###   ########.fr       */
+/*   Updated: 2018/04/22 02:35:55 by brabo-hi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_ast	*parse_lexer(char *str)
 		}
 		else if (*str && *str != ' ' && (term = get_type_string(str)))
 		{
-			if (!(parse_help1(&lex, &node, &word, &term)))
+			if (!(parse_help(&lex, &node, &word, &term)))
 				return (NULL);
 			str += free_parse_ast(&term);
 		}
@@ -43,9 +43,13 @@ t_ast	*parse_lexer(char *str)
 
 t_ast	*cpy_ast(char *word, t_ast *lex, t_ast *node)
 {
+	char	*new_str;
+
 	if (ft_strlen(word))
 	{
-		node = ast_new(remove_start_space(word), CMD);
+		new_str = remove_start_space(word);
+		node = ast_new(new_str, CMD);
+		ft_strdel(&new_str);
 		if (node && !(lex = ast_enqueue(lex, node)))
 			return (NULL);
 		ft_strdel(&word);
@@ -115,7 +119,8 @@ t_ast	*parse_tree_set_redirect(t_ast *ast)
 	cpy = ast;
 	while (ast)
 	{
-		if (ast->type == RED_NEXT || ast->type == RED_NNEXT|| ast->type == RED_PREV)
+		if (ast->type == RED_NEXT || ast->type == RED_NNEXT ||
+				ast->type == RED_PREV)
 			ast->right->type = FILES;
 		ast = ast->next;
 	}

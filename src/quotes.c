@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:13:13 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/11 10:55:50 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/05 01:55:52 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,31 @@ int	handle_weak_quote(t_av *av, t_shell *sh, int *i, int *k)
 	}
 	(*i)++;
 	return (2);
+}
+
+int	handle_tilde(t_av *av, t_shell *sh, int *i, int *k)
+{
+	char	*in;
+	char	*out;
+	char	*home;
+
+	in = av->in;
+	out = av->out;
+	home = NULL;
+	if ((*i > 0) && (ft_isspace(in[*i - 1])) &&
+			(in[*i + 1] == '/' || in[*i + 1] == ' ' || in[*i + 1] == 0))
+	{
+		home = kv_array_get_key_value(sh->envp, "HOME");
+		if (home != NULL)
+		{
+			ft_strcpy(&av->out[*k], home);
+			(*k) += ft_strlen(home);
+		}
+		(*i)++;
+	}
+	else
+	{
+		out[(*k)++] = in[(*i)++];
+	}
+	return (1);
 }

@@ -6,15 +6,32 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 07:05:45 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/06 07:17:03 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/05 13:41:00 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft.h"
 
-void	display_shell_prompt(void)
+void	display_shell_prompt(t_shell *sh)
 {
-	ft_printf(STDOUT_FILENO, "%s", SHELL_PROMPT);
+	ft_printf(STDOUT_FILENO, "%s", sh->prompt);
+	return ;
+}
+
+void	clear_input_buffers(t_shell *sh)
+{
+	if (sh->partial_input != NULL)
+		free(sh->partial_input);
+	sh->partial_input = NULL;
+	if (sh->history != NULL)
+		destroy_char_array(sh->history);
+	sh->history = NULL;
+	if (sh->child_argv != NULL)
+		destroy_char_array(sh->child_argv);
+	sh->child_argv = NULL;
+	if (sh->buffer != NULL)
+		free(sh->buffer);
+	sh->buffer = NULL;
 	return ;
 }
 
@@ -24,8 +41,12 @@ void	reprint_input(t_shell *sh)
 
 	ft_putstr(sh->carriage_return);
 	ft_putstr(sh->clear_down);
-	display_shell_prompt();
-	ft_printf(STDOUT_FILENO, sh->buffer);
+	display_shell_prompt(sh);
+	move_left = ft_strlen(sh->buffer) - 1;
+	while ((move_left >= 0) && (sh->buffer[move_left] != '\n'))
+		move_left--;
+	move_left++;
+	ft_printf(STDOUT_FILENO, &sh->buffer[move_left]);
 	move_left = ft_strlen(sh->buffer) - sh->buf_i;
 	while (move_left--)
 		ft_putstr(sh->cursor_move_left);

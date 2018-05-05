@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 16:20:50 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/17 22:00:17 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/05 13:16:08 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_exec		t_exec;
 typedef	t_process			t_proc;
 
 int		*group_process_make_pipes(t_process **group, int *i, int *count);
-int		group_process_close_pipes(int *pipes, int count);
+int		group_process_close_pipes(t_process **group, int *pipes, int count);
 char	**add_element_to_char_array(char **array, char *string);
 char	**build_child_argv_list(t_shell *sh, char *cmd);
 char	**create_char_array_copy(char **src, int extra);
@@ -84,6 +84,7 @@ int		ft_isalnum2(int c);
 int		handle_dollar_sign(t_av *av, t_shell *sh, int *i, int *k);
 int		handle_strong_quote(t_av *av, int *i, int *k);
 int		handle_weak_quote(t_av *av, t_shell *sh, int *i, int *k);
+int		handle_tilde(t_av *av, t_shell *sh, int *i, int *k);
 int		is_alphanumeric_string(char *str);
 int		is_numeric_string(char *str);
 int		string_has_whitespace(char *str);
@@ -105,7 +106,8 @@ void	col_if_flag_print_newline(int *f);
 void	col_print_loop(int cw, int nc, int count, t_exec **a);
 void	destroy_char_array(char **array);
 void	destroy_list_of_executables(t_shell *sh);
-void	display_shell_prompt(void);
+void	display_shell_prompt(t_shell *sh);
+void	display_shell_quote_prompt(void);
 void	end_of_input(t_shell *sh);
 void	execute(t_shell *sh, char *cmd);
 void	fatal_error(t_shell *sh);
@@ -134,6 +136,7 @@ void	kv_array_set_key_value(char ***array, char *key, char *value);
 void	print_error_ast(void);
 void	print_error_lexer(void);
 void	raw_read(t_shell *sh);
+int		has_paire_quote(t_shell *sh);
 void	reprint_input(t_shell *sh);
 void	restore_partial_input(t_shell *sh);
 void	sigint_handler(int signo);
@@ -146,6 +149,6 @@ void	termios_save_settings(t_shell *sh);
 void	ptr_null(t_shell *sh, t_ast **ptr);
 void	ptr_not_null(t_shell *sh, t_ast	**ptr, t_process **p, int *ec);
 void	main_ptr(t_shell *sh, t_ast	**ptr, t_process **p, int *ec);
-void	main_helper(t_shell *sh, int ec);
+void	main_helper(t_shell *sh, int *ec);
 
 #endif

@@ -6,71 +6,36 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 15:11:18 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/17 22:04:31 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/05 02:28:49 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft.h"
 
-void	group_process_destroy(t_process **group)
+void	group_fix_redirect(t_process **group, int i, int *pipes)
 {
-	int	i;
+	char	**filename;
 
-	i = 0;
-	while (group[i] != NULL)
-	{
-		(void)process_destroy(group[i]);
-		i++;
-	}
-	free(group);
-	return ;
-}
-
-int		group_process_wait(t_process **group)
-{
-	int i;
-	int pid;
-	int	status;
-
-	pid = 0;
-	status = 0;
-	while ((pid = wait(&status)) != -1)
-	{
-		i = 0;
-		while (group[i])
-		{
-			if (group[i]->pid == pid)
-			{
-				group[i]->exit_code = WEXITSTATUS(status);
-				break ;
-			}
-			i++;
-		}
-	}
-	return (status);
-}
-
-void	group_fix_redirect(t_process **group, int i, int count, int *pipes)
-{
-	int		fd;
-
-	count += 0;
 	if (group[i + 1] != NULL)
 	{
+		filename = ft_strsplit(group[i + 1]->ast->name, ' ');
 		if (group[i + 1]->ast->parent->type == RED_NEXT)
 		{
-			fd = open(group[i + 1]->ast->name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			if (fd == -1)
+			group[i]->fd1 = open(filename[0],
+					O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			if (group[i]->fd1 == -1)
 				perror(SHELL_NAME);
-			pipes[(i * 2) + 1] = fd;
+			pipes[(i * 2) + 1] = group[i]->fd1;
 		}
 		if (group[i + 1]->ast->parent->type == RED_NNEXT)
 		{
-			fd = open(group[i + 1]->ast->name, O_WRONLY | O_CREAT | O_APPEND, 0644);
-			if (fd == -1)
+			group[i]->fd1 = open(filename[0],
+					O_WRONLY | O_CREAT | O_APPEND, 0644);
+			if (group[i]->fd1 == -1)
 				perror(SHELL_NAME);
-			pipes[(i * 2) + 1] = fd;
+			pipes[(i * 2) + 1] = group[i]->fd1;
 		}
+		destroy_char_array(filename);
 	}
 }
 
@@ -78,7 +43,7 @@ void	group_fork_exec(t_process **group, int i, int count, int *pipes)
 {
 	t_process	*p;
 
-	(void)group_fix_redirect(group, i, count, pipes);
+	(void)group_fix_redirect(group, i, pipes);
 	p = group[i];
 	if ((p->pid = fork()) == 0)
 	{
@@ -100,34 +65,46 @@ void	group_fork_exec(t_process **group, int i, int count, int *pipes)
 	return ;
 }
 
+int		group_process_fix_path(t_process **group, int i, int *pipes, int count)
+{
+	char *path;
+
+	path = NULL;
+	if (is_valid_executable_file(group[i]->argv[0]) == 1)
+	{
+		group[i]->fullpath = ft_strdup(group[i]->argv[0]);
+		return (0);
+	}
+	else
+	{
+		if ((path = find_command_path(g_sh, group[i]->argv[0])) == NULL)
+		{
+			free(path);
+			(void)ft_printf(STDERR_FILENO, "%s: %s: command not found\n",
+					SHELL_NAME, group[i]->argv[0]);
+			return (group_process_close_pipes(group, pipes, count) + 1);
+		}
+		group[i]->fullpath = dir_slash_exec(path, group[i]->argv[0]);
+		free(path);
+	}
+	return (0);
+}
+
 int		group_process_execute(t_shell *sh, t_process **group, int i, int count)
 {
-	char	*path;
-	char	*fullpath;
 	int		*pipes;
 
+	sh->buf_i += 0;
 	pipes = group_process_make_pipes(group, &i, &count);
 	while (group[i])
 	{
 		if (group[i]->ast->type == CMD)
 		{
-			if (is_valid_executable_file(group[i]->argv[0]) == 1)
-				fullpath = ft_strdup(group[i]->argv[0]);
-			else
-			{
-				if ((path = find_command_path(sh, group[i]->argv[0])) == NULL)
-				{
-					free(path);
-					(void)ft_printf(STDERR_FILENO, "%s: %s: command not found\n",
-							SHELL_NAME, group[i]->argv[0]);
-					return (group_process_close_pipes(pipes, count) + 1);
-				}
-				group[i]->fullpath = dir_slash_exec(path, group[i]->argv[0]);
-				free(path);
-			}
+			if (group_process_fix_path(group, i, pipes, count) != 0)
+				return (1);
 			(void)group_fork_exec(group, i, count, pipes);
 		}
 		i++;
 	}
-	return (group_process_close_pipes(pipes, count));
+	return (group_process_close_pipes(group, pipes, count));
 }

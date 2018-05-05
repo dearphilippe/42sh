@@ -6,7 +6,7 @@
 /*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 22:00:50 by brabo-hi          #+#    #+#             */
-/*   Updated: 2018/04/15 22:15:50 by brabo-hi         ###   ########.fr       */
+/*   Updated: 2018/04/22 02:35:48 by brabo-hi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,15 @@ int		parse_quote_double(char **word, char *str)
 
 int		copy_str(int i, int res, char **word, char *cpy)
 {
+	char	*new_copy;
+
+	new_copy = cpy;
 	while (i++ < res)
 	{
 		if (!cpy)
 			return (0);
 		*word = ft_str_append(*word, *cpy++);
 	}
+	ft_strdel(&new_copy);
 	return (res);
 }

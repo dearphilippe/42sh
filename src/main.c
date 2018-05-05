@@ -6,7 +6,7 @@
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/17 21:37:38 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/05 14:28:11 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,25 @@ void		ptr_not_null(t_shell *sh, t_ast **ptr, t_process **p, int *ec)
 	if (((*ptr)->next == NULL) &&
 			((*p = process_prepare(sh, (*ptr))) != NULL))
 	{
-		*ec = process_execute(sh, *p);
+		(*ec) = process_execute(sh, *p);
 		(void)process_destroy(*p);
 		return ;
 	}
-	if (((*ptr)->type == OP_AND) && (ec == 0) &&
+	if (((*ptr)->type == OP_AND) && ((*ec) == 0) &&
 		((*p = process_prepare(sh, (*ptr)->right)) != NULL))
 	{
 		ec2 = process_execute(sh, *p);
 		(void)process_destroy(*p);
 		if (ec2 != 0)
-			*ec = 1;
+			(*ec) = 1;
 	}
-	else if (((*ptr)->type == OP_OR) && (*ec != 0) &&
+	else if (((*ptr)->type == OP_OR) && ((*ec) != 0) &&
 			((*p = process_prepare(sh, (*ptr)->right)) != NULL))
 	{
 		ec2 = process_execute(sh, *p);
 		(void)process_destroy(*p);
 		if (ec2 == 0)
-			*ec = 0;
+			(*ec) = 0;
 	}
 }
 
@@ -86,7 +86,7 @@ void		main_ptr(t_shell *sh, t_ast **ptr, t_process **p, int *ec)
 	}
 }
 
-void		main_helper(t_shell *sh, int ec)
+void		main_helper(t_shell *sh, int *ec)
 {
 	int			i;
 	t_process	*p;
@@ -104,12 +104,13 @@ void		main_helper(t_shell *sh, int ec)
 			{
 				while (ptr->next)
 					ptr = ptr->next;
-				main_ptr(sh, &ptr, &p, &ec);
+				main_ptr(sh, &ptr, &p, ec);
 			}
 			i++;
 		}
-		sh->exit_code = ec;
+		sh->exit_code = *ec;
 		free_trees(ast);
+		free(ast);
 	}
 }
 
@@ -123,10 +124,11 @@ int			main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		sh->state = STATE_READ;
+		sh->prompt = SHELL_PROMPT;
 		raw_read(sh);
 		if (sh->buffer == NULL)
 			break ;
-		main_helper(sh, ec);
+		main_helper(sh, &ec);
 		clear_input_buffers(sh);
 	}
 	clean_up(sh);

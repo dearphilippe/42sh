@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:16:43 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/06 08:00:38 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/05 14:55:05 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ void	key_left_arrow_function(t_shell *sh)
 {
 	if (sh->buf_i > 0)
 	{
-		sh->buf_i--;
-		ft_putstr(sh->cursor_move_left);
+		if (sh->buffer[sh->buf_i - 1] != '\n')
+		{
+			sh->buf_i--;
+			ft_putstr(sh->cursor_move_left);
+		}
 	}
 	return ;
 }
@@ -67,16 +70,19 @@ void	key_backspace_function(t_shell *sh)
 
 	if (sh->buf_i > 0)
 	{
-		key_left_arrow_function(sh);
-		tempo = sh->buf_i;
-		while (tempo < sh->input_size)
+		if (sh->buffer[sh->buf_i - 1] != '\n')
 		{
-			sh->buffer[tempo] = sh->buffer[tempo + 1];
-			tempo++;
+			key_left_arrow_function(sh);
+			tempo = sh->buf_i;
+			while ((tempo < sh->input_size) && sh->buffer[sh->buf_i != '\n'])
+			{
+				sh->buffer[tempo] = sh->buffer[tempo + 1];
+				tempo++;
+			}
+			sh->buffer[tempo] = 0;
+			sh->input_size--;
+			reprint_input(sh);
 		}
-		sh->buffer[tempo] = 0;
-		sh->input_size--;
-		reprint_input(sh);
 	}
 	return ;
 }

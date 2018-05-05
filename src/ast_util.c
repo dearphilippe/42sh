@@ -6,7 +6,7 @@
 /*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 15:10:27 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 23:14:51 by brabo-hi         ###   ########.fr       */
+/*   Updated: 2018/04/22 02:36:06 by brabo-hi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,18 @@ void	init_parse_lexer(t_ast **lex, t_ast **node, char **word, char **term)
 	*node = NULL;
 }
 
-t_ast	*parse_help1(t_ast **lex, t_ast **node, char **word, char **term)
+int		parse_help(t_ast **lex, t_ast **node, char **word, char **term)
 {
-	*node = ast_new(remove_start_space(*word), CMD);
+	char	*new_str;
+
+	new_str = remove_start_space(*word);
+	*node = ast_new(new_str, CMD);
+	ft_strdel(&new_str);
 	if (*node && !(*lex = ast_enqueue(*lex, *node)))
-		return (NULL);
+		return (0);
 	ft_strdel(word);
-	*word = NULL;
+	*word = 0;
 	if (!(*lex = ast_enqueue(*lex, ast_new(*term, get_type(*term)))))
-		return (NULL);
-	return (ast_new("NULL", NUL));
+		return (0);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:57:11 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 14:37:09 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/05 01:33:28 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int		mini_parse(t_shell *sh, t_av *av, int *i, int *k)
 		r = handle_dollar_sign(av, sh, i, k);
 	else if ((av->in[*i] == BACKSLASH) && ((*i)++))
 		av->out[(*k)++] = av->in[(*i)++];
+	else if (av->in[*i] == TILDE)
+		r = handle_tilde(av, sh, i, k);
 	else
 		av->out[(*k)++] = av->in[(*i)++];
 	if ((r > 0) && (is_end_of_argument(av->in[*i])))

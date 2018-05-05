@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 07:07:34 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/06 07:07:47 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/05 13:27:46 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,13 @@
 
 void	key_ctrl_a_function(t_shell *sh)
 {
-	sh->buf_i = 0;
-	reprint_input(sh);
+	sh->buf_i = sh->input_size;
+	if (sh->buffer[sh->buf_i] != '\n')
+	{
+		while ((sh->buf_i > 0) && (sh->buffer[sh->buf_i - 1] != '\n'))
+			sh->buf_i--;
+		reprint_input(sh);
+	}
 	return ;
 }
 

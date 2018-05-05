@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 21:09:07 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 21:19:04 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/04/18 00:54:54 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		*group_process_make_pipes(t_process **group, int *i, int *count)
 	return (pipes);
 }
 
-int		group_process_close_pipes(int *pipes, int count)
+int		group_process_close_pipes(t_process **group, int *pipes, int count)
 {
 	int	i;
 
@@ -43,5 +43,52 @@ int		group_process_close_pipes(int *pipes, int count)
 		i++;
 	}
 	free(pipes);
+	i = 0;
+	while (group[i] != NULL)
+	{
+		if (group[i]->fd0 != 0)
+			close(group[i]->fd0);
+		if (group[i]->fd1 != 0)
+			close(group[i]->fd1);
+		i++;
+	}
 	return (0);
+}
+
+void	group_process_destroy(t_process **group)
+{
+	int	i;
+
+	i = 0;
+	while (group[i] != NULL)
+	{
+		(void)process_destroy(group[i]);
+		i++;
+	}
+	free(group);
+	return ;
+}
+
+int		group_process_wait(t_process **group)
+{
+	int i;
+	int pid;
+	int	status;
+
+	pid = 0;
+	status = 0;
+	while ((pid = wait(&status)) != -1)
+	{
+		i = 0;
+		while (group[i])
+		{
+			if (group[i]->pid == pid)
+			{
+				group[i]->exit_code = WEXITSTATUS(status);
+				break ;
+			}
+			i++;
+		}
+	}
+	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 14:07:25 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 21:45:55 by brabo-hi         ###   ########.fr       */
+/*   Updated: 2018/05/05 02:05:50 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 char	*remove_start_space(char *str)
 {
 	char	*dest;
+	size_t	i;
 
 	if (!str)
 		return (NULL);
@@ -22,7 +23,20 @@ char	*remove_start_space(char *str)
 		str++;
 	if (!(dest = ft_memalloc(ft_strlen(str) + 1)))
 		return (NULL);
-	return (ft_strcpy(dest, str));
+	ft_strcpy(dest, str);
+	i = ft_strlen(dest) - 1;
+	if (str && *str && ft_strlen(str) == 1)
+	{
+		dest[i++] = *str;
+		dest[i] = 0;
+		return (dest);
+	}
+	while ((i > 0) && ft_isspace(dest[i]))
+		dest[i--] = 0;
+	if ((i > 0) && (dest[i] != 0))
+		return (dest);
+	else
+		return (NULL);
 }
 
 char	*delete_backslash_in_double_quote(char *str)

@@ -1,5 +1,6 @@
--redirection puts spaces at the end of file
--fix tilde expansion ex. " ls  -l   ~/Desktop "
--fix echo hello    &&    ls
-
+DONE -redirection puts spaces at the end of file
+DONE -fix tilde expansion ex. " ls  -l   ~/Desktop "
+DONE?-fix echo hello    &&    ls
+DONE-fix multiple lines "dquot>"
+DONE-redirection to filename with one character is "ast syntax error"
 
