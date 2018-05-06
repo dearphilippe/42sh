@@ -44,7 +44,7 @@ t_ast	**ast_create_tree(char *str)
 	t_ast	*lex;
 	t_ast	**ast;
 
-	if ((lex = parse_lexer(str)) == NULL)
+	if ((lex = parse_lexer(delete_start_space(str))) == NULL)
 	{
 		ft_printf(STDERR_FILENO, "ast lexical error!\n");
 		return (NULL);

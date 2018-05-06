@@ -6,7 +6,7 @@
 /*   By: passef <passef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 19:51:05 by asarandi          #+#    #+#             */
-/*   Updated: 2018/05/05 14:28:11 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/06 04:19:39 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		ptr_null(t_shell *sh, t_ast **ptr)
 		(*ptr) = (*ptr)->parent;
 	}
 	tcsetattr(STDIN_FILENO, TCSANOW, &sh->t_original);
-	(void)group_process_execute(sh, group, 0, 0);
+	(void)group_process_execute(sh, group, 0);
 	(void)group_process_wait(group);
 	(void)group_process_destroy(group);
 	tcsetattr(STDIN_FILENO, TCSANOW, &sh->t_custom);
@@ -94,7 +94,7 @@ void		main_helper(t_shell *sh, int *ec)
 	t_ast		**ast;
 
 	i = 0;
-	if ((ft_strlen(sh->buffer) != 0) &&
+	if ((ft_strlen(delete_start_space(sh->buffer)) != 0) &&
 			((ast = ast_create_tree(sh->buffer)) != NULL))
 	{
 		while (ast[i] != NULL)

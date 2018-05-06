@@ -91,3 +91,10 @@ int		set_backslash(char *dest, char *str, int i)
 	}
 	return (i);
 }
+
+char	*delete_start_space(char *str)
+{
+	while (str && *str && (*str == ' ' || *str == '\t'))
+		str++;
+	return (str);
+}

@@ -34,7 +34,7 @@ int		builtin_echo(t_shell *sh, char **argv)
 	int	i;
 
 	dash_n = 0;
-	sh->exit_code += 0;
+	sh->exit_code = 0;
 	if (argv[1] != NULL)
 	{
 		if (ft_strcmp(argv[1], "-n") == 0)

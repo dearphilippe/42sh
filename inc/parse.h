@@ -76,6 +76,7 @@ char				*get_type_string(char *str);
 char				*remove_start_space(char *str);
 char				*delete_backslash_in_double_quote(char *str);
 int					set_backslash(char *dest, char *str, int i);
+char				*delete_start_space(char *str);
 
 /*
 ** ast_parse.c

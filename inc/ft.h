@@ -6,7 +6,7 @@
 /*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 02:16:30 by brabo-hi          #+#    #+#             */
-/*   Updated: 2018/05/05 13:16:19 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/06 04:26:22 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,9 @@ typedef struct		s_shell
 
 t_shell	*g_sh;
 
+# define FILE_MODE1			(O_WRONLY | O_CREAT | O_TRUNC)
+# define FILE_MODE2			(O_WRONLY | O_CREAT | O_APPEND)
+# define INHIBITOR_PROMPT	"> "
 # define SHELL_PROMPT		"$> "
 # define SHELL_QUOTE_PROMPT	"quote> "
 # define SHELL_NAME			"42sh"

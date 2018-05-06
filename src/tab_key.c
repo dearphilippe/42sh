@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:25:17 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 19:38:56 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/05 20:58:50 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	key_tab_function(t_shell *sh)
 		tab_remove_duplicates(matches, &i);
 		if (i == 1)
 		{
+			ft_strcpy(sh->buffer, basename(matches[0]->cmd));
 			sh->buf_i = ft_strlen(basename(matches[0]->cmd));
 			sh->buffer[sh->buf_i++] = ' ';
 			sh->input_size = sh->buf_i;

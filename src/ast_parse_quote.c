@@ -77,14 +77,17 @@ int		parse_quote_double(char **word, char *str)
 int		copy_str(int i, int res, char **word, char *cpy)
 {
 	char	*new_copy;
+	int		j;
 
 	new_copy = cpy;
+	j = i;
 	while (i++ < res)
 	{
 		if (!cpy)
 			return (0);
 		*word = ft_str_append(*word, *cpy++);
 	}
-	ft_strdel(&new_copy);
+	if (j)
+		ft_strdel(&new_copy);
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:14:52 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 17:19:08 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/05 22:24:34 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	help_selection(char *cmd)
 		if (g_builtin_list[i] && (i >= 0))
 		{
 			if (ft_strcmp(cmd, g_builtin_list[i]) == 0)
-				return (void)printf("\n\033[37;1m\t%s\033[0m -> %s\n\n",
+				return (void)ft_printf(1, "\n\033[37;1m\t%s\033[0m -> %s\n\n",
 				g_builtin_list[i], g_punani_list[i]);
 				i++;
 		}
@@ -55,7 +55,7 @@ void	help_list(void)
 	{
 		j++;
 		if (i >= 0 && i < 6)
-			printf("\n(%d) Only if I'm \033[37;1m%s\033[0m\n\n", \
+			ft_printf(1, "\n(%d) Only if I'm \033[37;1m%s\033[0m\n\n", \
 			j, g_builtin_list[i]);
 		i++;
 	}

@@ -6,7 +6,7 @@
 #    By: passef <passef@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/15 23:17:54 by passef            #+#    #+#              #
-#    Updated: 2018/04/17 20:03:13 by passef           ###   ########.fr        #
+#    Updated: 2018/05/06 04:29:48 by asarandi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCFILES =	ast.c \
 	path_utils.c \
 	pipes.c \
 	process.c \
+	redirects.c \
 	quotes.c \
 	signal.c \
 	special_keys_a.c \

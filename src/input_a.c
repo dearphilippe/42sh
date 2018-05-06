@@ -6,7 +6,7 @@
 /*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:47:31 by asarandi          #+#    #+#             */
-/*   Updated: 2018/05/05 13:41:10 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/06 04:33:26 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,22 @@ void	raw_read(t_shell *sh)
 		else if (sh->keycode[0] == '\n')
 		{
 			if (has_paire_quote(sh))
-				return (end_of_input(sh));
+			{
+				if ((sh->input_size > 0) && (sh->buffer[sh->input_size - 1] == '\\'))
+				{
+					if (sh->buffer[sh->input_size - 2] != '\\')
+					{
+						ft_putstr("\n");
+						sh->buffer[sh->input_size - 1] = '\n';
+						sh->buf_i = sh->input_size;
+						sh->prompt = INHIBITOR_PROMPT;
+						reprint_input(sh);
+						continue ;
+					}
+				}
+				else
+					return (end_of_input(sh));
+			}
 			sh->prompt = SHELL_QUOTE_PROMPT;
 			return (close_quotes(sh));
 		}
