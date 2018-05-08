@@ -6,45 +6,29 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 16:00:36 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/08 16:02:04 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/07 03:51:08 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft.h"
 
-int		tab_count_matches(t_shell *sh)
+int		tab_count_matches(t_shell *sh, char *str)
 {
 	int		count;
 	int		needle_len;
 	t_exec	*ptr;
 
-	if ((needle_len = ft_strlen(sh->buffer)) < 1)
+	if ((needle_len = ft_strlen(str)) < 1)
 		return (0);
 	ptr = sh->exec;
 	count = 0;
 	while (ptr != NULL)
 	{
-		if (ft_strncmp(sh->buffer, basename(ptr->cmd), needle_len) == 0)
+		if (ft_strncmp(str, basename(ptr->cmd), needle_len) == 0)
 			count += 1;
 		ptr = ptr->next;
 	}
 	return (count);
-}
-
-int		tab_all_commands_longer(t_shell *sh, t_exec **a)
-{
-	size_t	k_len;
-	int		i;
-
-	i = 0;
-	while (a[i] != NULL)
-	{
-		k_len = ft_strlen(basename(a[i]->cmd));
-		if (k_len <= sh->input_size)
-			return (0);
-		i++;
-	}
-	return (1);
 }
 
 int		tab_all_commands_share_letter(t_exec **a, int index, char c)

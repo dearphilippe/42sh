@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:06:58 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 19:34:02 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/06 15:21:49 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int		builtin_cmd_index(char *cmd)
 {
 	int			i;
 	const char	*builtin_list[] = {
-		"echo", "cd", "setenv", "unsetenv", "env", "exit", "help"};
+		"echo", "cd", "setenv", "unsetenv", "env", "exit", "help",
+		"export", "unexport", "printlocal"};
 
 	i = 0;
 	while (i < NUM_BUILTINS)
@@ -57,7 +58,9 @@ char	*builtin_cd_get_kv(t_shell *sh, char *variable)
 	char	*result;
 
 	result = NULL;
-	result = kv_array_get_key_value(sh->envp, variable);
+	result = kv_array_get_key_value(sh->localvar, variable);
+	if (result == NULL)
+		result = kv_array_get_key_value(sh->envp, variable);
 	if (result == NULL)
 		(void)ft_printf(STDERR_FILENO, E_NOVARIABLE, variable);
 	return (result);

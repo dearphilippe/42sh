@@ -6,7 +6,7 @@
 #    By: passef <passef@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/15 23:17:54 by passef            #+#    #+#              #
-#    Updated: 2018/05/06 04:29:48 by asarandi         ###   ########.fr        #
+#    Updated: 2018/05/07 19:22:54 by asarandi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,11 @@ SRCFILES =	ast.c \
 	ast_util.c \
 	ast_validate.c \
 	ast_parse_quote.c \
+	parse_autocomplet.c \
 	autocomplete.c \
 	builtin_cd.c \
 	builtin_help.c \
+	builtin_localvar.c \
 	builtins.c \
 	builtins_env.c \
 	char_array.c \
@@ -37,6 +39,7 @@ SRCFILES =	ast.c \
 	init.c \
 	input_a.c \
 	input_b.c \
+	input_c.c \
 	kv_array.c \
 	main.c \
 	path_utils.c \
@@ -49,6 +52,8 @@ SRCFILES =	ast.c \
 	special_keys_b.c \
 	string_utils.c \
 	tab_columns.c \
+	tab_columns_f.c \
+	tab_files.c \
 	tab_key.c \
 	tab_utils.c \
 	termcaps.c \

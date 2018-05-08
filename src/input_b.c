@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 07:05:45 by asarandi          #+#    #+#             */
-/*   Updated: 2018/05/05 20:41:33 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/08 00:18:46 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,13 @@ void	insert_key_into_buffer(t_shell *sh)
 			size--;
 		}
 	}
-	sh->buffer[sh->buf_i++] = sh->keycode[0];
-	sh->input_size++;
+	size = 0;
+	while (ft_isprint(sh->keycode[size]))
+	{		
+		sh->buffer[sh->buf_i++] = sh->keycode[size];
+		sh->keycode[size++] = 0;
+		sh->input_size++;
+	}
 	reprint_input(sh);
 	return ;
 }

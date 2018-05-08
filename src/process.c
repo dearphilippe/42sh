@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 15:13:20 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/17 21:43:42 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/06 15:31:45 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int			process_execute(t_shell *sh, t_process *p)
 	int			r;
 	static int	(*builtin_functions[]) (t_shell *, char **) = {&builtin_echo,
 		&builtin_cd, &builtin_setenv, &builtin_unsetenv, &builtin_env,
-		&builtin_exit, &builtin_help};
+		&builtin_exit, &builtin_help,
+		&builtin_export, &builtin_unexport, &builtin_printlocal};
 
 	if (p->argv[0] != NULL)
 	{

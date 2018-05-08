@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:27:41 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/06 06:56:42 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/08 00:27:56 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	termios_save_settings(t_shell *sh)
 	if (tcgetattr(STDIN_FILENO, &sh->t_original) == -1)
 		return (fatal_error_message(sh, "tcgetattr() failed"));
 	sh->t_custom = sh->t_original;
+	sh->t_custom.c_lflag &= ~(ICANON | ECHO);
 	sh->t_custom.c_cc[VMIN] = 1;
 	sh->t_custom.c_cc[VTIME] = 0;
-	sh->t_custom.c_lflag &= ~(ICANON | ECHO);
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &sh->t_custom) == -1)
 		return (fatal_error_message(sh, "tcsetattr() failed"));
 	sh->custom_terminal = 1;

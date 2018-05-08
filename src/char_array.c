@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:09:44 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/06 05:10:42 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/06 15:37:18 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int		count_char_array(char **array)
 	int	i;
 
 	i = 0;
+	if (array == NULL)
+		return (0);
 	while (array[i] != NULL)
 		i++;
 	return (i);

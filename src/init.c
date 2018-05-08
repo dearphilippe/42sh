@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 15:14:14 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/15 17:09:52 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/08 02:13:24 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,12 @@ void	clean_up(t_shell *sh)
 {
 	termios_restore_settings(sh);
 	destroy_list_of_executables(sh);
+	if (sh->search_path != NULL)
+		free(sh->search_path);
 	if (sh->envp != NULL)
 		destroy_char_array(sh->envp);
+	if (sh->localvar != NULL)
+		destroy_char_array(sh->localvar);
 	if (sh->history != NULL)
 		destroy_char_array(sh->history);
 	if (sh->child_argv != NULL)
@@ -63,6 +67,8 @@ t_shell	*init_shell(int argc, char **argv, char **envp)
 	sh->argc = argc;
 	sh->argv = argv;
 	sh->envp = create_char_array_copy(envp, 0);
+	sh->localvar = create_char_array_copy(NULL, 0);
+	sh->search_path = ft_strdup(".");
 	terminal_init(sh);
 	g_sh = sh;
 	if ((path = kv_array_get_key_value(sh->envp, "PATH")) != NULL)

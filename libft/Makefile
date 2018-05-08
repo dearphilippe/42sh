@@ -6,13 +6,13 @@
 #    By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/20 17:41:00 by asarandi          #+#    #+#              #
-#    Updated: 2018/04/15 20:06:50 by asarandi         ###   ########.fr        #
+#    Updated: 2018/05/07 00:36:57 by asarandi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= libft.a
 CC			= gcc
-FLAGS		= -g -Wall -Werror -Wextra
+CFLAGS		= -g -Wall -Werror -Wextra
 INC			= -I inc/
 SRCFILES	=	ft_str_append.c \
 				ft_strcmp_withspace.c \
@@ -73,6 +73,7 @@ SRCFILES	=	ft_str_append.c \
 				ft_strnstr.c \
 				ft_strrchr.c \
 				ft_strreplace.c \
+				ft_strrev.c \
 				ft_strsplit.c \
 				ft_strstr.c \
 				ft_strsub.c \
@@ -116,7 +117,7 @@ objdir:
 	mkdir -p obj/
 
 obj/%.o: src/%.c | objdir
-	$(CC) $(FLAGS) -c $< -o $@ $(INC)
+	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 clean:
 	rm -rf obj/

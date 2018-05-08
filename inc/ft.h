@@ -6,7 +6,7 @@
 /*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 02:16:30 by brabo-hi          #+#    #+#             */
-/*   Updated: 2018/05/06 04:26:22 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/08 01:59:17 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,13 @@ typedef struct		s_shell
 	int				argc;
 	char			**argv;
 	char			**envp;
+	char			**localvar;
 	char			*buffer;
 	size_t			bufsize;
 	size_t			input_size;
 	size_t			buf_i;
+	char			*search_path;
+	char			*last_word;
 	char			*partial_input;
 	char			**history;
 	int				history_count;
@@ -130,7 +133,7 @@ t_shell	*g_sh;
 # define TAB_SIZE			8
 # define EMPTY_STRING		""
 # define DOLLAR_SIGN		'$'
-# define NUM_BUILTINS		7
+# define NUM_BUILTINS		10
 # define NUM_SPECIAL_KEYS	11
 # define HISTORY_FILE		".42sh_history"
 # define KEY_UP_ARROW		"\e[A"

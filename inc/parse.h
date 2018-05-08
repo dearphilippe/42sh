@@ -6,7 +6,7 @@
 /*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 00:05:19 by passef            #+#    #+#             */
-/*   Updated: 2018/04/18 01:48:38 by brabo-hi         ###   ########.fr       */
+/*   Updated: 2018/05/06 21:37:16 by brabo-hi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ typedef enum		e_type
 	ROOT,
 	NUL
 }					t_type;
+
+typedef enum		e_autocomplet
+{
+	PROG,
+	FICHIER
+}					t_autocomplet;
 
 typedef struct		s_ast
 {
@@ -133,5 +139,10 @@ void				init_parse_lexer(t_ast **lex, t_ast **node,
 					char **word, char **term);
 int					parse_help(t_ast **lex, t_ast **node,
 					char **word, char **term);
+
+/*
+** parse_autocomplet.c
+*/
+t_autocomplet		type_to_complet(char *str);
 
 #endif

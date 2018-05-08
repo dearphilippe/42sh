@@ -6,40 +6,11 @@
 /*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:47:31 by asarandi          #+#    #+#             */
-/*   Updated: 2018/05/06 04:33:26 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/06 15:57:01 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft.h"
-
-void	init_input_buffer(t_shell *sh)
-{
-	sh->buffer = ft_memalloc(POOGE);
-	sh->bufsize = POOGE;
-	sh->buf_i = 0;
-	sh->input_size = 0;
-	sh->history = history_array(sh);
-	sh->history_count = 0;
-	if (sh->history != NULL)
-		sh->history_count = count_char_array(sh->history);
-	sh->history_i = 0;
-	sh->partial_input = NULL;
-	sh->prompt = SHELL_PROMPT;
-	display_shell_prompt(sh);
-}
-
-void	increase_buffer(t_shell *sh)
-{
-	char	*newbuf;
-
-	if ((newbuf = ft_memalloc(sh->bufsize + POOGE)) == NULL)
-		fatal_error_message(sh, E_NOMEM);
-	ft_strncpy(newbuf, sh->buffer, sh->bufsize);
-	free(sh->buffer);
-	sh->buffer = newbuf;
-	sh->bufsize += POOGE;
-	return ;
-}
 
 void	close_quotes(t_shell *sh)
 {
@@ -67,6 +38,23 @@ void	close_quotes(t_shell *sh)
 	return ;
 }
 
+int		backslash_prompt(t_shell *sh)
+{
+	if ((sh->input_size > 0) && (sh->buffer[sh->input_size - 1] == '\\'))
+	{
+		if ((sh->input_size > 1) && (sh->buffer[sh->input_size - 2] != '\\'))
+		{
+			ft_putstr("\n");
+			sh->buffer[sh->input_size - 1] = '\n';
+			sh->buf_i = sh->input_size;
+			sh->prompt = INHIBITOR_PROMPT;
+			reprint_input(sh);
+			return (1);
+		}
+	}
+	return (0);
+}
+
 void	raw_read(t_shell *sh)
 {
 	init_input_buffer(sh);
@@ -80,18 +68,8 @@ void	raw_read(t_shell *sh)
 		{
 			if (has_paire_quote(sh))
 			{
-				if ((sh->input_size > 0) && (sh->buffer[sh->input_size - 1] == '\\'))
-				{
-					if (sh->buffer[sh->input_size - 2] != '\\')
-					{
-						ft_putstr("\n");
-						sh->buffer[sh->input_size - 1] = '\n';
-						sh->buf_i = sh->input_size;
-						sh->prompt = INHIBITOR_PROMPT;
-						reprint_input(sh);
-						continue ;
-					}
-				}
+				if (backslash_prompt(sh))
+					continue ;
 				else
 					return (end_of_input(sh));
 			}

@@ -6,15 +6,17 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 17:14:52 by asarandi          #+#    #+#             */
-/*   Updated: 2018/05/05 22:24:34 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/06 15:43:52 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft.h"
 
 char	*g_builtin_list[] = {
-	"cd", "echo", "env", "exit", "setenv", "unsetenv"
+	"cd", "echo", "env", "exit", "setenv", "unsetenv",
+	"help", "export", "unexport", "printlocal"
 };
+
 char	*g_punani_list[] = {
 	"Compact disc; access to other folders or directories",
 	"Display given string",
@@ -23,7 +25,11 @@ char	*g_punani_list[] = {
 	"function inserts or resets the environment variable name in the " \
 	"current environment list",
 	"function deletes all instances of the variable name pointed to by" \
-	" name from the list"
+	" name from the list",
+	"this help message",
+	"set a local variable",
+	"removes a local variable",
+	"show a list of local variables"
 };
 
 void	help_selection(char *cmd)
@@ -54,7 +60,7 @@ void	help_list(void)
 	while (g_builtin_list[i] != '\0')
 	{
 		j++;
-		if (i >= 0 && i < 6)
+		if (i >= 0 && i < 10)
 			ft_printf(1, "\n(%d) Only if I'm \033[37;1m%s\033[0m\n\n", \
 			j, g_builtin_list[i]);
 		i++;

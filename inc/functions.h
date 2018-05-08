@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 16:20:50 by asarandi          #+#    #+#             */
-/*   Updated: 2018/05/06 04:18:20 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/08 01:44:10 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,25 @@ typedef struct s_av			t_av;
 typedef struct s_process	t_process;
 typedef struct s_exec		t_exec;
 typedef	t_process			t_proc;
+typedef t_autocomplet		t_autoc;
 
+int		word_length_backwards(char *right, char *boundary);
+void	tab_files_show_columns(t_shell *sh, char *path, char *search);
+
+char	*insert_character(char *dst, char c);
+int		tab_max_lengthf(char **array);
+void	tab_bubble_sortf(char **a, int count);
+void	col_print_loopf(int cw, int nc, int count, char **a);
+void	tab_print_columnsf(char **array, int count);
+int		tab_files_valid_directory(char *path);
+int		tab_files_count_match_in_dir(char *path, char *search);
+char	**tab_files_array_of_matches(char *path, char *search);
+
+t_autoc	type_to_complet(char *str);
+int		builtin_export_kv(t_shell *sh, char **argv, int arg_count);
+int		builtin_export(t_shell *sh, char **argv);
+int		builtin_unexport(t_shell *sh, char **argv);
+int		builtin_printlocal(t_shell *sh, char **argv);
 char	**add_element_to_char_array(char **array, char *string);
 char	**build_child_argv_list(t_shell *sh, char *cmd);
 char	**create_char_array_copy(char **src, int extra);
@@ -79,7 +97,7 @@ int		path_has_executable(char *path, char *cmd);
 int		set_backslash(char *dest, char *str, int i);
 int		tab_all_commands_longer(t_shell *sh, t_exec **a);
 int		tab_all_commands_share_letter(t_exec **a, int index, char c);
-int		tab_count_matches(t_shell *sh);
+int		tab_count_matches(t_shell *sh, char *str);
 int		tab_max_length(t_exec **array);
 int		tab_mini_complete(t_shell *sh, t_exec **a);
 int		close_pipes(t_process **group);

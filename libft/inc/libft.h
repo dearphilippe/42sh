@@ -104,6 +104,7 @@ int					ft_tolower(int c);
 int					ft_toupper(int c);
 int					ft_atoi(const char *s);
 char				*ft_strreplace(char *search, char *replace, char *subject);
+char				*ft_strrev(char *str);
 char				*ft_capitalize(char *str);
 int					ft_isspace(int c);
 char				*ft_uriencode(char *s);
