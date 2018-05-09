@@ -6,13 +6,13 @@
 #    By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/20 17:41:00 by asarandi          #+#    #+#              #
-#    Updated: 2018/05/07 00:36:57 by asarandi         ###   ########.fr        #
+#    Updated: 2018/05/09 05:24:50 by asarandi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= libft.a
 CC			= gcc
-CFLAGS		= -g -Wall -Werror -Wextra
+CFLAGS		= -O2 -Wall -Werror -Wextra
 INC			= -I inc/
 SRCFILES	=	ft_str_append.c \
 				ft_strcmp_withspace.c \

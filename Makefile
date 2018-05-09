@@ -6,7 +6,7 @@
 #    By: passef <passef@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/15 23:17:54 by passef            #+#    #+#              #
-#    Updated: 2018/05/07 19:22:54 by asarandi         ###   ########.fr        #
+#    Updated: 2018/05/09 05:24:38 by asarandi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,12 +49,17 @@ SRCFILES =	ast.c \
 	quotes.c \
 	signal.c \
 	special_keys_a.c \
+	special_keys_a_2.c \
 	special_keys_b.c \
 	string_utils.c \
 	tab_columns.c \
 	tab_columns_f.c \
 	tab_files.c \
+	tab_files_2.c \
+	tab_files_help.c \
 	tab_key.c \
+	tab_key2.c \
+	tab_key3.c \
 	tab_utils.c \
 	termcaps.c \
 
@@ -62,7 +67,7 @@ OBJFILES	= $(SRCFILES:%.c=%.o)
 SRC			= $(addprefix src/,$(SRCFILES))
 OBJ			= $(addprefix obj/,$(OBJFILES))
 CC			= gcc
-FLAGS		= -g -Wextra -Wall -Werror
+FLAGS		= -O2 -Wextra -Wall -Werror
 INC			= -I libft/inc -I inc/
 LIB			= -L libft/ -lft -ltermcap
 
@@ -83,7 +88,6 @@ rmobj:
 
 rmbin:
 	rm -rf $(NAME)
-	rm -rf ASTDEMO
 
 again: rmobj rmbin all
 

@@ -12,6 +12,11 @@
 
 #include "../inc/ft.h"
 
+const char	*g_special_keys[] = {KEY_UP_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW,
+	KEY_RIGHT_ARROW, KEY_BACKSPACE, KEY_DELETE, KEY_CTRL_A, KEY_CTRL_E,
+	KEY_CTRL_K, KEY_CTRL_L, KEY_TAB, KEY_SHIFT_LEFT, KEY_SHIFT_RIGHT,
+	KEY_CTRL_U, KEY_CTRL_P};
+
 void	key_shift_left(t_shell *sh)
 {
 	int	i;
@@ -89,10 +94,6 @@ void	check_special_keys(t_shell *sh)
 	int			i;
 	const char	*key;
 	int			len;
-	const char	*special_keys[] = {KEY_UP_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW,
-		KEY_RIGHT_ARROW, KEY_BACKSPACE, KEY_DELETE, KEY_CTRL_A, KEY_CTRL_E,
-		KEY_CTRL_K, KEY_CTRL_L, KEY_TAB, KEY_SHIFT_LEFT, KEY_SHIFT_RIGHT,
-		KEY_CTRL_U, KEY_CTRL_P};
 	static void	(*special_key_functions[]) (t_shell *) = {
 	&key_up_arrow_function, &key_down_arrow_function, &key_left_arrow_function,
 	&key_right_arrow_function, &key_backspace_function, &key_delete_function,
@@ -103,7 +104,7 @@ void	check_special_keys(t_shell *sh)
 	i = 0;
 	while (i < NUM_SPECIAL_KEYS)
 	{
-		key = special_keys[i];
+		key = g_special_keys[i];
 		len = ft_strlen(key);
 		if (ft_strncmp(key, sh->keycode, len) == 0)
 		{
@@ -111,71 +112,6 @@ void	check_special_keys(t_shell *sh)
 			return (special_key_functions[i](sh));
 		}
 		i++;
-	}
-	return ;
-}
-
-void	key_left_arrow_function(t_shell *sh)
-{
-	if (sh->buf_i > 0)
-	{
-		if (sh->buffer[sh->buf_i - 1] != '\n')
-		{
-			sh->buf_i--;
-			ft_putstr(sh->cursor_move_left);
-		}
-	}
-	return ;
-}
-
-void	key_right_arrow_function(t_shell *sh)
-{
-	if (sh->buf_i < sh->input_size)
-	{
-		sh->buf_i++;
-		ft_putstr(sh->cursor_move_right);
-	}
-	return ;
-}
-
-void	key_backspace_function(t_shell *sh)
-{
-	size_t	tempo;
-
-	if (sh->buf_i > 0)
-	{
-		if (sh->buffer[sh->buf_i - 1] != '\n')
-		{
-			key_left_arrow_function(sh);
-			tempo = sh->buf_i;
-			while ((tempo < sh->input_size) && sh->buffer[sh->buf_i != '\n'])
-			{
-				sh->buffer[tempo] = sh->buffer[tempo + 1];
-				tempo++;
-			}
-			sh->buffer[tempo] = 0;
-			sh->input_size--;
-			reprint_input(sh);
-		}
-	}
-	return ;
-}
-
-void	key_delete_function(t_shell *sh)
-{
-	size_t	tempo;
-
-	if (sh->input_size > sh->buf_i)
-	{
-		tempo = sh->buf_i;
-		while (tempo < sh->input_size)
-		{
-			sh->buffer[tempo] = sh->buffer[tempo + 1];
-			tempo++;
-		}
-		sh->buffer[tempo] = 0;
-		sh->input_size--;
-		reprint_input(sh);
 	}
 	return ;
 }

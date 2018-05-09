@@ -13,6 +13,7 @@
 #ifndef FUNCTIONS_H
 # define FUNCTIONS_H
 
+# include <dirent.h>
 # include "ft.h"
 # include "parse.h"
 
@@ -34,7 +35,15 @@ void	tab_print_columnsf(char **array, int count);
 int		tab_files_valid_directory(char *path);
 int		tab_files_count_match_in_dir(char *path, char *search);
 char	**tab_files_array_of_matches(char *path, char *search);
-
+int		tab_files_array_of_matches_help1(char ***a, char *search, int *len);
+void	tab_files_array_of_matches_1(t_shell *sh, char **a, int i);
+void	tab_files_array_of_matches_2(t_shell *sh);
+void	tab_files_array_of_matches_3(t_shell *sh, char **a, int *i);
+int		tab_files_mini_complete(t_shell *sh, char **a);
+char	*key_tab_part_str(t_shell *sh);
+char	*key_tab_last_word(char *str);
+t_exec	**tab_array_of_matches(t_shell *sh, char *str);
+char	**tab_files_array_of_matches_help2(char **a, DIR *dirp, int i);
 t_autoc	type_to_complet(char *str);
 int		builtin_export_kv(t_shell *sh, char **argv, int arg_count);
 int		builtin_export(t_shell *sh, char **argv);
@@ -185,5 +194,10 @@ void	tab_remove_duplicates(t_exec **array, int *count);
 void	terminal_init(t_shell *sh);
 void	termios_restore_settings(t_shell *sh);
 void	termios_save_settings(t_shell *sh);
+void	insert_character_1(t_shell *sh, char *s, char c);
+void	tab_print_columns_1(t_shell *sh, t_exec	**matches, int i);
+int		key_tab_function_1(t_shell *sh, int f);
+void	key_tab_function_2(t_shell *sh, char *str);
+int		key_tab_function_3(t_shell *sh, char *str);
 
 #endif

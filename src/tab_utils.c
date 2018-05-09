@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 16:00:36 by asarandi          #+#    #+#             */
-/*   Updated: 2018/05/07 03:51:08 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/09 05:23:13 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,10 @@ void	tab_bubble_sort(t_exec **a, int count)
 		if (flag == 0)
 			break ;
 	}
+}
+
+void	tab_print_columns_1(t_shell *sh, t_exec **matches, int i)
+{
+	tab_print_columns(matches, i);
+	reprint_input(sh);
 }

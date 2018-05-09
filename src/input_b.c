@@ -68,7 +68,7 @@ void	insert_key_into_buffer(t_shell *sh)
 	}
 	size = 0;
 	while (ft_isprint(sh->keycode[size]))
-	{		
+	{
 		sh->buffer[sh->buf_i++] = sh->keycode[size];
 		sh->keycode[size++] = 0;
 		sh->input_size++;
