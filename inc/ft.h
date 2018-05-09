@@ -6,7 +6,7 @@
 /*   By: brabo-hi <brabo-hi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 02:16:30 by brabo-hi          #+#    #+#             */
-/*   Updated: 2018/05/08 01:59:17 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/08 21:06:40 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct		s_shell
 	size_t			bufsize;
 	size_t			input_size;
 	size_t			buf_i;
+	char			*clipboard;
 	char			*search_path;
 	char			*last_word;
 	char			*partial_input;
@@ -104,7 +105,7 @@ t_shell	*g_sh;
 # define FILE_MODE1			(O_WRONLY | O_CREAT | O_TRUNC)
 # define FILE_MODE2			(O_WRONLY | O_CREAT | O_APPEND)
 # define INHIBITOR_PROMPT	"> "
-# define SHELL_PROMPT		"$> "
+# define SHELL_PROMPT		"~ "
 # define SHELL_QUOTE_PROMPT	"quote> "
 # define SHELL_NAME			"42sh"
 # define POOGE				4096
@@ -134,7 +135,7 @@ t_shell	*g_sh;
 # define EMPTY_STRING		""
 # define DOLLAR_SIGN		'$'
 # define NUM_BUILTINS		10
-# define NUM_SPECIAL_KEYS	11
+# define NUM_SPECIAL_KEYS	15
 # define HISTORY_FILE		".42sh_history"
 # define KEY_UP_ARROW		"\e[A"
 # define KEY_DOWN_ARROW		"\e[B"
@@ -142,9 +143,13 @@ t_shell	*g_sh;
 # define KEY_RIGHT_ARROW	"\e[C"
 # define KEY_BACKSPACE		"\x7f"
 # define KEY_DELETE			"\e[3~"
+# define KEY_SHIFT_LEFT		"\x1b\x5b\x31\x3b\x32\x44"
+# define KEY_SHIFT_RIGHT	"\x1b\x5b\x31\x3b\x32\x43"
 # define KEY_CTRL_A			"\x01"
 # define KEY_CTRL_E			"\x05"
 # define KEY_CTRL_K			"\x0b"
+# define KEY_CTRL_U			"\x15"
+# define KEY_CTRL_P			"\x10"
 # define KEY_CTRL_L			"\x0c"
 # define KEY_TAB			"\x09"
 

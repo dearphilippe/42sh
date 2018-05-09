@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:14:52 by asarandi          #+#    #+#             */
-/*   Updated: 2018/04/06 06:16:06 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/08 16:32:51 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,28 @@ char	*history_file_name(t_shell *sh)
 	return (fullpath);
 }
 
+void	history_fix_data(char *filename, char *data)
+{
+	struct stat	st;
+	off_t		i;
+
+	if (((stat(filename, &st)) == 0) && (data != NULL))
+	{
+		i = 0;
+		while (i < st.st_size)
+		{
+			if (!ft_isprint(data[i]))
+			{
+				if ((data[i] != ' ') &&
+						(data[i] != '\t') && (data[i] != '\n'))
+					data[i] = ' ';
+			}
+			i++;
+		}
+	}
+	return ;
+}
+
 char	**history_array(t_shell *sh)
 {
 	char	*filename;
@@ -67,6 +89,7 @@ char	**history_array(t_shell *sh)
 
 	filename = history_file_name(sh);
 	data = file_get_contents(filename);
+	history_fix_data(filename, data);
 	free(filename);
 	if (data == NULL)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 05:25:17 by asarandi          #+#    #+#             */
-/*   Updated: 2018/05/08 03:17:35 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/08 21:22:00 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ char	*insert_character(char *dst, char c)
 	if (dst == NULL)
 		return (NULL);
 	i = ft_strlen(dst);
-	while (i > 0)
+	while (i >= 0)
 	{
 		dst[i + 1] = dst[i];
 		i--;
@@ -317,15 +317,16 @@ void	key_tab_function(t_shell *sh)
 
 			int f = ft_strlen(sh->last_word) - 1;
 			int g;
-			while (f > 0)
+			while (&sh->last_word[f] >= sh->last_word)
 			{
 				if (sh->last_word[f] == '/')
 				{
 					free(sh->search_path);
 					g = &sh->last_word[f] - sh->last_word;
-
+					if (!g)
+						g++;
 					sh->search_path = ft_memalloc(g + 1);
-					(void)ft_strncpy(sh->search_path, sh->last_word, g);
+					(void)ft_memcpy(sh->search_path, sh->last_word, g);
 					sh->last_word = &sh->last_word[f + 1];
 	
 					break ;

@@ -13,6 +13,10 @@ DONE-norme @asarandi -> input_a.c
 05/08/2018
 DONE-able to paste into shell
 DONE-display and (partial) auto-complete of files in current directory
+DONE-colored header and prompt @ passed, lol
+DONE-word to word jumping:   [alt + right->]   and  [alt + left<-]
+DONE-clipboard; ctrl+k = cut till cursor; ctrl+u = cut line; ctrl+p = paste
+
 
 @passef
 - no tab (press tab stdin)

@@ -6,7 +6,7 @@
 /*   By: asarandi <asarandi@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 07:05:45 by asarandi          #+#    #+#             */
-/*   Updated: 2018/05/08 00:18:46 by asarandi         ###   ########.fr       */
+/*   Updated: 2018/05/08 18:41:43 by asarandi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	display_shell_prompt(t_shell *sh)
 {
-	ft_printf(STDOUT_FILENO, "%s", sh->prompt);
+	ft_printf(STDOUT_FILENO, "{green}%s{eoc}", sh->prompt);
 	return ;
 }
 
